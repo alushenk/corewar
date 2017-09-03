@@ -1,39 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   x_live.c                                           :+:      :+:    :+:   */
+/*   x_ld.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 14:32:01 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/03 15:38:47 by vrybchyc         ###   ########.fr       */
+/*   Created: 2017/09/03 15:11:21 by vrybchyc          #+#    #+#             */
+/*   Updated: 2017/09/03 15:49:48 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	say_live(t_vm *vm, unsigned int name, int cycle)
+void		x_ld(t_player *palyer, char **arena)
 {
-	int				i;
+	unsigned int	arg1;
+	unsigned int	arg2;
 
-	i = 0;
-	while (vm->players[i])
+	player->pc = (player->pc + 1) % MEM_SIZE;
+	if (arena[player->pc] = 144)
 	{
-		if ((unsigned int)vm->players[i]->name == name)
-		{
-			vm->players[i]->lives++;
-			vm->players[i]->last_live = cycle;
-		}
-		i++;
+		arg1 = get_4_bytes(arena, player->pc) % IDX_MOD;
+		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
-}
-
-void		x_live(t_player *palyer, char **arena, t_vm *vm, int cycle)
-{
-	unsigned int	*name;
-	
-	name = get_4_bytes(arena, player->pc);//add!
+	else if (arena[player->pc] = 208)
+	{
+		arg1 = get_2_bytes(arena, player->pc) % IDX_MOD;
+		player->pc = (player->pc + 2) % MEM_SIZE;
+	}
+	else
+		return ;
+	arg2 = get_1_byte(arena, player->pc);
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	say_live(vm, name);
+	if (arg2 < REG_NUMBER)
+		player->rgstr[arg2] = arg1;
 }

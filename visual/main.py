@@ -29,24 +29,31 @@ def main():
         print('ti pidor')
         exit()
 
-    black = (0, 0, 0)
-    green = (59, 171, 176)
+    background_color = (39, 40, 34)
+    element_color = (70, 70, 70)
+    text_color = (180, 180, 180)
 
     pygame.init()
 
-    info = pygame.display.Info()
-    size = width, height = info.current_w / 2, int(info.current_w * 0.4)
+    space = 2
+    element_size = 20
+    menu_width = 400
+    height = (element_size + space) * 64
+    width = height + menu_width
 
-    screen = pygame.display.set_mode(size, pygame.RESIZABLE)
-    screen.fill(black)
+    screen = pygame.display.set_mode((int(width), int(height)), pygame.RESIZABLE)
+    screen.fill(background_color)
 
+    font = pygame.font.SysFont(False, 19, bold=False, italic=False, )
     index = 0
     for i in range(64):
         for j in range(64):
-            size = 13
-            space = 2
-            pygame.draw.rect(screen, green, [i * (size + space), j * (size + space), size, size])
-            # print(format(memory[index], '02x'), end=' ')
+            x = j * (element_size + space)
+            y = i * (element_size + space)
+            pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
+
+            text = font.render(format(memory[index], '02x'), True, text_color)
+            screen.blit(text, (x + 2, y + 3))
             index += 1
 
     loop = True

@@ -6,13 +6,13 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:11:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/03 15:49:48 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/04 12:53:13 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		x_ld(t_player *palyer, char **arena)
+void		x_ld(t_player *palyer, char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
@@ -35,4 +35,6 @@ void		x_ld(t_player *palyer, char **arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arg2 < REG_NUMBER)
 		player->rgstr[arg2] = arg1;
+	if (arg1 == 0)
+		player->carry = 1;
 }

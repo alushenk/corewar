@@ -6,13 +6,25 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:44:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/03 16:25:44 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/04 13:06:56 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		x_st(t_player *palyer, char **arena)
+static void	put_value(t_player *palyer, char *arena, unsigned int arg1,
+					  unsigned int arg2)
+{
+	int		addr;
+
+	addr = pc + (player->rgstrs[arg1] % IDX_MOD);
+	addr = addr % MEM_SIZE;
+	if (addr < 0)
+		addr += MEM_SIZE;
+	// put velue to ddr
+}
+
+void		x_st(t_player *palyer, char *arena)
 {
 	unsigned int    arg1;
     unsigned int    arg2;
@@ -25,12 +37,14 @@ void		x_st(t_player *palyer, char **arena)
     }
     else if (arena[player->pc] = 80)
     {
-        arg2 = get_1_byte1(arena, player->pc) % IDX_MOD;
+        arg2 = get_1_byte(arena, player->pc) % IDX_MOD;
         player->pc = (player->pc + 1) % MEM_SIZE;
     }
     else
         return ;
 	arg1 = get_1_byte(arena, player->pc);
+	if (arg1 < REG_NUMBER)
+		put_value(player, arena, arg1);
     player->pc = (player->pc + 1) % MEM_SIZE;
     player->pc = (player->pc + 1) % MEM_SIZE;
 }

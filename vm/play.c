@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/04 13:22:43 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/04 15:44:50 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,18 @@ static int	nbr_live(t_vm *vm)
 	return (nbr_live);
 }
 
+static void	clear_players_lives(t_vm *vm)
+{
+	int		i;
+
+	i = 0;
+	while (i < vm->players_count)
+	{
+		vm->player[i].lives = 0;
+		i++;
+	}
+}
+
 static int	end(t_vm *vm)
 {
 	if (vm->cycle_to_die < vm->cycle)
@@ -69,7 +81,7 @@ static int	end(t_vm *vm)
 		vm->max_checks == MAX_CHECKS;
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->current_cycle = 0;
-		// обнулить players->live
+		clear_players_lives(vm);
 		// обнулять carry???? скорее нет, чем да...
 		if (vm->cycle_to_die > 0)
 			return (0);
@@ -89,9 +101,12 @@ void		play(t_vm *vm)
 		i = 0;
 		while (i < vm->players_count)
 		{
-			// count of cycle for cuurent move!!!!
-			if (!(vm->players[i].cycle))
-				move(&(vm->players[i]) ,vm);
+			vm->player[i].cycle++;
+			if (enough_cycle(vm->player[i].cycle, vm->arena[vm->player[i].pc]))
+			{
+				move(&(vm->players[i]), vm);
+				vm->player[i].cycle = 0;;
+			}
 			i++;
 		}
 		vm->cycle++;

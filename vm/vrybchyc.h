@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/04 15:06:09 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 11:45:24 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct		s_player
 	unsigned int	pc;
 	int				alive;
 	int				carry;
-	int				cycle_to_move;
+	int				cycle;
 	int				lives;
 	int				last_live;
 }					t_player;

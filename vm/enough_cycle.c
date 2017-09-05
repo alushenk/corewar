@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/04 15:33:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/04 15:40:48 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 11:45:16 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		enough_cycle(int cycle, int command)
 {
-	if (command < 1 && command > 16)
+	if (command < 1 || command > 16)
 		return (1);
 	else if (command == 1 && cycle == 10)
 		return (1);

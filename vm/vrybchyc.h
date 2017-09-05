@@ -6,12 +6,13 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 11:45:24 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 13:14:02 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VRYBCHYC_H
 # define VRYBCHYC_H
+# include "vrudenko.h"
 
 /*
 ** vm.current_cycle - cycle in current period
@@ -20,27 +21,13 @@
 ** player.lives - count of lives in current period
 */
 
-typedef struct		s_vm
-{
-	char			*arena;
-	int				cycle_to_die;
-	int				cycle;
-	int				current_cycle;
-	int				max_checks;
-	t_player		*players;
-	int				players_count;
-}					t_vm
+void		play(t_vm *vm);
+void		move(t_player *player, t_vm *vm);
+int			enough_cycle(int cycle, int command);
 
-typedef struct		s_player
-{
-	int				name;
-	unsigned int	rgstrs[REG_NUMBER];
-	unsigned int	pc;
-	int				alive;
-	int				carry;
-	int				cycle;
-	int				lives;
-	int				last_live;
-}					t_player;
+void		x_live(t_player *player, t_vm *vm);
+void		x_ld(t_player *player, unsigned char *arena);
+void		x_st(t_player *player, unsigned char *arena);
+
 
 #endif

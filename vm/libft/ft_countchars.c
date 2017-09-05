@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_countchars.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/30 17:21:35 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 18:35:40 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "libft.h"
 
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
+int		ft_countchars(char *str, char c)
+{
+	char	*tmp;
+	int		i;
 
-
-#include <stdio.h> // delete
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-#endif
+	if (!str)
+		return (0);
+	tmp = str;
+	i = 0;
+	while (*tmp != c && *tmp != '\0')
+	{
+		tmp++;
+		i++;
+	}
+	return (i);
+}

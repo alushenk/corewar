@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/30 14:58:07 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 17:47:09 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
-#include <stdlib.h>
+#include "libft.h"
 #include <unistd.h>
-#include <fcntl.h>
 
-
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}

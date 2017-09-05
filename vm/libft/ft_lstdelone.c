@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/12/02 17:30:58 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/02 19:14:56 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
+#include "libft.h"
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 
-
-
-#endif
+void	ft_lstdelone(t_list **alst, void (*del)(void *, size_t))
+{
+	del((*alst)->content, (*alst)->content_size);
+	free(*alst);
+	*alst = NULL;
+}

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/30 21:43:41 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/04 17:09:35 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "libft.h"
 
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
+void	*ft_memchr(const void *s, int c, size_t n)
+{
+	size_t i;
 
-
-#include <stdio.h> // delete
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-#endif
+	i = 0;
+	while (i < n)
+	{
+		if (*((unsigned char*)s) == (unsigned char)c)
+			return (((void*)s));
+		i++;
+		s++;
+	}
+	return (NULL);
+}

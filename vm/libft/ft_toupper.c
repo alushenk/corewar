@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/28 17:49:47 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/05 15:29:37 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#include "libft.h"
 
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
+int		ft_toupper(int c)
+{
+	int shift;
 
-
-#include <stdio.h> // delete
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-#endif
+	shift = 'a' - 'A';
+	if (c >= 97 && c <= 122)
+		c = c - shift;
+	return (c);
+}

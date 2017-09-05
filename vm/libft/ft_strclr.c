@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/29 17:51:29 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 17:41:37 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+void	ft_strclr(char *s)
+{
+	int		i;
 
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-
-
-
-#endif
+	i = 0;
+	if (s)
+	{
+		while (s[i] != '\0')
+		{
+			s[i] = '\0';
+			i++;
+		}
+	}
+}

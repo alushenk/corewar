@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/10/31 11:00:47 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 17:47:24 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
-#include <stdlib.h>
 #include <unistd.h>
-#include <fcntl.h>
 
+void	ft_putchar(char c)
+{
+	unsigned char a;
 
-
-#endif
+	a = (unsigned char)c;
+	write(1, &a, 1);
+}

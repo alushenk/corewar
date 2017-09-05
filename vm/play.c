@@ -6,13 +6,14 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/04 15:44:50 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 13:18:53 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static int	no_live_payers(t_player *players)
+
+static int	no_live_payers(t_vm *vm)
 {
 	int		i;
 
@@ -64,7 +65,7 @@ static void	clear_players_lives(t_vm *vm)
 	i = 0;
 	while (i < vm->players_count)
 	{
-		vm->player[i].lives = 0;
+		vm->players[i].lives = 0;
 		i++;
 	}
 }
@@ -78,7 +79,7 @@ static int	end(t_vm *vm)
 		return (1);
 	if (nbr_live(vm) >= NBR_LIVE || !vm->max_checks)
 	{
-		vm->max_checks == MAX_CHECKS;
+		vm->max_checks = MAX_CHECKS;
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->current_cycle = 0;
 		clear_players_lives(vm);
@@ -101,11 +102,11 @@ void		play(t_vm *vm)
 		i = 0;
 		while (i < vm->players_count)
 		{
-			vm->player[i].cycle++;
-			if (enough_cycle(vm->player[i].cycle, vm->arena[vm->player[i].pc]))
+			vm->players[i].cycle++;
+			if (enough_cycle(vm->players[i].cycle, vm->arena[vm->players[i].pc]))
 			{
 				move(&(vm->players[i]), vm);
-				vm->player[i].cycle = 0;;
+				vm->players[i].cycle = 0;;
 			}
 			i++;
 		}

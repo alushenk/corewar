@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_memdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/12/01 18:31:25 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 18:31:51 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
+#include "libft.h"
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 
-
-
-#endif
+void	ft_memdel(void **ap)
+{
+	if ((ap))
+	{
+		free(*ap);
+		*ap = NULL;
+	}
+}

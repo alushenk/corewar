@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/12/02 19:15:20 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/03 15:37:26 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
+#include "libft.h"
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
+{
+	t_list *temp;
 
-
-#endif
+	temp = *alst;
+	while (*alst)
+	{
+		temp = *alst;
+		del((*alst)->content, (*alst)->content_size);
+		free(*alst);
+		*alst = (temp)->next;
+	}
+}

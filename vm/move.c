@@ -6,20 +6,21 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:00:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/04 12:53:07 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 12:55:07 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		move(t_player *palyer, t_vm *vm)
+void		move(t_player *player, t_vm *vm)
 {
 	if (vm->arena[player->pc] == 1)
 		x_live(player, vm);
 	else  if (vm->arena[player->pc] == 2)
-		x_ld(player, vm->rena);
+		x_ld(player, vm->arena);
 	else  if (vm->arena[player->pc] == 3)
         x_st(player, vm->arena);
+/*
 	else  if (vm->arena[player->pc] == 4)
         x_add(player, vm);
 	else  if (vm->arena[player->pc] == 5)
@@ -46,6 +47,7 @@ void		move(t_player *palyer, t_vm *vm)
         x_lfork(player, vm);
 	else  if (vm->arena[player->pc]) == 16)
         x_aff(player, vm);
+*/
 	else
 		player->pc = (player->pc + 1) % MEM_SIZE;
 }

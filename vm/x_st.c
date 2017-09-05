@@ -6,19 +6,20 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:44:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 11:54:42 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 13:26:00 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	put_value_from_reg(t_player *player, char *arena,
+
+static void	put_value_from_reg(t_player *player, unsigned char *arena,
 						unsigned int arg1, unsigned int arg2)
 {
 	int				addr;
 	unsigned int	value;
 
-	addr = pc + (player->rgstrs[arg1 - 1] % IDX_MOD);
+	addr = player->pc + (player->rgstrs[arg1 - 1] % IDX_MOD);
 	addr = addr % MEM_SIZE;
 	if (addr < 0)
 		addr += MEM_SIZE;
@@ -29,12 +30,12 @@ static void	put_value_from_reg(t_player *player, char *arena,
 	arena[(addr + 3) % MEM_SIZE] = (value & 0xFF000000) >> 24;
 }
 
-static void	put_value_from_ind(t_player *palyer, char *arena,
+static void	put_value_from_ind(t_player *player, unsigned char *arena,
 						unsigned int arg1, unsigned int arg2)
 {
 	int				addr;
 
-	addr = pc + (player->rgstrs[arg1 - 1] % IDX_MOD);
+	addr = player->pc + (player->rgstrs[arg1 - 1] % IDX_MOD);
 	addr = addr % MEM_SIZE;
 	if (addr < 0)
 		addr += MEM_SIZE;
@@ -42,7 +43,7 @@ static void	put_value_from_ind(t_player *palyer, char *arena,
 	arena[(addr + 1) % MEM_SIZE] = (arg2 & 0x0000FF00) >> 8;
 }
 
-void		x_st(t_player *palyer, char *arena)
+void		x_st(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
@@ -52,13 +53,13 @@ void		x_st(t_player *palyer, char *arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arg1 < 1 || arg1 > REG_NUMBER)
 		return ;
-	if (arena[player->pc] = 112)
+	if (arena[player->pc] == 112)
 	{
 		arg2 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
 		player->pc = (player->pc + 2) % MEM_SIZE;
 		put_value_from_ind(player, arena, arg1, arg2);
 	}
-	else if (arena[player->pc] = 80)
+	else if (arena[player->pc] == 80)
 	{
 		arg2 = ft_get_n_bytes(arena, player->pc, 1) % IDX_MOD;
 		player->pc = (player->pc + 1) % MEM_SIZE;

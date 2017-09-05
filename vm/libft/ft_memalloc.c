@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/01 11:32:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/01 11:39:42 by vrybchyc         ###   ########.fr       */
+/*   Created: 2016/11/28 13:04:31 by vrudenko          #+#    #+#             */
+/*   Updated: 2016/12/01 18:33:44 by vrudenko         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
-
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
+#include "libft.h"
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 
+void	*ft_memalloc(size_t size)
+{
+	void			*temp;
+	unsigned char	*strtemp;
+	size_t			i;
 
-
-#endif
+	i = 0;
+	if ((temp = (void*)malloc(size)) == NULL)
+		return (NULL);
+	strtemp = temp;
+	while (i < size)
+	{
+		strtemp[i] = 0;
+		i++;
+	}
+	return (temp);
+}

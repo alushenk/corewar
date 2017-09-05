@@ -6,24 +6,24 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:11:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 11:51:20 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 13:20:40 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "corewar.h"
 
-void		x_ld(t_player *palyer, char *arena)
+
+void		x_ld(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	if (arena[player->pc] = 144)
+	if (arena[player->pc] == 144)
 	{
 		arg1 = ft_get_n_bytes(arena, player->pc, 4) % IDX_MOD;
 		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
-	else if (arena[player->pc] = 208)
+	else if (arena[player->pc] == 208)
 	{
 		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
 		player->pc = (player->pc + 2) % MEM_SIZE;
@@ -34,7 +34,7 @@ void		x_ld(t_player *palyer, char *arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arg2 > 0 && arg2 < REG_NUMBER + 1)
-		player->rgstr[arg2 - 1] = arg1;
+		player->rgstrs[arg2 - 1] = arg1;
 	if (arg1 == 0)
 		player->carry = 1;
 }

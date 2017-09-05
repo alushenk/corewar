@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   x_ld.c                                             :+:      :+:    :+:   */
+/*   x_lld.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 15:11:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 17:10:50 by vrybchyc         ###   ########.fr       */
+/*   Created: 2017/09/05 18:07:17 by vrybchyc          #+#    #+#             */
+/*   Updated: 2017/09/05 18:08:31 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "corewar.h"
 
 
-void		x_ld(t_player *player, unsigned char *arena)
+void		x_lld(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
@@ -20,14 +21,13 @@ void		x_ld(t_player *player, unsigned char *arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] == 144)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 4) % IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, player->pc, 4);
 		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
 	else if (arena[player->pc] == 208)
 	{
 		arg1 = ft_get_n_bytes(arena, player->pc, 2);
-		arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4)
-			% IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4);
 		player->pc = (player->pc + 2) % MEM_SIZE;
 	}
 	else

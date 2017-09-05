@@ -6,12 +6,11 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:44:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 13:26:00 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/05 15:28:12 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 static void	put_value_from_reg(t_player *player, unsigned char *arena,
 						unsigned int arg1, unsigned int arg2)
@@ -49,18 +48,22 @@ void		x_st(t_player *player, unsigned char *arena)
 	unsigned int	arg2;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	arg1 = ft_get_n_bytes(arena, player->pc, 1);
-	player->pc = (player->pc + 1) % MEM_SIZE;
-	if (arg1 < 1 || arg1 > REG_NUMBER)
-		return ;
 	if (arena[player->pc] == 112)
 	{
+		arg1 = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
+		if (arg1 < 1 || arg1 > REG_NUMBER)
+			return ;
 		arg2 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
 		player->pc = (player->pc + 2) % MEM_SIZE;
 		put_value_from_ind(player, arena, arg1, arg2);
 	}
 	else if (arena[player->pc] == 80)
 	{
+		arg1 = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
+		if (arg1 < 1 || arg1 > REG_NUMBER)
+			return ;
 		arg2 = ft_get_n_bytes(arena, player->pc, 1) % IDX_MOD;
 		player->pc = (player->pc + 1) % MEM_SIZE;
 		if (arg2 > 0 && arg2 < REG_NUMBER + 1)

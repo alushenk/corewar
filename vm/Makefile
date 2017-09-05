@@ -6,7 +6,7 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/15 11:17:22 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/09/05 13:32:48 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/09/05 17:33:29 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -23,6 +23,10 @@ SRC = 	DEBUGG.c \
 		x_ld.c \
 		x_live.c \
 		x_st.c \
+		x_add.c \
+		x_sub.c \
+		x_and.c \
+		x_or.c
 
 OBJ = $(SRC:.c=.o)
 

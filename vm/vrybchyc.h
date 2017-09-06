@@ -36,10 +36,13 @@ void        x_xor(t_player *player, unsigned char *arena);
 void        x_zjmp(t_player *player, unsigned char *arena);
 void        x_ldi(t_player *player, unsigned char *arena);
 void        x_sti(t_player *player, unsigned char *arena);
-void        x_fork(t_player *player, unsigned char *arena);
 void        x_lld(t_player *player, unsigned char *arena);
 void        x_lldi(t_player *player, unsigned char *arena);
-void        x_lfork(t_player *player, unsigned char *arena);
 void        x_aff(t_player *player, unsigned char *arena);
+void		x_fork(t_player *player, t_vm *vm);
+void		x_lfork(t_player *player, t_vm *vm);
+
+t_player	*ft_create_new_player(t_player *player, unsigned int new_pc);
+void		ft_add_new_player(t_vm *vm, t_player *new_player);
 
 #endif

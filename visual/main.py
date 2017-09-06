@@ -9,13 +9,6 @@ import pygame
 # champion = ' '.join(x.encode('hex') for x in a)
 # print(' '.join(format(x, '02x') for x in memory))
 
-# index = 0
-# for i in range(64):
-#     for j in range(64):
-#         print(format(memory[index], '02x'), end=' ')
-#         index += 1
-#     print()
-
 def main():
     memory = bytearray(4096)
 
@@ -44,17 +37,12 @@ def main():
     screen = pygame.display.set_mode((int(width), int(height)), pygame.RESIZABLE)
     screen.fill(background_color)
 
-    font = pygame.font.SysFont(False, 19, bold=False, italic=False, )
-    index = 0
-    for i in range(64):
-        for j in range(64):
-            x = j * (element_size + space)
-            y = i * (element_size + space)
-            pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
+    font = pygame.font.SysFont(False, 23, bold=False, italic=False, )
 
-            text = font.render(format(memory[index], '02x'), True, text_color)
-            screen.blit(text, (x + 2, y + 3))
-            index += 1
+    player_start_index = 1
+    player_color = (0, 255, 0)
+    highlighted_text_color = (0, 0, 0)
+    size = 12
 
     loop = True
     while loop:
@@ -63,6 +51,24 @@ def main():
                 loop = False
             if event.type == pygame.QUIT:
                 loop = False
+            index = 0
+            for i in range(64):
+                for j in range(64):
+                    x = j * (element_size + space)
+                    y = i * (element_size + space)
+                    if player_start_index <= index <= player_start_index + size:
+                        current_text_color = highlighted_text_color
+                        current_player_color = player_color
+                    else:
+                        current_text_color = text_color
+                        current_player_color = element_color
+                    pygame.draw.rect(screen, current_player_color, [x, y, element_size, element_size])
+
+                    text = font.render(format(memory[index] & 240, '02x')[0], True, current_text_color)
+                    screen.blit(text, (x + 1, y + 3))
+                    text = font.render(format(memory[index] & 15, '02x')[1], True, current_text_color)
+                    screen.blit(text, (x + 10, y + 3))
+                    index += 1
         pygame.display.update()
 
     pygame.quit()

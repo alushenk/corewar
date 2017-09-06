@@ -66,6 +66,6 @@ unsigned int ft_get_n_bytes(unsigned char *arena, int pc, int bytes_num);
 void 		ft_print_player(t_players *player);
 t_vm    	*ft_create_vm(unsigned char *arena, t_players **players_array, int argc);
 
-void    ft_print_map(t_vm *vm, t_players **players);
+void    ft_print_map(t_vm *vm);
 
 #endif //COREWAR_VRUDENKO_H

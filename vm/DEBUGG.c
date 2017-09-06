@@ -21,7 +21,7 @@ void ft_print_player(t_players *player)
 }
 
 
-void    ft_print_map(t_vm *vm, t_players **players)
+void    ft_print_map(t_vm *vm)
 {
     unsigned int     i;
     int     flag;
@@ -37,7 +37,7 @@ void    ft_print_map(t_vm *vm, t_players **players)
         flag = 0;
         while (k < vm->players_count)
         {
-            if (i >= vm->players[k].pc && i < vm->players[k].pc + players[k]->size) {
+            if (i >= vm->players[k].pc && i < vm->players[k].pc + 1) {
                 flag = 1;
             }
             k++;

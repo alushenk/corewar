@@ -78,11 +78,12 @@ int main(int argc, char **argv)
     arena = fill_arena(arena, player_array, argc);
 
     vm = ft_create_vm(arena, player_array, argc);
-
+    ft_print_map(vm);
+    // printf("REG0: %u\n", vm->players[0]->rg);
 	play(vm);//
 
 
-    ft_print_map(vm, player_array);
+    
 
 
     return (0);

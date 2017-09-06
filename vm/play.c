@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 13:18:53 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/06 14:49:33 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ static int	end(t_vm *vm)
 		vm->cycle_to_die -= CYCLE_DELTA;
 		vm->current_cycle = 0;
 		clear_players_lives(vm);
-		// обнулять carry???? скорее нет, чем да...
 		if (vm->cycle_to_die > 0)
 			return (0);
 		else
@@ -97,8 +96,12 @@ void		play(t_vm *vm)
 {
 	int		i;
 
-	while (!end(vm))
+	while (!end(vm) && vm->cycle < 100)
 	{
+		printf("RGSTRS: %u\n", vm->players[0].rgstrs[0]);
+		printf("\nCYCLE: %d\n\n", vm->cycle);//test
+		ft_print_map(vm);
+		sleep (1);
 		i = 0;
 		while (i < vm->players_count)
 		{

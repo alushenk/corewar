@@ -6,16 +6,16 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 17:37:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 17:50:42 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/06 13:43:56 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#incldeu "corewar.h"
+#include "corewar.h"
 
 void		x_zjmp(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg;
-	int				tmp;
+	int				tmp1;
 	int				tmp2;
 	int             addr;
 

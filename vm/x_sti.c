@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 18:07:17 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 18:08:31 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/06 13:45:55 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,7 @@ void		x_sti(t_player *player, unsigned char *arena)
 		arg3 = ft_get_n_bytes(arena, player->pc, 2);
 		player->pc = (player->pc + 2) % MEM_SIZE;
 	}
+	else 
+		return ;
 	arena[(arg1 + arg2) % IDX_MOD] = arg3;
 }

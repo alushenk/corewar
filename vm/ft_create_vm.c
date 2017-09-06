@@ -21,21 +21,23 @@ static t_player    ft_create_vm_player( int i, int num_players)
 
 //    vm_player = (t_player*)malloc(sizeof(*vm_player));
 
-    vm_player.name = -(i + 1);
-    vm_player.rgstrs[0] = vm_player.name;
+    vm_player.name =  -1 * i;
+    vm_player.rgstrs[0] = (-1) * i;
     while (k < REG_NUMBER)
     {
         vm_player.rgstrs[i] = 0;
         k++;
     }
 //    printf("%d\n", i);
-    vm_player.pc = (MEM_SIZE / num_players) * i;
+    vm_player.pc = (MEM_SIZE / num_players) * (i - 1);
     vm_player.alive = 1;
     vm_player.carry = 0;
     vm_player.cycle = 0;
     vm_player.lives = 0;
     vm_player.last_live = 0;
 
+
+    // printf("NAME FiRst: %d\n", )
 
     return (vm_player);
 }
@@ -52,7 +54,7 @@ static t_player    *ft_create_vm_players_array(t_players **players_array, int nu
 
     while (i < num_players)
     {
-        players_vm_array[i] = ft_create_vm_player(i, num_players);
+        players_vm_array[i] = ft_create_vm_player(i + 1, num_players);
         i++;
     }
 
@@ -73,6 +75,9 @@ t_vm    *ft_create_vm(unsigned char *arena, t_players **players_array, int argc)
     vm->players = ft_create_vm_players_array(players_array, argc - 1);
     vm->players_count = argc - 1;
 
+    printf("Name: %d\n", vm->players[0].name);
+    printf("PAM %u\n", vm->players[0].rgstrs[0]);
+    printf("START PC %u\n", vm->players[0].pc);
 
     return (vm);
 }

@@ -6,13 +6,13 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:21:25 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 13:21:49 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 15:47:43 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		x_and(t_player *player, unsigned char *arena)
+void		x_or(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
@@ -115,6 +115,7 @@ void		x_and(t_player *player, unsigned char *arena)
 	arg3 = ft_get_n_bytes(arena, player->pc, 1);
 	if (arg3 < 1 || arg3 > REG_NUMBER)
 		return ;
+	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->rgstrs[arg3 - 1] = arg1 | arg2;
 	player->carry = 1;

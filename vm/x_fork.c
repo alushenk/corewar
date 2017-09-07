@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   x_live.c                                           :+:      :+:    :+:   */
+/*   x_fork.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/03 14:32:01 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 17:47:30 by vrybchyc         ###   ########.fr       */
+/*   Created: 2017/09/07 13:44:12 by vrybchyc          #+#    #+#             */
+/*   Updated: 2017/09/07 15:50:48 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,16 @@ void		ft_add_new_player(t_vm *vm, t_player *new_player)
 
 void			x_fork(t_player *player, t_vm *vm)
 {
-	unsigned int	argv1;
+	unsigned int	arg1;
 	unsigned int	new_pc;
 	t_player		*new_player;
 	int				tmp;
 	int             addr;
 
 	addr = (int)player->pc;
-	player->pc = (player->pc + 1) % MEM_SIZE;
-	argv1 = ft_get_n_bytes(vm->arena, player->pc, 2);  // 2 или 4???
-	new_pc = argv1 % IDX_MOD;
-	tmp = (int)new_pc;
+	arg1 = ft_get_n_bytes(vm->arena, player->pc, 4) % IDX_MOD;
+	player->pc = (player->pc + 4) % MEM_SIZE;
+	tmp = (int)arg1;
 	addr = addr + tmp;
 	addr = addr % MEM_SIZE;
     if (addr < 0)
@@ -75,4 +74,5 @@ void			x_fork(t_player *player, t_vm *vm)
 	new_pc = (unsigned int)addr;
 	new_player = ft_create_new_player(player, new_pc);
 	ft_add_new_player(vm, new_player);	
+	player->pc = (player->pc + 1) % MEM_SIZE;
 }

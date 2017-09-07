@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 15:27:31 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 13:19:38 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 15:42:02 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void		x_and(t_player *player, unsigned char *arena)
 	arg3 = ft_get_n_bytes(arena, player->pc, 1);
 	if (arg3 < 1 || arg3 > REG_NUMBER)
 		return ;
+	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->rgstrs[arg3 - 1] = arg1 & arg2;
 	player->carry = 1;

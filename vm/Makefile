@@ -6,7 +6,7 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/15 11:17:22 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/09/06 13:44:46 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/09/07 13:11:13 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,6 +14,7 @@ NAME = corewar
 
 SRC = 	DEBUGG.c \
 		enough_cycle.c \
+		ft_addr.c \
 		ft_bytes_to_int.c \
 		ft_create_players_array.c \
 		ft_create_vm.c \

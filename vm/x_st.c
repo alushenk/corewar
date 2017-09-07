@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:44:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/06 15:49:33 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 12:34:49 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static void	put_value_from_reg(t_player *player, unsigned char *arena,
         tmp += MEM_SIZE;
     addr = (unsigned int)tmp;
     arg1 = player->rgstrs[arg1 - 1];
-    arena[addr] = (arg1 & 0x000000FF);
-    arena[(addr + 1) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
-    arena[(addr + 2) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
-    arena[(addr + 3) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
+    arena[(addr + 3) % MEM_SIZE] = (arg1 & 0x000000FF);
+    arena[(addr + 2) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
+    arena[(addr + 1) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
+    arena[(addr + 0) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
 }
 
 static void	put_value_from_ind(t_player *player, unsigned char *arena,
@@ -36,16 +36,16 @@ static void	put_value_from_ind(t_player *player, unsigned char *arena,
 	unsigned int	addr;
 	int				tmp;
 
-	tmp = player->pc - 4 + arg2;
+	tmp = player->pc - 4 + (int)arg2;
 	tmp = tmp % MEM_SIZE;
 	if (tmp < 0)
 		tmp += MEM_SIZE;
 	addr = (unsigned int)tmp;
 	arg1 = player->rgstrs[arg1 - 1];
-	arena[addr] = (arg1 & 0x000000FF);
-	arena[(addr + 1) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
-	arena[(addr + 2) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
-    arena[(addr + 3) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
+	arena[(addr + 3) % MEM_SIZE] = (arg1 & 0x000000FF);
+	arena[(addr + 2) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
+	arena[(addr + 1) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
+    arena[(addr + 0) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
 }
 
 void		x_st(t_player *player, unsigned char *arena)

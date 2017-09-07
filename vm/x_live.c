@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 14:32:01 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 17:47:30 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 10:58:41 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void		x_live(t_player *player, t_vm *vm)
 	unsigned int	name;
 	
 	name = ft_get_n_bytes(vm->arena, player->pc, 4);
-	player->pc = (player->pc + 1) % MEM_SIZE;
+	player->pc = (player->pc + 4) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	say_live(vm, name);
 }

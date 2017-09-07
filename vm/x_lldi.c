@@ -5,18 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/05 18:06:22 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 18:06:52 by vrybchyc         ###   ########.fr       */
+/*   Created: 2017/09/07 13:27:28 by vrybchyc          #+#    #+#             */
+/*   Updated: 2017/09/07 13:28:25 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		x_lldi(t_player *player, unsigned char *arena)
+void		x_ldi(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
 	unsigned int	arg3;
+	int				tmp;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
     if (arena[player->pc] == 84)
@@ -59,9 +60,9 @@ void		x_lldi(t_player *player, unsigned char *arena)
 	}
 	else if (arena[player->pc] == 212)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2);
-        arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4)
-            % IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		tmp = player->pc - 1 + (int)arg1;
+        arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
 		player->pc = (player->pc + 2) % MEM_SIZE;
 		arg2 = ft_get_n_bytes(arena, player->pc, 1);
         player->pc = (player->pc + 1) % MEM_SIZE;
@@ -71,9 +72,9 @@ void		x_lldi(t_player *player, unsigned char *arena)
 	}
 	else if (arena[player->pc] == 228)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2);
-		arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4)
-            % IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		tmp = player->pc - 1 + (int)arg1;
+        arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
         player->pc = (player->pc + 2) % MEM_SIZE;
 		arg2 = ft_get_n_bytes(arena, player->pc, 2);
         player->pc = (player->pc + 2) % MEM_SIZE;
@@ -82,6 +83,5 @@ void		x_lldi(t_player *player, unsigned char *arena)
 	if (arg3 < 1 || arg3 > REG_NUMBER)
 		return ;
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	player->rgstrs[arg3 - 1] = arg1 + arg2;
-	player->carry = 1;
+	player->rgstrs[arg3 - 1] = (arg1 + arg2);
 }

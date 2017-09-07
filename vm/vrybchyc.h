@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 18:15:32 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 13:11:33 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,7 @@ void		x_lfork(t_player *player, t_vm *vm);
 
 t_player	*ft_create_new_player(t_player *player, unsigned int new_pc);
 void		ft_add_new_player(t_vm *vm, t_player *new_player);
+
+unsigned int    ft_addr(int tmp);
 
 #endif

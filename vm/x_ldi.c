@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 17:58:19 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 18:13:18 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 13:25:41 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		x_ldi(t_player *player, unsigned char *arena)
 	unsigned int	arg1;
 	unsigned int	arg2;
 	unsigned int	arg3;
+	int				tmp;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
     if (arena[player->pc] == 84)
@@ -59,9 +60,9 @@ void		x_ldi(t_player *player, unsigned char *arena)
 	}
 	else if (arena[player->pc] == 212)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2);
-        arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4)
-            % IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		tmp = player->pc - 1 + (int)arg1;
+        arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
 		player->pc = (player->pc + 2) % MEM_SIZE;
 		arg2 = ft_get_n_bytes(arena, player->pc, 1);
         player->pc = (player->pc + 1) % MEM_SIZE;
@@ -71,9 +72,9 @@ void		x_ldi(t_player *player, unsigned char *arena)
 	}
 	else if (arena[player->pc] == 228)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2);
-		arg1 = ft_get_n_bytes(arena, (player->pc + arg1) % MEM_SIZE, 4)
-            % IDX_MOD;
+		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		tmp = player->pc - 1 + (int)arg1;
+        arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
         player->pc = (player->pc + 2) % MEM_SIZE;
 		arg2 = ft_get_n_bytes(arena, player->pc, 2);
         player->pc = (player->pc + 2) % MEM_SIZE;

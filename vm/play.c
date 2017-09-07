@@ -6,12 +6,11 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/06 14:49:33 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 11:35:11 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 static int	no_live_payers(t_vm *vm)
 {
@@ -95,25 +94,34 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm)
 {
 	int		i;
+	char	c;
 
 	while (!end(vm) && vm->cycle < 100)
 	{
-		printf("RGSTRS: %u\n", vm->players[0].rgstrs[0]);
-		printf("\nCYCLE: %d\n\n", vm->cycle);//test
-		ft_print_map(vm);
-		sleep (1);
-		i = 0;
-		while (i < vm->players_count)
+		while(1)
 		{
-			vm->players[i].cycle++;
-			if (enough_cycle(vm->players[i].cycle, vm->arena[vm->players[i].pc]))
+			c = getchar();
+			if (c == 's' || c == ']')
 			{
-				move(&(vm->players[i]), vm);
-				vm->players[i].cycle = 0;;
+				printf("\nCYCLE: %d\n\n", vm->cycle);//test
+				ft_print_map(vm);
+				sleep (1);
+				i = 0;
+				while (i < vm->players_count)
+				{
+					vm->players[i].cycle++;
+					if (enough_cycle(vm->players[i].cycle, vm->arena[vm->players[i].pc]))
+					{
+						move(&(vm->players[i]), vm);
+						vm->players[i].cycle = 0;;
+					}
+					i++;
+				}
+				vm->cycle++;
+				vm->current_cycle++;
 			}
-			i++;
+			if (c == 'q')
+				return ;
 		}
-		vm->cycle++;
-		vm->current_cycle++;
 	}
 }

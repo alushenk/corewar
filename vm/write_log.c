@@ -1,0 +1,107 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_log.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2017/09/07 20:02:18 by alushenk          #+#    #+#             */
+/*   Updated: 2017/09/07 20:02:20 by alushenk         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "corewar.h"
+
+size_t	ft_strlen(const char *s)
+{
+	unsigned long i;
+
+	i = 0;
+	while (*s != '\0')
+	{
+		s++;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char *temp;
+
+	temp = s;
+	while (n > 0)
+	{
+		*temp = 0;
+		temp++;
+		n--;
+	}
+}
+
+// передать сюда t_vm *vm
+void	write_log(int fd)
+{
+	// карта, один раз
+	unsigned char map[MEM_SIZE + 1];
+	write(fd, map, MEM_SIZE + 1);
+
+	// колличество кареток, один раз
+	unsigned int number_of_carriages = 494949;
+	write(fd, &number_of_carriages, 4);
+
+	// каретки игроков, в цикле while(number_of_carriages)
+	unsigned char player_number = 5;
+	write(fd, &player_number, 1);
+	unsigned int pc = 4000;
+	write(fd, &pc, 4);
+}
+
+// передать сюда t_vm *vm
+// пока пишу случайные тестовые данные
+int		create_log_file(void)
+{
+	int fd_output;
+
+	if ((fd_output = open("output", O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR)) < 0)
+	{
+		write(2, "Error! can't create output file\n", ft_strlen("Error! can't create output file\n"));
+		exit(0);
+	}
+
+	// колличество игроков, один раз
+	unsigned char	number_of_players = 2;
+	write(fd_output, &number_of_players, 1);
+
+	// тут начинается цикл по всем игрокам
+
+	unsigned char	player_number = 1; // номер игрока
+	write(fd_output, &player_number, 1);
+
+	unsigned int 	player_size = 25; // размер игрока
+	write(fd_output, &player_size, 4);
+
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	ft_bzero(prog_name, PROG_NAME_LENGTH + 1);
+	write(fd_output, prog_name, PROG_NAME_LENGTH + 1);
+
+	char			comment[COMMENT_LENGTH + 1];
+	ft_bzero(comment, COMMENT_LENGTH + 1);
+	comment[4] = 'h';
+	comment[5] = 'u';
+	comment[6] = 'y';
+	write(fd_output, comment, COMMENT_LENGTH + 1);
+
+	return (fd_output);
+}
+
+int main(void)
+{
+	int fd;
+
+	// запускается один раз, создает файл и возвращает его дескриптор
+	fd = create_log_file();
+	// запускается много раз в цикле, внутри play()
+	// передайте в нее t_vm *vm и пишите данные от туда
+	write_log(fd);
+	return (0);
+}

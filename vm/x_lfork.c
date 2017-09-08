@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:46:25 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 15:50:58 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 14:35:11 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void			x_lfork(t_player *player, t_vm *vm)
 	int             addr;
 
 	addr = (int)player->pc;
-	arg1 = ft_get_n_bytes(vm->arena, player->pc, 4);
-	player->pc = (player->pc + 4) % MEM_SIZE;
+	arg1 = ft_get_n_bytes(vm->arena, player->pc, 2);
+	player->pc = (player->pc + 2) % MEM_SIZE;
 	tmp = (int)arg1;
 	addr = addr + tmp;
 	addr = addr % MEM_SIZE;

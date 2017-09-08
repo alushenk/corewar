@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:46:25 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 15:28:18 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 18:31:23 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void			x_lfork(t_player *player, t_vm *vm)
 {
 	unsigned int	arg1;
 	unsigned int	new_pc;
-	t_player		*new_player;
+	t_player		new_player;
 	int				tmp;
 	int             addr;
 

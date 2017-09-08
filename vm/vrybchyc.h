@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:31:05 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 15:28:47 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 18:31:57 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void        x_lldi(t_player *player, unsigned char *arena);
 void		x_fork(t_player *player, t_vm *vm);
 void		x_lfork(t_player *player, t_vm *vm);
 
-t_player	*ft_create_new_player(t_player *player, unsigned int new_pc);
-void		ft_add_new_player(t_vm *vm, t_player *new_player);
+t_player	ft_create_new_player(t_player *player, unsigned int new_pc);
+void		ft_add_new_player(t_vm *vm, t_player new_player);
 
 unsigned int    ft_addr(int tmp);
 

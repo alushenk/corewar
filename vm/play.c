@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 16:26:47 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 19:36:41 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,10 +109,10 @@ void		play(t_vm *vm)
 //			c = getchar();
 //			if (c == 's' || c == ']')
 //			{
-				printf("\nCYCLE: %d\n\n", vm->cycle);//test
+			printf("\nCYCLE: %d\n\n", vm->cycle);//test
 				//	printf("\nCURRENT CYCLE: %d\n\n", vm->current_cycle);//test
 				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
-				ft_print_map(vm);				
+			ft_print_map(vm);				
 				i = 0;
 				while (i < vm->players_count)
 				{
@@ -120,8 +120,20 @@ void		play(t_vm *vm)
 					if (enough_cycle(vm->players[i].cycle, vm->arena[vm->players[i].pc]))
 					{
 						move(&(vm->players[i]), vm);
-						vm->players[i].cycle = 0;;
+						vm->players[i].cycle = 0;
 					}
+					//testtttttttttttttt
+
+/*
+					int		r = 0;
+					while (r < 16)
+					{
+						printf("ARG%d: %u\n", r + 1, vm->players[i].rgstrs[r]);//TEST
+						r++;
+					}
+
+*/
+					//testttttttttttttttttttt
 					i++;
 				}
 				vm->cycle++;

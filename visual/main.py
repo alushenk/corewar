@@ -4,28 +4,17 @@ from __future__ import print_function
 import sys
 from collections import deque
 import pygame
-
+from parse import parse_header
 
 # champion = ' '.join(x.encode('hex') for x in a)
 # print(' '.join(format(x, '02x') for x in memory))
 
+background_color = (39, 40, 34)
+element_color = (70, 70, 70)
+text_color = (180, 180, 180)
+
+
 def main():
-    memory = bytearray(4096)
-
-    if len(sys.argv) == 2:
-        with open(sys.argv[1], 'rb') as file:
-            a = file.read()
-
-            for i, byte in enumerate(a):
-                memory[i] = byte
-    else:
-        print('ti pidor')
-        exit()
-
-    background_color = (39, 40, 34)
-    element_color = (70, 70, 70)
-    text_color = (180, 180, 180)
-
     pygame.init()
 
     space = 2
@@ -64,9 +53,13 @@ def main():
                         current_player_color = element_color
                     pygame.draw.rect(screen, current_player_color, [x, y, element_size, element_size])
 
-                    text = font.render(format(memory[index] & 240, '02x')[0], True, current_text_color)
+                    # text = font.render(format(memory[index] & 240, '02x')[0], True, current_text_color)
+                    # screen.blit(text, (x + 1, y + 3))
+                    # text = font.render(format(memory[index] & 15, '02x')[1], True, current_text_color)
+                    # screen.blit(text, (x + 10, y + 3))
+                    text = font.render(memory[index].encode('hex')[0], True, current_text_color)
                     screen.blit(text, (x + 1, y + 3))
-                    text = font.render(format(memory[index] & 15, '02x')[1], True, current_text_color)
+                    text = font.render(memory[index].encode('hex')[1], True, current_text_color)
                     screen.blit(text, (x + 10, y + 3))
                     index += 1
         pygame.display.update()
@@ -76,4 +69,16 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 2:
+        with open(sys.argv[1], 'r') as file:
+            a = file.read()
+
+        # memory = bytearray(4096)
+        # for i, byte in enumerate(a):
+        #     memory[i] = byte
+        memory = 'z' * 4096
+        parse_header(a)
+        main()
+    else:
+        print('ti pidor')
+        exit()

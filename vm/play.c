@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 16:08:51 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 16:26:47 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,14 @@ static void	clear_players_lives(t_vm *vm)
 
 static int	end(t_vm *vm)
 {
-	if (vm->cycle_to_die < vm->cycle)
+	if (vm->cycle_to_die > vm->current_cycle)
 		return (0);
 	update_alive(vm);
 	if (no_live_payers(vm))
+	{//
+		printf("\n\nno live players\n\n");//test
 		return (1);
+	}//
 	if (nbr_live(vm) >= NBR_LIVE || !vm->max_checks)
 	{
 		vm->max_checks = MAX_CHECKS;
@@ -85,7 +88,10 @@ static int	end(t_vm *vm)
 		if (vm->cycle_to_die > 0)
 			return (0);
 		else
+		{//
+			printf("\n\nno cycle to die\n\n");//test
 			return (1);
+		}//
 	}
 	vm->max_checks--;
 	return (0);
@@ -94,16 +100,18 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm)
 {
 	int		i;
-	char	c;
+//	char	c;
 
-	while (!end(vm) && vm->cycle < 100)
+	while (!(end(vm)) && vm->cycle < 2511)
 	{
-		while(1)
-		{
-			c = getchar();
-			if (c == 's' || c == ']')
-			{
+//		while(1)
+//		{
+//			c = getchar();
+//			if (c == 's' || c == ']')
+//			{
 				printf("\nCYCLE: %d\n\n", vm->cycle);//test
+				//	printf("\nCURRENT CYCLE: %d\n\n", vm->current_cycle);//test
+				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
 				ft_print_map(vm);				
 				i = 0;
 				while (i < vm->players_count)
@@ -118,9 +126,9 @@ void		play(t_vm *vm)
 				}
 				vm->cycle++;
 				vm->current_cycle++;
-			}
-			if (c == 'q')
-				return ;
+//			}
+//			if (c == 'q')
+//				return ;
 		}
-	}
+//	}
 }

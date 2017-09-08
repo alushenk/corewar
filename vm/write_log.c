@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include <stdio.h>
 
 size_t	ft_strlen(const char *s)
 {
@@ -38,22 +39,37 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
+void	write_int_to_file(unsigned int value, int fd)
+{
+	unsigned char temp;
+
+	temp = (value >> (8 * 3)) & 0xFF;
+	write(fd, &temp, 1);
+	temp = (value >> (8 * 2)) & 0xFF;
+	write(fd, &temp, 1);
+	temp = (value >> (8 * 1)) & 0xFF;
+	write(fd, &temp, 1);
+	temp = value & 0xFF;
+	write(fd, &temp, 1);
+}
+
 // передать сюда t_vm *vm
 void	write_log(int fd)
 {
 	// карта, один раз
 	unsigned char map[MEM_SIZE + 1];
+	ft_bzero(map, MEM_SIZE + 1); // это для дебага, когда будешь писать карту это надо убрать
 	write(fd, map, MEM_SIZE + 1);
 
 	// колличество кареток, один раз
 	unsigned int number_of_carriages = 494949;
-	write(fd, &number_of_carriages, 4);
+	write_int_to_file(number_of_carriages, fd);
 
 	// каретки игроков, в цикле while(number_of_carriages)
 	unsigned char player_number = 5;
 	write(fd, &player_number, 1);
 	unsigned int pc = 4000;
-	write(fd, &pc, 4);
+	write_int_to_file(pc, fd);
 }
 
 // передать сюда t_vm *vm
@@ -78,7 +94,7 @@ int		create_log_file(void)
 	write(fd_output, &player_number, 1);
 
 	unsigned int 	player_size = 25; // размер игрока
-	write(fd_output, &player_size, 4);
+	write_int_to_file(player_size, fd_output);
 
 	char			prog_name[PROG_NAME_LENGTH + 1];
 	ft_bzero(prog_name, PROG_NAME_LENGTH + 1);

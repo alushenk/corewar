@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 16:08:51 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/07 16:07:54 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,17 +94,19 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm)
 {
 	int		i;
-	char	c;
+	char	c = 'z';
 
 	while (!end(vm) && vm->cycle < 100)
 	{
 		while(1)
 		{
-			c = getchar();
+			if (vm->cycle > 1085)
+				c = getchar();
 			if (c == 's' || c == ']')
 			{
 				printf("\nCYCLE: %d\n\n", vm->cycle);//test
-				ft_print_map(vm);				
+				ft_print_map(vm);
+				sleep (1);
 				i = 0;
 				while (i < vm->players_count)
 				{

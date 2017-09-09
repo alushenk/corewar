@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 17:58:19 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 19:41:44 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 11:41:47 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		x_ldi(t_player *player, unsigned char *arena)
 		return ;
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	addr = addr + (int)arg1 + (int)arg2 - 1;
+	addr = addr + ((int)arg1 + (int)arg2) % IDX_MOD - 1;
 	arg1 = ft_addr(addr);
 	player->rgstrs[arg3 - 1] = ft_get_n_bytes(arena, arg1, 4);
 }

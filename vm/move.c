@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:00:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/06 13:37:21 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 11:43:34 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void		move(t_player *player, t_vm *vm)
         x_lldi(player, vm->arena);
 	else  if (vm->arena[player->pc] == 15)
         x_lfork(player, vm);
-//	else  if (vm->arena[player->pc] == 16)
-//        x_aff(player, vm->arena);
+	else  if (vm->arena[player->pc] == 16)
+        x_aff(player, vm->arena);
 	else
 		player->pc = (player->pc + 1) % MEM_SIZE;
 }

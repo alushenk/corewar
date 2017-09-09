@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:30:27 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 13:03:09 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 14:26:38 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void		x_sti(t_player *player, unsigned char *arena)
 	else if (arena[player->pc - 1] == 100) // T_REG | T_DIR | T_REG
 	{
 		arg2 = ft_get_n_bytes(arena, player->pc, 2);
-		player->pc = (player->pc + 1) % MEM_SIZE;
-		arg3 = ft_get_n_bytes(arena, player->pc, 1);
 		player->pc = (player->pc + 2) % MEM_SIZE;
+		arg3 = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
 		if (arg3 < 1 || arg3 > REG_NUMBER)
 			return ;
 		arg3 = player->rgstrs[arg3 - 1];

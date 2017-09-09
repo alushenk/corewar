@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 15:09:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/05 17:57:07 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 13:58:33 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void    x_add(t_player *player, unsigned char *arena)
 	unsigned int    arg2;
 	unsigned int    arg3;
 
+	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] != 84)
 		return ;
-	player->pc = (player->pc + 1) % MEM_SIZE;
 	arg1 = ft_get_n_bytes(arena, player->pc, 1);
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	arg2 = ft_get_n_bytes(arena, player->pc, 1);

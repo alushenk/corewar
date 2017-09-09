@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 17:37:03 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/06 13:43:56 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 14:11:05 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void		x_zjmp(t_player *player, unsigned char *arena)
 
 	if (!player->carry)
 	{
-		player->pc = (player->pc + 1) % MEM_SIZE;
+		player->pc = (player->pc + 3) % MEM_SIZE;
 		return ;
 	}
 	arg = ft_get_n_bytes(arena, player->pc, 2);

@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 12:31:54 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 14:13:27 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void		play(t_vm *vm)
 	int		i;
 //	char	c;
 
-	int Z = 2741;//test
+	int Z = 1270;//test
 
 	while (!(end(vm)) && vm->cycle < Z + 1)
 	{
@@ -142,8 +142,8 @@ void		play(t_vm *vm)
 				vm->cycle++;
 				vm->current_cycle++;
 //			}
-//			if (c == 'q')
-//				return ;
-		}
-//	}
+				//if (c == 'q')
+				//return ;
+				//}
+			}
 }

@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/31 18:07:30 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 19:36:41 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 12:31:54 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ void		play(t_vm *vm)
 	int		i;
 //	char	c;
 
-	while (!(end(vm)) && vm->cycle < 2511)
+	int Z = 2741;//test
+
+	while (!(end(vm)) && vm->cycle < Z + 1)
 	{
 //		while(1)
 //		{
@@ -112,6 +114,7 @@ void		play(t_vm *vm)
 			printf("\nCYCLE: %d\n\n", vm->cycle);//test
 				//	printf("\nCURRENT CYCLE: %d\n\n", vm->current_cycle);//test
 				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
+			if (vm->cycle > Z - 5) //test
 			ft_print_map(vm);				
 				i = 0;
 				while (i < vm->players_count)

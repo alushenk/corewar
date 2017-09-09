@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:30:27 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 19:02:22 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/09 12:25:24 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,8 @@ void		x_sti(t_player *player, unsigned char *arena)
 	else 
 		return ;
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	arg2 = (arg2 + arg3) % IDX_MOD;
-	arg2 += addr;
-	arg2 = arg2 % MEM_SIZE;
+	tmp = ((int)arg2 + (int)arg3) % IDX_MOD;
+	arg2 = ft_addr(tmp + addr);
 	arena[(arg2 + 3) % MEM_SIZE] = (arg1 & 0x000000FF);
     arena[(arg2 + 2) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
     arena[(arg2 + 1) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;

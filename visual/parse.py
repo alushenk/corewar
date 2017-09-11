@@ -1,67 +1,70 @@
 from __future__ import print_function
 import numpy as np
-import binascii
+from collections import deque
+from classes import Player, Step, Carriage, bin_to_int
 
 
-# int.from_bytes(b, byteorder='big', signed=False)
-# binascii.hexlify(player_size) # returns 00000019 suka
-
-# player_size = bytes(data[index: index + 4])
-# print(int(player_size.encode('hex'), 16))
-
-def parse(data):
+def parse_players(data):
     index = 0
-    length = len(data)
 
     number_of_players = data[index]
-    print(number_of_players)
     index += 1
 
-    # dt = np.dtype([
-    #     ('number_of_players', np.int8),
-    #     ('num', np.int8),
-    #     ('size', np.int16)])
-    #
-    # x = np.zeros((1,), dtype=dt)
-    # print(np.fromfile(data, dtype=dt))
-
+    players = []
     while number_of_players > 0:
-        player_number = data[index]
-        print(player_number)
+        player = Player(data[index])
         index += 1
 
-        player_size = data[index: index + 4]
-        print(int(binascii.hexlify(player_size), 16))
+        player.set_size(data[index: index + 4])
         index += 4
 
-        name = data[index: index + 129]
-        print(name.decode('utf-8'))
+        player.set_name(data[index: index + 129])
         index += 129
 
-        comment = data[index: index + 2049]
-        print(comment.decode('utf-8'))
+        player.set_comment(data[index: index + 2049])
         index += 2049
 
+        players.append(player)
         number_of_players -= 1
 
-    map = data[index: index + 4097]
-    print(map.decode('utf-8'))
+    return players, number_of_players, index
+
+
+def parse_step(data, index):
+    step = Step()
+
+    step.field = data[index: index + 4097]
     index += 4097
 
-    number_of_carriages = data[index: index + 4]
-    number_of_carriages = int(binascii.hexlify(number_of_carriages), 16)
-    print(number_of_carriages)
+    number_of_carriages = bin_to_int(data[index: index + 4])
     index += 4
 
     while number_of_carriages > 0:
-        player_number = data[index]
-        print(player_number)
+        carriage = Carriage()
+
+        carriage.player_number = data[index]
         index += 1
 
-        pc = data[index: index + 4]
-        print(int(binascii.hexlify(pc), 16))
+        carriage.pc = data[index: index + 4]
         index += 4
 
+        step.carriages.append(carriage)
         number_of_carriages -= 1
 
-    return map
+    return step, index
+
+
+def parse(data):
+    data_size = len(data)
+
+    players, number_of_players, index = parse_players(data)
+
+    steps = deque()
+    while index < data_size:
+        step, index = parse_step(data, index)
+        steps.append(step)
+
+    print()
+    print(index)
+    print(data_size)
+    return steps

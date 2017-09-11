@@ -5,9 +5,7 @@ import sys
 from collections import deque
 import pygame
 from parse import parse
-
-# champion = ' '.join(x.encode('hex') for x in a)
-# print(' '.join(format(x, '02x') for x in memory))
+import binascii
 
 # colors
 background_color = (39, 40, 34)
@@ -32,7 +30,7 @@ font_name = "sans"
 font_size = element_size - 5
 
 
-def draw_map(i, j, index, screen, font):
+def draw_map(i, j, index, screen, font, field):
     x = j * (element_size + space)
     y = i * (element_size + space)
     if player_start_index <= index <= player_start_index + size:
@@ -43,15 +41,19 @@ def draw_map(i, j, index, screen, font):
         current_player_color = element_color
     pygame.draw.rect(screen, current_player_color, [x, y, element_size, element_size])
 
-    text = font.render(format(memory[index] & 240, '02x')[0], True, current_text_color)
-    screen.blit(text, (x + size * 0.2, y + 3))
-    text = font.render(format(memory[index] & 15, '02x')[1], True, current_text_color)
-    screen.blit(text, (x + size * 0.7, y + 3))
+    # text = font.render(format(field[index] & 240, '02x')[0], True, current_text_color)
+    # screen.blit(text, (x + size * 0.2, y + 3))
+    # text = font.render(format(field[index] & 15, '02x')[1], True, current_text_color)
+    # screen.blit(text, (x + size * 0.7, y + 3))
+
     # text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
     # screen.blit(text, (x + 1, y  + 3))
+    value = format(field[index], '02x').upper()
+    text = font.render(value, True, current_text_color)
+    screen.blit(text, (x + 2, y + 2))
 
 
-def main():
+def main(steps):
     pygame.init()
 
     screen = pygame.display.set_mode((
@@ -75,7 +77,7 @@ def main():
             index = 0
             for i in range(64):
                 for j in range(64):
-                    draw_map(i, j, index, screen, font)
+                    draw_map(i, j, index, screen, font, steps[0].field)
                     index += 1
         pygame.display.update()
 
@@ -88,16 +90,10 @@ if __name__ == "__main__":
         with open(sys.argv[1], 'rb') as file:
             data = file.read()
 
-        # memory = bytearray(4096)
-        # for i, byte in enumerate(data):
-        #     memory[i] = byte
+        data = bytearray(data)
+        steps = parse(data)
 
-        # memory = 'z' * 4096
-
-        memory = bytearray(data)
-        memory = parse(memory)
-
-        main()
+        main(steps)
     else:
-        print('ti pidor')
+        print('usage: ./main.py [output]')
         exit()

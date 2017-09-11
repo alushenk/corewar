@@ -56,19 +56,27 @@ void	write_int_to_file(unsigned int value, int fd)
 // передать сюда t_vm *vm
 void	write_log(int fd)
 {
+    unsigned char   map[MEM_SIZE + 1];
+    unsigned int    number_of_carriages;
+    unsigned char   player_number;
+    unsigned int    pc;
+
 	// карта, один раз
-	unsigned char map[MEM_SIZE + 1];
 	ft_bzero(map, MEM_SIZE + 1); // это для дебага, когда будешь писать карту это надо убрать
+	map[4093] = 0x6D;
+	map[4094] = 0x61;
+	map[4095] = 0x70;
 	write(fd, map, MEM_SIZE + 1);
 
 	// колличество кареток, один раз
-	unsigned int number_of_carriages = 494949;
+	number_of_carriages = 1;
 	write_int_to_file(number_of_carriages, fd);
 
 	// каретки игроков, в цикле while(number_of_carriages)
-	unsigned char player_number = 5;
+	player_number = 5;
 	write(fd, &player_number, 1);
-	unsigned int pc = 4000;
+
+	pc = 4000;
 	write_int_to_file(pc, fd);
 }
 
@@ -76,7 +84,12 @@ void	write_log(int fd)
 // пока пишу случайные тестовые данные
 int		create_log_file(void)
 {
-	int fd_output;
+	int             fd_output;
+	unsigned char   number_of_players;
+	unsigned char	player_number;
+	unsigned int 	player_size;
+	char			prog_name[PROG_NAME_LENGTH + 1];
+	char			comment[COMMENT_LENGTH + 1];
 
 	if ((fd_output = open("output", O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR)) < 0)
 	{
@@ -85,22 +98,23 @@ int		create_log_file(void)
 	}
 
 	// колличество игроков, один раз
-	unsigned char	number_of_players = 2;
+	number_of_players = 1;
 	write(fd_output, &number_of_players, 1);
 
 	// тут начинается цикл по всем игрокам
-
-	unsigned char	player_number = 1; // номер игрока
+	player_number = 1; // номер игрока
 	write(fd_output, &player_number, 1);
 
-	unsigned int 	player_size = 25; // размер игрока
+	player_size = 25; // размер игрока
 	write_int_to_file(player_size, fd_output);
 
-	char			prog_name[PROG_NAME_LENGTH + 1];
 	ft_bzero(prog_name, PROG_NAME_LENGTH + 1);
+	prog_name[0] = 'z';
+	prog_name[1] = 'o';
+	prog_name[2] = 'r';
+	prog_name[3] = 'k';
 	write(fd_output, prog_name, PROG_NAME_LENGTH + 1);
 
-	char			comment[COMMENT_LENGTH + 1];
 	ft_bzero(comment, COMMENT_LENGTH + 1);
 	comment[4] = 'h';
 	comment[5] = 'u';

@@ -30,7 +30,7 @@ font_name = "sans"
 font_size = element_size - 5
 
 
-def draw_map(i, j, index, screen, font, field):
+def draw_map(i, j, index, screen, font, step):
     x = j * (element_size + space)
     y = i * (element_size + space)
     if player_start_index <= index <= player_start_index + size:
@@ -48,7 +48,7 @@ def draw_map(i, j, index, screen, font, field):
 
     # text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
     # screen.blit(text, (x + 1, y  + 3))
-    value = format(field[index], '02x').upper()
+    value = format(step.field[index], '02x').upper()
     text = font.render(value, True, current_text_color)
     screen.blit(text, (x + 2, y + 2))
 
@@ -77,7 +77,7 @@ def main(steps):
             index = 0
             for i in range(64):
                 for j in range(64):
-                    draw_map(i, j, index, screen, font, steps[0].field)
+                    draw_map(i, j, index, screen, font, steps[0])
                     index += 1
         pygame.display.update()
 

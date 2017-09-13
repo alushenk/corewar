@@ -16,7 +16,7 @@ highlighted_text_color = (0, 0, 0)
 
 # sizes
 space = 1
-element_size = 15
+element_size = 16
 menu_width = 200
 height = (element_size + space) * 64
 width = height + menu_width
@@ -26,8 +26,8 @@ player_start_index = 1
 size = 12
 
 # font
-font_name = "sans"
-font_size = element_size - 5
+font_name = "raleway/Raleway-Thin.ttf"
+font_size = element_size + 3
 
 
 def draw_map(i, j, index, screen, font, step):
@@ -50,7 +50,7 @@ def draw_map(i, j, index, screen, font, step):
     # screen.blit(text, (x + 1, y  + 3))
     value = format(step.field[index], '02x').upper()
     text = font.render(value, True, current_text_color)
-    screen.blit(text, (x + 2, y + 2))
+    screen.blit(text, (x + 1, y + 2))
 
 
 def main(steps):

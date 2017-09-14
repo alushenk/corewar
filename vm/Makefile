@@ -6,7 +6,7 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/15 11:17:22 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/09/07 13:11:13 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/09/09 11:51:03 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -36,6 +36,7 @@ SRC = 	DEBUGG.c \
 		x_zjmp.c \
 		x_fork.c \
 		x_lfork.c \
+		x_aff.c \
 
 OBJ = $(SRC:.c=.o)
 

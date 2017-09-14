@@ -24,5 +24,9 @@
 #include <fcntl.h>
 //# include <ncurses.h>
 
+int		create_log_file(t_vm *vm, t_players *initial_players);
+void	write_log(int fd, t_vm *vm);
+
+
 
 #endif

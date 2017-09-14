@@ -15,6 +15,9 @@ def parse_players(data):
         player = Player(data[index])
         index += 1
 
+        player.pc = data[index: index + 4]
+        index += 4
+
         player.set_size(data[index: index + 4])
         index += 4
 

@@ -53,47 +53,40 @@ void	write_int_to_file(unsigned int value, int fd)
 	write(fd, &temp, 1);
 }
 
-// передать сюда t_vm *vm
-void	write_log(int fd)
+// call in play.c play()
+void	write_log(int fd, t_vm *vm)
 {
-    unsigned char   map[MEM_SIZE + 1];
     unsigned int    number_of_carriages;
     unsigned char   player_number;
     unsigned int    pc;
 
 	// карта, один раз
-	ft_bzero(map, MEM_SIZE + 1); // это для дебага, когда будешь писать карту это надо убрать
-	map[1] = 0xFF;
-	map[2] = 0xA0;
-	map[3] = 0xD5;
-
-	map[4093] = 0x6D;
-	map[4094] = 0x61;
-	map[4095] = 0x70;
-	write(fd, map, MEM_SIZE + 1);
+	write(fd, vm->arena, MEM_SIZE + 1);
 
 	// колличество кареток, один раз
-	number_of_carriages = 1;
+	number_of_carriages = vm->players_count;
 	write_int_to_file(number_of_carriages, fd);
 
-	// каретки игроков, в цикле while(number_of_carriages)
-	player_number = 5;
-	write(fd, &player_number, 1);
+	unsigned int i = 0;
+	while (i < number_of_carriages)
+	{
+	    player_number = vm->players[i].name;
+    	write(fd, &player_number, 1);
 
-	pc = 4000;
-	write_int_to_file(pc, fd);
+	    pc = vm->players[i].pc;
+	    write_int_to_file(pc, fd);
+
+	    i++;
+	}
 }
 
-// передать сюда t_vm *vm
-// пока пишу случайные тестовые данные
-int		create_log_file(void)
+// call in main.c main()
+int		create_log_file(t_vm *vm, t_players *initial_players)
 {
 	int             fd_output;
 	unsigned char   number_of_players;
 	unsigned char	player_number;
 	unsigned int 	player_size;
-	char			prog_name[PROG_NAME_LENGTH + 1];
-	char			comment[COMMENT_LENGTH + 1];
 
 	if ((fd_output = open("output", O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR)) < 0)
 	{
@@ -102,40 +95,39 @@ int		create_log_file(void)
 	}
 
 	// колличество игроков, один раз
-	number_of_players = 1;
+	number_of_players = vm->players_count;
 	write(fd_output, &number_of_players, 1);
 
-	// тут начинается цикл по всем игрокам
-	player_number = 1; // номер игрока
-	write(fd_output, &player_number, 1);
+    unsigned int i = 0;
+    while (i < number_of_players)
+    {
+        // тут начинается цикл по всем игрокам
+	    player_number = vm->players[i].name * -1; // номер игрока
+	    write(fd_output, &player_number, 1);
 
-	player_size = 25; // размер игрока
-	write_int_to_file(player_size, fd_output);
+        unsigned int pc;
+        pc = vm->players[i].pc;
+        write_int_to_file(pc, fd_output);
 
-	ft_bzero(prog_name, PROG_NAME_LENGTH + 1);
-	prog_name[0] = 'z';
-	prog_name[1] = 'o';
-	prog_name[2] = 'r';
-	prog_name[3] = 'k';
-	write(fd_output, prog_name, PROG_NAME_LENGTH + 1);
+	    player_size = initial_players[i].size; // размер игрока
+	    write_int_to_file(player_size, fd_output);
 
-	ft_bzero(comment, COMMENT_LENGTH + 1);
-	comment[4] = 'h';
-	comment[5] = 'u';
-	comment[6] = 'y';
-	write(fd_output, comment, COMMENT_LENGTH + 1);
+	    write(fd_output, initial_players[i].name, PROG_NAME_LENGTH + 1);
+	    write(fd_output, initial_players[i].comment, COMMENT_LENGTH + 1);
 
+	    i++;
+    }
 	return (fd_output);
 }
 
-int main(void)
-{
-	int fd;
-
-	// запускается один раз, создает файл и возвращает его дескриптор
-	fd = create_log_file();
-	// запускается много раз в цикле, внутри play()
-	// передайте в нее t_vm *vm и пишите данные от туда
-	write_log(fd);
-	return (0);
-}
+//int main(void)
+//{
+//	int fd;
+//
+//	// запускается один раз, создает файл и возвращает его дескриптор
+//	fd = create_log_file();
+//	// запускается много раз в цикле, внутри play()
+//	// передайте в нее t_vm *vm и пишите данные от туда
+//	write_log(fd);
+//	return (0);
+//}

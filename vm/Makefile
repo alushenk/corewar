@@ -37,6 +37,7 @@ SRC = 	DEBUGG.c \
 		x_fork.c \
 		x_lfork.c \
 		x_aff.c \
+		write_log.c
 
 OBJ = $(SRC:.c=.o)
 

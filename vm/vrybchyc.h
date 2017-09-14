@@ -21,7 +21,7 @@
 ** player.lives - count of lives in current period
 */
 
-void		play(t_vm *vm);
+void		play(t_vm *vm, int fd);
 void		move(t_player *player, t_vm *vm);
 int			enough_cycle(int cycle, int command);
 

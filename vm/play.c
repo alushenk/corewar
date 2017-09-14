@@ -97,25 +97,30 @@ static int	end(t_vm *vm)
 	return (0);
 }
 
-void		play(t_vm *vm)
+void		play(t_vm *vm, int fd)
 {
 	int		i;
 //	char	c;
 
-	int Z = 1270;//test
-
-	while (!(end(vm)) && vm->cycle < Z + 1)
+	//int Z = 1270;//test
+    //&& vm->cycle < Z + 1
+	while (!(end(vm)))
 	{
 //		while(1)
 //		{
 //			c = getchar();
 //			if (c == 's' || c == ']')
 //			{
-			printf("\nCYCLE: %d\n\n", vm->cycle);//test
+            if (vm->cycle % 100 == 0)
+			    printf("\nCYCLE: %d\n\n", vm->cycle);//test
 				//	printf("\nCURRENT CYCLE: %d\n\n", vm->current_cycle);//test
 				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
-			if (vm->cycle > Z - 5) //test
-			ft_print_map(vm);				
+
+			write_log(fd, vm);
+			//fd = 1;
+
+			// if (vm->cycle > Z - 5) //test
+			// ft_print_map(vm);
 				i = 0;
 				while (i < vm->players_count)
 				{

@@ -50,7 +50,7 @@ class Player(object):
     def __init__(self, player_number):
         self.number = set_number(player_number)
         self.size = 0
-        self.pc = 0
+        self._pc = 0
         self.name = 0
         self.comment = 0
 
@@ -62,6 +62,14 @@ class Player(object):
 
     def set_comment(self, data):
         self.comment = bin_to_str(data)
+
+    @property
+    def pc(self):
+        return self._pc
+
+    @pc.setter
+    def pc(self, data):
+        self._pc = bin_to_int(data)
 
 
 class Data(object):

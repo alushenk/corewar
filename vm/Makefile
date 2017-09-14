@@ -49,7 +49,7 @@ $(NAME): $(OBJ)
 	@echo "\033[32;1mmake libft...\033[0m"
 	@make -C libft/
 	@echo "\033[32;1mmake vm\033[0m"
-	@gcc $(FLAGS) -o $(NAME) -L libft/ -lft $(OBJ)
+	@gcc $(FLAGS) -o $(NAME) $(OBJ) libft/libft.a
 
 .c.o:
 	@gcc $(FLAGS) -c $< -o $@

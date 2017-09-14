@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   ft_create_players_array.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lush <lush@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/10/31 17:23:01 by vrudenko          #+#    #+#             */
-/*   Updated: 2017/09/05 13:30:03 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/15 00:20:49 by lush             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "corewar.h"
 
 static char         *ft_strncpy_my(char *dest, const char *src, size_t len)
 {
     size_t	i;
     char	*t;
-    int		flag;
 
     i = 0;
     t = dest;
-    flag = 0;
     while (i < len)
     {
         t[i] = src[i];

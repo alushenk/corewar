@@ -26,8 +26,9 @@ player_start_index = 1
 size = 12
 
 # font
-font_name = "raleway/Raleway-Thin.ttf"
-font_size = element_size + 3
+# font_name = "raleway/Raleway-Thin.ttf"
+font_name = "quicksand/Quicksand-Light.ttf"
+font_size = element_size + 2
 
 
 def draw_map(i, j, index, screen, font, step):
@@ -41,16 +42,17 @@ def draw_map(i, j, index, screen, font, step):
         current_player_color = element_color
     pygame.draw.rect(screen, current_player_color, [x, y, element_size, element_size])
 
-    # text = font.render(format(field[index] & 240, '02x')[0], True, current_text_color)
-    # screen.blit(text, (x + size * 0.2, y + 3))
-    # text = font.render(format(field[index] & 15, '02x')[1], True, current_text_color)
-    # screen.blit(text, (x + size * 0.7, y + 3))
+    text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
+    screen.blit(text, (x + 1, y + 3))
+    text = font.render(format(step.field[index] & 15, '02x')[1].upper(), True, current_text_color)
+    screen.blit(text, (x + 9, y + 3))
 
     # text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
     # screen.blit(text, (x + 1, y  + 3))
-    value = format(step.field[index], '02x').upper()
-    text = font.render(value, True, current_text_color)
-    screen.blit(text, (x + 1, y + 2))
+
+    # value = format(step.field[index], '02x').upper()
+    # text = font.render(value, True, current_text_color)
+    # screen.blit(text, (x + 1, y + 2))
 
 
 def main(steps):

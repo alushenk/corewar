@@ -1,4 +1,5 @@
 import binascii
+import numpy
 
 
 def bin_to_int(data):
@@ -40,10 +41,11 @@ class Carriage(object):
 
 
 class Step(object):
-    __slots__ = ['carriages', 'field']
+    __slots__ = ['carriages', 'field', 'objects']
 
     def __init__(self):
         self.carriages = []
+        self.objects = numpy.empty(4096, dtype=object)
 
 
 class Player(object):

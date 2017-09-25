@@ -81,7 +81,7 @@ int main(int argc, char **argv)
     // ft_print_map(vm);
     // printf("REG0: %u\n", vm->players[0]->rg);
 
-    int fd = create_log_file(vm, *player_array);
+    FILE *fd = create_log_file(vm, *player_array);
     //int fd = 4;
 
 	play(vm, fd);//

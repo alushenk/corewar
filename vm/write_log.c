@@ -55,7 +55,7 @@ void	write_int_to_file(unsigned int value, int fd)
 
 // call in play.c play()
 // unsigned char *copy
-void	write_log(int fd, t_vm *vm)
+void	write_log(FILE *fd, t_vm *vm)
 {
     unsigned int    number_of_carriages;
     unsigned char   player_number;
@@ -87,34 +87,38 @@ void	write_log(int fd, t_vm *vm)
 //	    }
 //	}
 	//write(fd, vm->arena, MEM_SIZE + 1);
-    fwrite(vm->arena, 1, MEM_SIZE + 1, &fd);
+    fwrite(vm->arena, 1, MEM_SIZE + 1, fd);
 
 	// колличество кареток, один раз
 	number_of_carriages = vm->players_count;
-	write_int_to_file(number_of_carriages, fd);
+	//write_int_to_file(number_of_carriages, fd);
+	fwrite(&number_of_carriages, 1, 4, fd);
 
 	i = 0;
 	while (i < number_of_carriages)
 	{
 	    player_number = vm->players[i].name;
-    	write(fd, &player_number, 1);
+    	//write(fd, &player_number, 1);
+        fwrite(&player_number, 1, 1, fd);
 
 	    pc = vm->players[i].pc;
-	    write_int_to_file(pc, fd);
+	    //write_int_to_file(pc, fd);
+	    fwrite(&pc, 1, 1, fd);
 
 	    i++;
 	}
 }
 
 // call in main.c main()
-int		create_log_file(t_vm *vm, t_players *initial_players)
+FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 {
-	int             fd_output;
+	FILE            *fd_output;
 	unsigned char   number_of_players;
 	unsigned char	player_number;
 	unsigned int 	player_size;
 
-	if ((fd_output = open("output", O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR)) < 0)
+    //O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR
+	if ((fd_output = fopen("output", "w")) < 0)
 	{
 		write(2, "Error! can't create output file\n", ft_strlen("Error! can't create output file\n"));
 		exit(0);
@@ -122,24 +126,28 @@ int		create_log_file(t_vm *vm, t_players *initial_players)
 
 	// колличество игроков, один раз
 	number_of_players = vm->players_count;
-	write(fd_output, &number_of_players, 1);
+	fwrite(&number_of_players, 1, 1, fd_output);
 
     unsigned int i = 0;
     while (i < number_of_players)
     {
         // тут начинается цикл по всем игрокам
 	    player_number = vm->players[i].name * -1; // номер игрока
-	    write(fd_output, &player_number, 1);
+	    fwrite(&player_number, 1, 1, fd_output);
 
         unsigned int pc;
         pc = vm->players[i].pc;
-        write_int_to_file(pc, fd_output);
+        //write_int_to_file(pc, fd_output);
+        fwrite(&pc, 1, 4, fd_output);
 
 	    player_size = initial_players[i].size; // размер игрока
-	    write_int_to_file(player_size, fd_output);
+	    //write_int_to_file(player_size, fd_output);
+	    fwrite(&player_size, 1, 4, fd_output);
 
-	    write(fd_output, initial_players[i].name, PROG_NAME_LENGTH + 1);
-	    write(fd_output, initial_players[i].comment, COMMENT_LENGTH + 1);
+	    //write(fd_output, initial_players[i].name, PROG_NAME_LENGTH + 1);
+	    fwrite(initial_players[i].name, 1, PROG_NAME_LENGTH + 1, fd_output);
+	    //write(fd_output, initial_players[i].comment, COMMENT_LENGTH + 1);
+	    fwrite(initial_players[i].comment, 1, COMMENT_LENGTH + 1, fd_output);
 
 	    i++;
     }

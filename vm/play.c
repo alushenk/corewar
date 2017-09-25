@@ -97,7 +97,7 @@ static int	end(t_vm *vm)
 	return (0);
 }
 
-void		play(t_vm *vm, int fd)
+void		play(t_vm *vm, FILE *fd)
 {
 	int		i;
 	//unsigned char copy[MEM_SIZE + 1];

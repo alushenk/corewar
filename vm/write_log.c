@@ -54,20 +54,46 @@ void	write_int_to_file(unsigned int value, int fd)
 }
 
 // call in play.c play()
+// unsigned char *copy
 void	write_log(int fd, t_vm *vm)
 {
     unsigned int    number_of_carriages;
     unsigned char   player_number;
     unsigned int    pc;
-
-	// карта, один раз
-	write(fd, vm->arena, MEM_SIZE + 1);
+    unsigned int i;
+//    int len;
+//
+//	len = 0;
+//	i = 0;
+//	while (copy[i])
+//	{
+//	    if (vm->arena[i] != copy[i])
+//	        len++;
+//	    i++;
+//	}
+//	printf("\nlen: %d\n", len);
+//	write_int_to_file(len, fd);
+//	if (len > 0)
+//	{
+//	    i = 0;
+//	    len = 0;
+//	    while (copy[i])
+//	    {
+//	        if (vm->arena[i] != copy[i])
+//	            write_int_to_file(len, fd);
+//	            write(fd, &copy[i], 1);
+//	            len++;
+//	        i++;
+//	    }
+//	}
+	//write(fd, vm->arena, MEM_SIZE + 1);
+    fwrite(vm->arena, 1, MEM_SIZE + 1, &fd);
 
 	// колличество кареток, один раз
 	number_of_carriages = vm->players_count;
 	write_int_to_file(number_of_carriages, fd);
 
-	unsigned int i = 0;
+	i = 0;
 	while (i < number_of_carriages)
 	{
 	    player_number = vm->players[i].name;

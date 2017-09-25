@@ -100,8 +100,10 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm, int fd)
 {
 	int		i;
+	//unsigned char copy[MEM_SIZE + 1];
 //	char	c;
 
+    //ft_bzero(copy, MEM_SIZE + 1);
 	//int Z = 1270;//test
     //&& vm->cycle < Z + 1
 	while (!(end(vm)))
@@ -117,6 +119,7 @@ void		play(t_vm *vm, int fd)
 				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
 
 			write_log(fd, vm);
+			//ft_strcpy((char*)copy, (char*)vm->arena);
 			//fd = 1;
 
 			// if (vm->cycle > Z - 5) //test

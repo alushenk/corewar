@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_log.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alushenk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lush <lush@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 20:02:18 by alushenk          #+#    #+#             */
-/*   Updated: 2017/09/07 20:02:20 by alushenk         ###   ########.fr       */
+/*   Updated: 2017/09/26 00:04:06 by lush             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,12 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 	unsigned int 	player_size;
 
     //O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR
-	if ((fd_output = fopen("output", "w")) < 0)
-	{
-		write(2, "Error! can't create output file\n", ft_strlen("Error! can't create output file\n"));
-		exit(0);
-	}
+	// if ((fd_output = fopen("output", "w")) < 0)
+	// {
+	// 	write(2, "Error! can't create output file\n", ft_strlen("Error! can't create output file\n"));
+	// 	exit(0);
+	// }
+	fd_output = fopen("output", "w");
 
 	// колличество игроков, один раз
 	number_of_players = vm->players_count;

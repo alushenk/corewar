@@ -119,8 +119,10 @@ void		play(t_vm *vm, FILE *fd)
 				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
 
 			write_log(fd, vm);
+
+
 			//ft_strcpy((char*)copy, (char*)vm->arena);
-			//fd = 1;
+			//fd = NULL;
 
 			// if (vm->cycle > Z - 5) //test
 			// ft_print_map(vm);

@@ -39,18 +39,22 @@ void	ft_bzero(void *s, size_t n)
 	}
 }
 
-void	write_int_to_file(unsigned int value, int fd)
+void	write_int_to_file(unsigned int value, FILE *fd)
 {
 	unsigned char temp;
 
 	temp = (value >> (8 * 3)) & 0xFF;
-	write(fd, &temp, 1);
+	//write(fd, &temp, 1);
+	fwrite(&temp, 1, 1, fd);
 	temp = (value >> (8 * 2)) & 0xFF;
-	write(fd, &temp, 1);
+	//write(fd, &temp, 1);
+	fwrite(&temp, 1, 1, fd);
 	temp = (value >> (8 * 1)) & 0xFF;
-	write(fd, &temp, 1);
+	//write(fd, &temp, 1);
+	fwrite(&temp, 1, 1, fd);
 	temp = value & 0xFF;
-	write(fd, &temp, 1);
+	//write(fd, &temp, 1);
+	fwrite(&temp, 1, 1, fd);
 }
 
 // call in play.c play()
@@ -91,8 +95,8 @@ void	write_log(FILE *fd, t_vm *vm)
 
 	// колличество кареток, один раз
 	number_of_carriages = vm->players_count;
-	//write_int_to_file(number_of_carriages, fd);
-	fwrite(&number_of_carriages, 1, 4, fd);
+	write_int_to_file(number_of_carriages, fd);
+	//fwrite(&number_of_carriages, 1, 4, fd);
 
 	i = 0;
 	while (i < number_of_carriages)
@@ -116,6 +120,7 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 	unsigned char   number_of_players;
 	unsigned char	player_number;
 	unsigned int 	player_size;
+	unsigned int    pc;
 
     //O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR
 	if ((fd_output = fopen("output", "w")) < 0)
@@ -135,14 +140,13 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 	    player_number = vm->players[i].name * -1; // номер игрока
 	    fwrite(&player_number, 1, 1, fd_output);
 
-        unsigned int pc;
         pc = vm->players[i].pc;
-        //write_int_to_file(pc, fd_output);
-        fwrite(&pc, 1, 4, fd_output);
+        write_int_to_file(pc, fd_output);
+        //fwrite(&pc, 1, 4, fd_output);
 
 	    player_size = initial_players[i].size; // размер игрока
-	    //write_int_to_file(player_size, fd_output);
-	    fwrite(&player_size, 1, 4, fd_output);
+	    write_int_to_file(player_size, fd_output);
+	    //fwrite(&player_size, 1, 4, fd_output);
 
 	    //write(fd_output, initial_players[i].name, PROG_NAME_LENGTH + 1);
 	    fwrite(initial_players[i].name, 1, PROG_NAME_LENGTH + 1, fd_output);

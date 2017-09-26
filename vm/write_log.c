@@ -44,16 +44,12 @@ void	write_int_to_file(unsigned int value, FILE *fd)
 	unsigned char temp;
 
 	temp = (value >> (8 * 3)) & 0xFF;
-	//write(fd, &temp, 1);
 	fwrite(&temp, 1, 1, fd);
 	temp = (value >> (8 * 2)) & 0xFF;
-	//write(fd, &temp, 1);
 	fwrite(&temp, 1, 1, fd);
 	temp = (value >> (8 * 1)) & 0xFF;
-	//write(fd, &temp, 1);
 	fwrite(&temp, 1, 1, fd);
 	temp = value & 0xFF;
-	//write(fd, &temp, 1);
 	fwrite(&temp, 1, 1, fd);
 }
 
@@ -65,6 +61,7 @@ void	write_log(FILE *fd, t_vm *vm)
     unsigned char   player_number;
     unsigned int    pc;
     unsigned int i;
+
 //    int len;
 //
 //	len = 0;
@@ -90,24 +87,21 @@ void	write_log(FILE *fd, t_vm *vm)
 //	        i++;
 //	    }
 //	}
-	//write(fd, vm->arena, MEM_SIZE + 1);
+
     fwrite(vm->arena, 1, MEM_SIZE + 1, fd);
 
 	// колличество кареток, один раз
 	number_of_carriages = vm->players_count;
 	write_int_to_file(number_of_carriages, fd);
-	//fwrite(&number_of_carriages, 1, 4, fd);
 
 	i = 0;
 	while (i < number_of_carriages)
 	{
 	    player_number = vm->players[i].name;
-    	//write(fd, &player_number, 1);
         fwrite(&player_number, 1, 1, fd);
 
 	    pc = vm->players[i].pc;
-	    //write_int_to_file(pc, fd);
-	    fwrite(&pc, 1, 1, fd);
+	    write_int_to_file(pc, fd);
 
 	    i++;
 	}
@@ -143,15 +137,11 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 
         pc = vm->players[i].pc;
         write_int_to_file(pc, fd_output);
-        //fwrite(&pc, 1, 4, fd_output);
 
 	    player_size = initial_players[i].size; // размер игрока
 	    write_int_to_file(player_size, fd_output);
-	    //fwrite(&player_size, 1, 4, fd_output);
 
-	    //write(fd_output, initial_players[i].name, PROG_NAME_LENGTH + 1);
 	    fwrite(initial_players[i].name, 1, PROG_NAME_LENGTH + 1, fd_output);
-	    //write(fd_output, initial_players[i].comment, COMMENT_LENGTH + 1);
 	    fwrite(initial_players[i].comment, 1, COMMENT_LENGTH + 1, fd_output);
 
 	    i++;

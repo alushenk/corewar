@@ -4,8 +4,10 @@ import pygame
 background_color = (39, 40, 34)
 element_color = (70, 70, 70)
 text_color = (180, 180, 180)
-player_color = (0, 255, 0)
 highlighted_text_color = (0, 0, 0)
+
+# player colors
+player_colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255)]
 
 # sizes
 space = 1
@@ -14,27 +16,23 @@ menu_width = 200
 height = (element_size + space) * 64
 width = height + menu_width
 
-# temporary defines
-player_start_index = 1
-size = 12
-
 # font
 # font_name = "raleway/Raleway-Thin.ttf"
 font_name = "quicksand/Quicksand-Light.ttf"
 font_size = element_size + 2
 
 
-def render(i, j, index, screen, font, step):
+def render(i, j, index, screen, font, step, players):
     x = j * (element_size + space)
     y = i * (element_size + space)
-    if player_start_index <= index <= player_start_index + size:
-        current_text_color = highlighted_text_color
-        current_player_color = player_color
-    else:
-        current_text_color = text_color
-        current_player_color = element_color
 
-    pygame.draw.rect(screen, current_player_color, [x, y, element_size, element_size])
+    pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
+
+    current_text_color = text_color
+    for i, player in enumerate(players):
+        if player.pc <= index <= player.pc + player.size:
+            pygame.draw.rect(screen, player_colors[i], [x, y, element_size, element_size])
+            current_text_color = highlighted_text_color
 
     # text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
     # screen.blit(text, (x + 1, y + 3))
@@ -49,7 +47,7 @@ def render(i, j, index, screen, font, step):
     screen.blit(text, (x + 1, y + 2))
 
 
-def draw_map(steps):
+def draw_map(steps, players):
     pygame.init()
 
     screen = pygame.display.set_mode((
@@ -96,7 +94,7 @@ def draw_map(steps):
             index = 0
             for i in range(64):
                 for j in range(64):
-                    render(i, j, index, screen, font, steps[iteration])
+                    render(i, j, index, screen, font, steps[iteration], players)
                     index += 1
 
         if run < 0:

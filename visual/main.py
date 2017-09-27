@@ -13,9 +13,9 @@ def main():
             data = file.read()
 
         data = bytearray(data)
-        steps = parse(data)
+        steps, players = parse(data)
 
-        draw_map(steps)
+        draw_map(steps, players)
     else:
         print('usage: ./main.py [output]')
         exit()

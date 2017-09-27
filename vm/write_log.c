@@ -108,7 +108,7 @@ void	write_log(FILE *fd, t_vm *vm)
 }
 
 // call in main.c main()
-FILE		*create_log_file(t_vm *vm, t_players *initial_players)
+FILE		*create_log_file(t_vm *vm, t_players **initial_players)
 {
 	FILE            *fd_output;
 	unsigned char   number_of_players;
@@ -128,6 +128,9 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
 	number_of_players = vm->players_count;
 	fwrite(&number_of_players, 1, 1, fd_output);
 
+    ft_putnbr(number_of_players);
+    ft_putstr("\n");
+
     unsigned int i = 0;
     while (i < number_of_players)
     {
@@ -138,11 +141,15 @@ FILE		*create_log_file(t_vm *vm, t_players *initial_players)
         pc = vm->players[i].pc;
         write_int_to_file(pc, fd_output);
 
-	    player_size = initial_players[i].size; // размер игрока
+	    player_size = initial_players[i]->size; // размер игрока
 	    write_int_to_file(player_size, fd_output);
 
-	    fwrite(initial_players[i].name, 1, PROG_NAME_LENGTH + 1, fd_output);
-	    fwrite(initial_players[i].comment, 1, COMMENT_LENGTH + 1, fd_output);
+	    fwrite(initial_players[i]->name, 1, PROG_NAME_LENGTH + 1, fd_output);
+
+	    ft_putnbr(i);
+        ft_putstr("\n");
+
+	    fwrite(initial_players[i]->comment, 1, COMMENT_LENGTH + 1, fd_output);
 
 	    i++;
     }

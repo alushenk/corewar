@@ -70,4 +70,4 @@ def parse(data):
     print()
     print(index)
     print(data_size)
-    return steps
+    return steps, players

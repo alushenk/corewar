@@ -5,6 +5,7 @@ background_color = (39, 40, 34)
 element_color = (70, 70, 70)
 text_color = (180, 180, 180)
 highlighted_text_color = (0, 0, 0)
+carriage_color = (25, 25, 25)
 
 # player colors
 player_colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255)]
@@ -23,16 +24,27 @@ font_size = element_size + 2
 
 
 def render(i, j, index, screen, font, step, players):
+    busy = 0
+    current_text_color = text_color
+
     x = j * (element_size + space)
     y = i * (element_size + space)
 
-    pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
+    for carriage in step.carriages:
+        if carriage.pc == index:
+            pygame.draw.rect(screen, carriage_color, [x, y, element_size, element_size])
+            busy = 1
 
-    current_text_color = text_color
-    for i, player in enumerate(players):
-        if player.pc <= index <= player.pc + player.size:
-            pygame.draw.rect(screen, player_colors[i], [x, y, element_size, element_size])
-            current_text_color = highlighted_text_color
+    if not busy:
+        current_text_color = text_color
+        for player in players:
+            if player.pc <= index <= player.pc + player.size:
+                pygame.draw.rect(screen, player_colors[player.number], [x, y, element_size, element_size])
+                current_text_color = highlighted_text_color
+                busy = 1
+
+    if not busy:
+        pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
 
     # text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
     # screen.blit(text, (x + 1, y + 3))
@@ -45,6 +57,7 @@ def render(i, j, index, screen, font, step, players):
     value = format(step.field[index], '02x').upper()
     text = font.render(value, True, current_text_color)
     screen.blit(text, (x + 1, y + 2))
+
 
 
 def draw_map(steps, players):
@@ -100,6 +113,7 @@ def draw_map(steps, players):
         if run < 0:
             iteration += 1
         pygame.display.update()
+
 
     pygame.quit()
     quit()

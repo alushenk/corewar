@@ -8,7 +8,7 @@ highlighted_text_color = (0, 0, 0)
 carriage_color = (25, 25, 25)
 
 # player colors
-player_colors = [(0, 255, 0), (255, 0, 0), (0, 0, 255)]
+player_colors = [(183, 102, 3), (41, 244, 126), (232, 23, 186), (25, 209, 252)]
 
 # sizes
 space = 1
@@ -39,7 +39,7 @@ def render(i, j, index, screen, font, step, players):
         current_text_color = text_color
         for player in players:
             if player.pc <= index <= player.pc + player.size:
-                pygame.draw.rect(screen, player_colors[player.number], [x, y, element_size, element_size])
+                pygame.draw.rect(screen, player_colors[player.number - 1], [x, y, element_size, element_size])
                 current_text_color = highlighted_text_color
                 busy = 1
 
@@ -57,7 +57,6 @@ def render(i, j, index, screen, font, step, players):
     value = format(step.field[index], '02x').upper()
     text = font.render(value, True, current_text_color)
     screen.blit(text, (x + 1, y + 2))
-
 
 
 def draw_map(steps, players):
@@ -113,7 +112,6 @@ def draw_map(steps, players):
         if run < 0:
             iteration += 1
         pygame.display.update()
-
 
     pygame.quit()
     quit()

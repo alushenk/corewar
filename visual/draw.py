@@ -1,4 +1,22 @@
+import time
 import pygame
+import numpy as np
+
+# from os import system
+# from platform import system as platform
+# set up your Tk Frame and whatnot here...
+# if platform() == 'Darwin':  # How Mac OS X is identified by Python
+#     system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
+
+# text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
+# screen.blit(text, (x + 1, y + 3))
+# text = font.render(format(step.field[index] & 15, '02x')[1].upper(), True, current_text_color)
+# screen.blit(text, (x + 9, y + 3))
+
+# text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
+# screen.blit(text, (x + 1, y  + 3))
+
+clock = pygame.time.Clock()
 
 # colors
 background_color = (39, 40, 34)
@@ -22,70 +40,39 @@ width = height + menu_width
 font_name = "quicksand/Quicksand-Light.ttf"
 font_size = element_size + 2
 
+# pygame intitialization
+pygame.init()
 
-def render(i, j, index, screen, font, step, players):
-    busy = 0
-    current_text_color = text_color
+screen = pygame.display.set_mode((
+    int(width),
+    int(height)),
+    pygame.RESIZABLE)
 
-    x = j * (element_size + space)
-    y = i * (element_size + space)
+screen.fill(background_color)
 
-    for carriage in step.carriages:
-        if carriage.pc == index:
-            pygame.draw.rect(screen, carriage_color, [x, y, element_size, element_size])
-            busy = 1
+font = pygame.font.SysFont(
+    font_name,
+    font_size,
+    bold=False,
+    italic=False)
 
-    if not busy:
-        current_text_color = text_color
-        for player in players:
-            if player.pc <= index <= player.pc + player.size:
-                pygame.draw.rect(screen, player_colors[player.number - 1], [x, y, element_size, element_size])
-                current_text_color = highlighted_text_color
-                busy = 1
-
-    if not busy:
-        pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
-
-    # text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
-    # screen.blit(text, (x + 1, y + 3))
-    # text = font.render(format(step.field[index] & 15, '02x')[1].upper(), True, current_text_color)
-    # screen.blit(text, (x + 9, y + 3))
-
-    # text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
-    # screen.blit(text, (x + 1, y  + 3))
-
-    value = format(step.field[index], '02x').upper()
-    text = font.render(value, True, current_text_color)
-    screen.blit(text, (x + 1, y + 2))
+info_font = pygame.font.SysFont(
+    font_name,
+    font_size + 10,
+    bold=False,
+    italic=False)
 
 
 def draw_map(steps, players):
-    pygame.init()
-
-    screen = pygame.display.set_mode((
-        int(width),
-        int(height)),
-        pygame.RESIZABLE)
-
-    screen.fill(background_color)
-
-    font = pygame.font.SysFont(
-        font_name,
-        font_size,
-        bold=False,
-        italic=False)
-
-    info_font = pygame.font.SysFont(
-        font_name,
-        font_size + 10,
-        bold=False,
-        italic=False)
-
     iteration = 0
     run = 1
     loop = True
-    while loop:
 
+    size = element_size + space
+    matrix = [(i * size, j * size) for j in range(64) for i in range(64)]
+
+    while loop:
+        # screen.fill(background_color)
         pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
@@ -104,14 +91,37 @@ def draw_map(steps, players):
                 loop = False
 
             index = 0
-            for i in range(64):
-                for j in range(64):
-                    render(i, j, index, screen, font, steps[iteration], players)
-                    index += 1
+            for place in matrix:
+                busy = 0
+                current_text_color = text_color
+
+                for carriage in steps[iteration].carriages:
+                    if carriage.pc == index:
+                        pygame.draw.rect(screen, carriage_color, [place[0], place[1], element_size, element_size])
+                        busy = 1
+
+                if not busy:
+                    current_text_color = text_color
+                    for player in players:
+                        if player.pc <= index <= player.pc + player.size:
+                            pygame.draw.rect(screen, player_colors[player.number - 1],
+                                             [place[0], place[1], element_size, element_size])
+                            current_text_color = highlighted_text_color
+                            busy = 1
+
+                if not busy:
+                    pygame.draw.rect(screen, element_color, [place[0], place[1], element_size, element_size])
+
+                value = format(steps[iteration].field[index], '02x').upper()
+                text = font.render(value, True, current_text_color)
+                screen.blit(text, (place[0] + 1, place[1] + 2))
+                index += 1
 
         if run < 0:
             iteration += 1
         pygame.display.update()
+        # pygame.display.flip()
+        # clock.tick(10)
 
     pygame.quit()
     quit()

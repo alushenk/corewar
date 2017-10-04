@@ -72,8 +72,9 @@ def draw_map(steps, players):
     matrix = [(i * size, j * size) for j in range(64) for i in range(64)]
 
     while loop:
-        # screen.fill(background_color)
-        pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
+        # shit here
+        pygame.draw.rect(screen, highlighted_text_color, [width, height, 0, 0])
+        #pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
 
@@ -91,37 +92,34 @@ def draw_map(steps, players):
                 loop = False
 
             index = 0
-            for place in matrix:
-                busy = 0
+            for x, y in matrix:
                 current_text_color = text_color
 
                 for carriage in steps[iteration].carriages:
                     if carriage.pc == index:
-                        pygame.draw.rect(screen, carriage_color, [place[0], place[1], element_size, element_size])
-                        busy = 1
-
-                if not busy:
+                        pygame.draw.rect(screen, carriage_color, [x, y, element_size, element_size])
+                        break
+                else:
                     current_text_color = text_color
                     for player in players:
                         if player.pc <= index <= player.pc + player.size:
                             pygame.draw.rect(screen, player_colors[player.number - 1],
-                                             [place[0], place[1], element_size, element_size])
+                                             [x, y, element_size, element_size])
                             current_text_color = highlighted_text_color
-                            busy = 1
-
-                if not busy:
-                    pygame.draw.rect(screen, element_color, [place[0], place[1], element_size, element_size])
+                            break
+                    else:
+                        pygame.draw.rect(screen, element_color, [x, y, element_size, element_size])
 
                 value = format(steps[iteration].field[index], '02x').upper()
                 text = font.render(value, True, current_text_color)
-                screen.blit(text, (place[0] + 1, place[1] + 2))
+                screen.blit(text, (x + 1, y + 2))
                 index += 1
 
         if run < 0:
             iteration += 1
-        pygame.display.update()
-        # pygame.display.flip()
-        # clock.tick(10)
+        #pygame.display.update()
+        pygame.display.flip()
+        clock.tick(20)
 
     pygame.quit()
     quit()

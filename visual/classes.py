@@ -17,11 +17,13 @@ def set_number(data):
 
 
 class Carriage(object):
-    __slots__ = ['_player_number', '_pc']
+    __slots__ = ['_player_number', '_pc', 'is_change', 'addr_of_change']
 
     def __init__(self):
         self._player_number = 0
         self._pc = 0
+        self.is_change = 0
+        self.addr_of_change = {}
 
     @property
     def player_number(self):

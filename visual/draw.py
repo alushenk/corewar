@@ -73,8 +73,8 @@ def draw_map(steps, players):
 
     while loop:
         # shit here
-        pygame.draw.rect(screen, highlighted_text_color, [width, height, 0, 0])
-        #pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
+        # pygame.draw.rect(screen, highlighted_text_color, [width, height, 0, 0])
+        pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
 

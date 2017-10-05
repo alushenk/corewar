@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:44:12 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/10/05 19:21:42 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/09/08 18:53:43 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "corewar.h"
@@ -29,8 +29,6 @@ t_player    ft_create_new_player(t_player *player, unsigned int new_pc)
     new_player.cycle = -1;
     new_player.lives = player->lives;
     new_player.last_live = player->last_live;
-	new_player.is_change = 0;
-    new_player.addr_of_change = 0;
     return (new_player);
 }
 void        ft_add_new_player(t_vm *vm, t_player new_player)

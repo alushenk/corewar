@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:30:27 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 14:26:38 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:24:08 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,6 @@ void		x_sti(t_player *player, unsigned char *arena)
     arena[(arg2 + 2) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
     arena[(arg2 + 1) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
     arena[(arg2 + 0) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
+	player->is_change =1;
+    player->addr_of_change = arg2;
 }

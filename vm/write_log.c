@@ -60,6 +60,8 @@ void	write_log(FILE *fd, t_vm *vm)
     unsigned int    number_of_carriages;
     unsigned char   player_number;
     unsigned int    pc;
+    unsigned int    is_change;
+    unsigned int    addr_of_change;
     unsigned int i;
 
 //    int len;
@@ -102,6 +104,12 @@ void	write_log(FILE *fd, t_vm *vm)
 
 	    pc = vm->players[i].pc;
 	    write_int_to_file(pc, fd);
+
+	    is_change = vm->players[i].is_change;
+	    fwrite(&is_change, 1, 1, fd);
+
+	    addr_of_change = vm->players[i].addr_of_change;
+	    write_int_to_file(addr_of_change, fd);
 
 	    i++;
 	}

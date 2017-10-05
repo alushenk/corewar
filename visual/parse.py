@@ -51,6 +51,18 @@ def parse_step(data, index):
         carriage.pc = data[index: index + 4]
         index += 4
 
+        carriage.is_change = data[index]
+        index += 1
+
+        carriage.addr_of_change[index] = data[index]
+        index += 1
+        carriage.addr_of_change[index] = data[index]
+        index += 1
+        carriage.addr_of_change[index] = data[index]
+        index += 1
+        carriage.addr_of_change[index] = data[index]
+        index += 1
+
         step.carriages.append(carriage)
         number_of_carriages -= 1
 

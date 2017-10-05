@@ -40,6 +40,9 @@ width = height + menu_width
 font_name = "quicksand/Quicksand-Light.ttf"
 font_size = element_size + 2
 
+# shit here
+run = 1
+
 # pygame intitialization
 pygame.init()
 
@@ -63,20 +66,43 @@ info_font = pygame.font.SysFont(
     italic=False)
 
 
+def text_objects(text, font):
+    textSurface = font.render(text, True, text_color)
+    return textSurface, textSurface.get_rect()
+
+
+def button(msg, x, y, w, h):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    # print(click)
+    if x + w > mouse[0] > x and y + h > mouse[1] > y:
+        pygame.draw.rect(screen, (200, 200, 100), (x, y, w, h))
+
+        if click[0] == 1:
+            run *= -1
+    else:
+        pygame.draw.rect(screen, (100, 200, 100), (x, y, w, h))
+
+    smallText = pygame.font.SysFont("comicsansms", 20)
+    textSurf, textRect = text_objects(msg, smallText)
+    textRect.center = ((x + (w / 2)), (y + (h / 2)))
+    screen.blit(textSurf, textRect)
+
+
 def draw_map(steps, players):
     iteration = 0
-    run = 1
     loop = True
 
     size = element_size + space
     matrix = [(i * size, j * size) for j in range(64) for i in range(64)]
 
     while loop:
-        # shit here
         # pygame.draw.rect(screen, highlighted_text_color, [width, height, 0, 0])
         pygame.draw.rect(screen, background_color, [width - menu_width, 0, menu_width, height])
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
+
+        button('huy', width - menu_width, 20, menu_width, 40)
 
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -99,6 +125,9 @@ def draw_map(steps, players):
                     if carriage.pc == index:
                         pygame.draw.rect(screen, carriage_color, [x, y, element_size, element_size])
                         break
+                    elif index in carriage.addr_of_change:
+                        pygame.draw.rect(screen, carriage_color, [x, y, element_size, element_size])
+                        break
                 else:
                     current_text_color = text_color
                     for player in players:
@@ -117,9 +146,9 @@ def draw_map(steps, players):
 
         if run < 0:
             iteration += 1
-        #pygame.display.update()
+        # pygame.display.update()
         pygame.display.flip()
-        clock.tick(20)
+        # clock.tick(20)
 
     pygame.quit()
     quit()

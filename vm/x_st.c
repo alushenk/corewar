@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:44:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 12:34:49 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/05 19:23:51 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	put_value_from_reg(t_player *player, unsigned char *arena,
     arena[(addr + 2) % MEM_SIZE] = (arg1 & 0x0000FF00) >> 8;
     arena[(addr + 1) % MEM_SIZE] = (arg1 & 0x00FF0000) >> 16;
     arena[(addr + 0) % MEM_SIZE] = (arg1 & 0xFF000000) >> 24;
+	player->is_change = 1;
+	player->addr_of_change = addr;
 }
 
 static void	put_value_from_ind(t_player *player, unsigned char *arena,

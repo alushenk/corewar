@@ -45,8 +45,6 @@ typedef struct		s_player
 	int				cycle;
 	int				lives;
 	int				last_live;
-	int				is_change;
-	unsigned int	addr_of_change;
 }					t_player;
 
 typedef struct		s_vm

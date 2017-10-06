@@ -6,7 +6,7 @@
 /*   By: lush <lush@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 20:02:18 by alushenk          #+#    #+#             */
-/*   Updated: 2017/09/26 00:04:06 by lush             ###   ########.fr       */
+/*   Updated: 2017/10/06 11:59:04 by lush             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void	write_log(FILE *fd, t_vm *vm)
 
 	    is_change = vm->players[i].is_change;
 	    fwrite(&is_change, 1, 1, fd);
+	    vm->players[i].is_change = 0;
 
 	    addr_of_change = vm->players[i].addr_of_change;
 	    write_int_to_file(addr_of_change, fd);

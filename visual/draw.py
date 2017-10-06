@@ -72,6 +72,7 @@ def text_objects(text, font):
 
 
 def button(msg, x, y, w, h):
+    global run
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
     # print(click)
@@ -90,6 +91,7 @@ def button(msg, x, y, w, h):
 
 
 def draw_map(steps, players):
+    global run
     iteration = 0
     loop = True
 

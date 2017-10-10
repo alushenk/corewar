@@ -22,11 +22,10 @@ clock = pygame.time.Clock()
 background_color = (39, 40, 34)
 element_color = (70, 70, 70)
 text_color = (180, 180, 180)
-highlighted_text_color = (0, 0, 0)
-carriage_color = (25, 25, 25)
+highlighted_text_color = (40, 40, 40)
 
 # player colors
-player_colors = [(183, 102, 3), (41, 244, 126), (232, 23, 186), (25, 209, 252)]
+player_colors = [(183, 102, 30), (41, 225, 126), (225, 30, 186), (30, 209, 225)]
 
 # sizes
 space = 1
@@ -37,7 +36,8 @@ width = height + menu_width
 
 # font
 # font_name = "raleway/Raleway-Thin.ttf"
-font_name = "quicksand/Quicksand-Light.ttf"
+# font_name = "quicksand/Quicksand-Light.ttf"
+font_name = "comicsansms"
 font_size = element_size + 2
 
 # shit here
@@ -136,7 +136,10 @@ def draw_map(steps, players):
         # changes with player color
         for carriage in steps[iteration].carriages:
             if carriage.is_change:
-                color = player_colors[(-carriage.player_number) - 1]
+                color = list(player_colors[(-carriage.player_number) - 1])
+                color[0] -= 30
+                color[1] -= 30
+                color[2] -= 30
                 for addr in carriage.addr_of_change:
                     matrix[addr].color = color
 
@@ -151,15 +154,19 @@ def draw_map(steps, players):
 
         # carriage itself
         for carriage in steps[iteration].carriages:
+            color = list(player_colors[(-carriage.player_number) - 1])
+            color[0] += 30
+            color[1] += 30
+            color[2] += 30
             pygame.draw.rect(
                 screen,
-                player_colors[(-carriage.player_number) - 1],
+                color,
                 [matrix[carriage.pc].x, matrix[carriage.pc].y, element_size, element_size]
             )
 
         # text on top
         for i, byte in enumerate(matrix):
-            current_text_color = text_color
+            current_text_color = text_color if not byte.color else highlighted_text_color
 
             value = format(steps[iteration].field[i], '02x').upper()
             text = font.render(value, True, current_text_color)

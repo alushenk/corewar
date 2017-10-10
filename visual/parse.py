@@ -69,11 +69,14 @@ def parse(data):
     players, number_of_players, index = parse_players(data)
 
     steps = deque()
+    indexes = []
+    indexes.append(index)
     while index < data_size:
         step, index = parse_step(data, index)
         steps.append(step)
+        indexes.append(index)
 
     print()
     print(index)
     print(data_size)
-    return steps, players
+    return steps, players, indexes

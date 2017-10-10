@@ -13,7 +13,7 @@ def main():
             data = file.read()
 
         data = bytearray(data)
-        steps, players = parse(data)
+        steps, players, indexes = parse(data)
 
         draw_map(steps, players)
     else:

@@ -35,9 +35,9 @@ height = (element_size + space) * 64
 width = height + menu_width
 
 # font
-# font_name = "raleway/Raleway-Thin.ttf"
+font_name = "raleway/Raleway-Thin.ttf"
 # font_name = "quicksand/Quicksand-Light.ttf"
-font_name = "comicsansms"
+# font_name = "comicsansms"
 font_size = element_size + 2
 
 # shit here
@@ -49,7 +49,7 @@ pygame.init()
 screen = pygame.display.set_mode((
     int(width),
     int(height)),
-    # pygame.RESIZABLE
+    pygame.RESIZABLE
 )
 
 font = pygame.font.SysFont(

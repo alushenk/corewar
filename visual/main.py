@@ -2,6 +2,7 @@
 # #! /usr/bin/env python
 from __future__ import print_function
 import sys
+import os
 
 from parse import parse
 from draw import draw_map
@@ -9,13 +10,14 @@ from draw import draw_map
 
 def main():
     if len(sys.argv) == 2:
-        with open(sys.argv[1], 'rb') as file:
-            data = file.read()
+        file_name = sys.argv[1]
+        file_size = os.path.getsize(file_name)
+        with open(file_name, 'rb') as file:
+            #data = file.read()
+            # data = bytearray(data)
+            players, indexes = parse(file, file_size)
 
-        data = bytearray(data)
-        steps, players, indexes = parse(data)
-
-        draw_map(steps, players)
+            draw_map(players, indexes)
     else:
         print('usage: ./main.py [output]')
         exit()

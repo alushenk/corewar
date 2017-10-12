@@ -7,8 +7,9 @@ def bin_to_int(data):
 
 
 def bin_to_str(data):
-    #return data.decode('utf-8')
-    return data
+    # return data.decode('utf-8')
+    return data.decode('unicode_escape').encode('utf-8')
+    # return data
 
 
 def set_number(data):

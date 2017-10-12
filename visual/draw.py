@@ -16,6 +16,7 @@ import numpy as np
 # text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
 # screen.blit(text, (x + 1, y  + 3))
 
+
 clock = pygame.time.Clock()
 
 # colors
@@ -43,27 +44,6 @@ font_size = element_size + 2
 # shit here
 run = 1
 
-# pygame intitialization
-pygame.init()
-
-screen = pygame.display.set_mode((
-    int(width),
-    int(height)),
-    pygame.RESIZABLE
-)
-
-font = pygame.font.SysFont(
-    font_name,
-    font_size,
-    bold=False,
-    italic=False)
-
-info_font = pygame.font.SysFont(
-    font_name,
-    font_size + 10,
-    bold=False,
-    italic=False)
-
 
 class Byte(object):
     def __init__(self, x, y):
@@ -75,11 +55,11 @@ class Byte(object):
 
 
 def text_objects(text, font):
-    textSurface = font.render(text, True, text_color)
-    return textSurface, textSurface.get_rect()
+    text_surface = font.render(text, True, text_color)
+    return text_surface, text_surface.get_rect()
 
 
-def button(msg, x, y, w, h):
+def button(screen, msg, x, y, w, h):
     global run
     mouse = pygame.mouse.get_pos()
     click = pygame.mouse.get_pressed()
@@ -92,13 +72,34 @@ def button(msg, x, y, w, h):
     else:
         pygame.draw.rect(screen, (100, 200, 100), (x, y, w, h))
 
-    smallText = pygame.font.SysFont("comicsansms", 20)
-    textSurf, textRect = text_objects(msg, smallText)
-    textRect.center = ((x + (w / 2)), (y + (h / 2)))
-    screen.blit(textSurf, textRect)
+    small_text = pygame.font.SysFont("comicsansms", 20)
+    text_surf, text_rect = text_objects(msg, small_text)
+    text_rect.center = ((x + (w / 2)), (y + (h / 2)))
+    screen.blit(text_surf, text_rect)
 
 
 def draw_map(steps, players):
+    # pygame intitialization
+    pygame.init()
+
+    screen = pygame.display.set_mode((
+        int(width),
+        int(height)),
+        pygame.RESIZABLE
+    )
+
+    font = pygame.font.SysFont(
+        font_name,
+        font_size,
+        bold=False,
+        italic=False)
+
+    info_font = pygame.font.SysFont(
+        font_name,
+        font_size + 10,
+        bold=False,
+        italic=False)
+
     global run
     iteration = 0
     loop = True
@@ -176,7 +177,7 @@ def draw_map(steps, players):
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
 
-        button('huy', width - menu_width, 20, menu_width, 40)
+        button(screen, 'huy', width - menu_width, 20, menu_width, 40)
 
         pygame.display.update()
         screen.fill(background_color)

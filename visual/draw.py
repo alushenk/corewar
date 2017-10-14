@@ -1,7 +1,7 @@
 import time
 import pygame
 import numpy as np
-
+import parse
 # from os import system
 # from platform import system as platform
 # set up your Tk Frame and whatnot here...
@@ -78,7 +78,7 @@ def button(screen, msg, x, y, w, h):
     screen.blit(text_surf, text_rect)
 
 
-def draw_map(steps, players):
+def draw_map(file, players, indexes):
     # pygame intitialization
     pygame.init()
 
@@ -118,6 +118,8 @@ def draw_map(steps, players):
 
     while loop:
 
+        step = parse.parse_step(file, indexes[iteration])
+
         # pygame events
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
@@ -135,7 +137,7 @@ def draw_map(steps, players):
                 loop = False
 
         # changes with player color
-        for carriage in steps[iteration].carriages:
+        for carriage in step.carriages:
             if carriage.is_change:
                 color = list(player_colors[(-carriage.player_number) - 1])
                 color[0] -= 30
@@ -154,7 +156,7 @@ def draw_map(steps, players):
             )
 
         # carriage itself
-        for carriage in steps[iteration].carriages:
+        for carriage in step.carriages:
             color = list(player_colors[(-carriage.player_number) - 1])
             color[0] += 30
             color[1] += 30
@@ -169,7 +171,8 @@ def draw_map(steps, players):
         for i, byte in enumerate(matrix):
             current_text_color = text_color if not byte.color else highlighted_text_color
 
-            value = format(steps[iteration].field[i], '02x').upper()
+            value = format(step.field[i], '02x')
+            # value = step.field[i].upper()
             text = font.render(value, True, current_text_color)
             screen.blit(text, (byte.x + 1, byte.y + 2))
 

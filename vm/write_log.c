@@ -12,57 +12,7 @@
 
 #include "corewar.h"
 #include <stdio.h>
-
-size_t	ft_strlen(const char *s)
-{
-	unsigned long i;
-
-	i = 0;
-	while (*s != '\0')
-	{
-		s++;
-		i++;
-	}
-	return (i);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char *temp;
-
-	temp = s;
-	while (n > 0)
-	{
-		*temp = 0;
-		temp++;
-		n--;
-	}
-}
-
-void	write_int_to_file(unsigned int value, FILE *fd)
-{
-	unsigned char temp;
-
-	temp = (value >> (8 * 3)) & 0xFF;
-	fwrite(&temp, 1, 1, fd);
-	temp = (value >> (8 * 2)) & 0xFF;
-	fwrite(&temp, 1, 1, fd);
-	temp = (value >> (8 * 1)) & 0xFF;
-	fwrite(&temp, 1, 1, fd);
-	temp = value & 0xFF;
-	fwrite(&temp, 1, 1, fd);
-}
-
-// call in play.c play()
-// unsigned char *copy
-void	write_log(FILE *fd, t_vm *vm)
-{
-    unsigned int    number_of_carriages;
-    unsigned char   player_number;
-    unsigned int    pc;
-    unsigned int    is_change;
-    unsigned int    addr_of_change;
-    unsigned int i;
+#include <time.h>
 
 //    int len;
 //
@@ -90,33 +40,105 @@ void	write_log(FILE *fd, t_vm *vm)
 //	    }
 //	}
 
-    fwrite(vm->arena, 1, MEM_SIZE + 1, fd);
+void    write_buf(unsigned char value, FILE *fd, t_buffer *buffer)
+{
+    if (buffer->size < SIZE)
+    {
+        buffer->data[buffer->size] = value;
+        buffer->size += 1;
+    }
+    else
+    {
+        fwrite(buffer->data, 1, SIZE, fd);
+        buffer->size = 0;
+    }
+
+}
+
+void	write_int_to_file(unsigned int value, FILE *fd)
+{
+	unsigned char temp;
+
+	temp = (value >> (8 * 3)) & 0xFF;
+	fwrite(&temp, 1, 1, fd);
+	temp = (value >> (8 * 2)) & 0xFF;
+	fwrite(&temp, 1, 1, fd);
+	temp = (value >> (8 * 1)) & 0xFF;
+	fwrite(&temp, 1, 1, fd);
+	temp = value & 0xFF;
+	fwrite(&temp, 1, 1, fd);
+}
+
+void	write_int_to_buf(unsigned int value, FILE *fd, t_buffer *buffer)
+{
+	unsigned char temp;
+
+	temp = (value >> (8 * 3)) & 0xFF;
+	write_buf(temp, fd, buffer);
+	temp = (value >> (8 * 2)) & 0xFF;
+	write_buf(temp, fd, buffer);
+	temp = (value >> (8 * 1)) & 0xFF;
+	write_buf(temp, fd, buffer);
+	temp = value & 0xFF;
+	write_buf(temp, fd, buffer);
+}
+
+// unsigned char *copy
+void	write_log(FILE *fd, t_vm *vm)
+{
+    unsigned int    number_of_carriages;
+    unsigned char   player_number;
+    unsigned int    pc;
+    unsigned int    is_change;
+    unsigned int    addr_of_change;
+    unsigned int i;
+
+//    time_t start_t, end_t;
+//    double diff_t;
+//
+//    time(&start_t);
+
+    //fwrite(vm->arena, 1, MEM_SIZE + 1, fd);
+    i = 0;
+    while (i < MEM_SIZE + 1)
+    {
+        write_buf(vm->arena[i], fd, vm->buffer);
+        i++;
+    }
 
 	// колличество кареток, один раз
 	number_of_carriages = vm->players_count;
-	write_int_to_file(number_of_carriages, fd);
+	// write_int_to_file(number_of_carriages, fd);
+	write_int_to_buf(number_of_carriages, fd, vm->buffer);
 
 	i = 0;
 	while (i < number_of_carriages)
 	{
 	    player_number = vm->players[i].name;
-        fwrite(&player_number, 1, 1, fd);
+        //fwrite(&player_number, 1, 1, fd);
+        write_buf(player_number, fd, vm->buffer);
 
 	    pc = vm->players[i].pc;
-	    write_int_to_file(pc, fd);
+	    //write_int_to_file(pc, fd);
+	    write_int_to_buf(pc, fd, vm->buffer);
 
 	    is_change = vm->players[i].is_change;
-	    fwrite(&is_change, 1, 1, fd);
+	    //fwrite(&is_change, 1, 1, fd);
+	    write_buf(is_change, fd, vm->buffer);
 	    vm->players[i].is_change = 0;
 
 	    addr_of_change = vm->players[i].addr_of_change;
-	    write_int_to_file(addr_of_change, fd);
-
+	    //write_int_to_file(addr_of_change, fd);
+        write_int_to_buf(addr_of_change, fd, vm->buffer);
 	    i++;
 	}
+
+//	time(&end_t);
+//    diff_t = difftime(end_t, start_t);
+//
+//    printf("Execution time = %f\n", diff_t);
 }
 
-// call in main.c main()
 FILE		*create_log_file(t_vm *vm, t_players **initial_players)
 {
 	FILE            *fd_output;
@@ -124,6 +146,11 @@ FILE		*create_log_file(t_vm *vm, t_players **initial_players)
 	unsigned char	player_number;
 	unsigned int 	player_size;
 	unsigned int    pc;
+
+
+    vm->buffer = (t_buffer*)malloc(sizeof(t_buffer));
+    vm->buffer->data = (unsigned char*)malloc(SIZE);
+    vm->buffer->size = 0;
 
     //O_TRUNC | O_WRONLY | O_APPEND | O_CREAT, S_IROTH | S_IRUSR | S_IWUSR
 	// if ((fd_output = fopen("output", "w")) < 0)
@@ -164,15 +191,3 @@ FILE		*create_log_file(t_vm *vm, t_players **initial_players)
     }
 	return (fd_output);
 }
-
-//int main(void)
-//{
-//	int fd;
-//
-//	// запускается один раз, создает файл и возвращает его дескриптор
-//	fd = create_log_file();
-//	// запускается много раз в цикле, внутри play()
-//	// передайте в нее t_vm *vm и пишите данные от туда
-//	write_log(fd);
-//	return (0);
-//}

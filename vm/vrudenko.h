@@ -49,6 +49,14 @@ typedef struct		s_player
 	unsigned int	addr_of_change;
 }					t_player;
 
+#define SIZE 4000000000
+
+typedef struct      s_buffer
+{
+    unsigned char   *data;
+    size_t          size;
+}                   t_buffer;
+
 typedef struct		s_vm
 {
 	unsigned char		*arena;
@@ -58,6 +66,7 @@ typedef struct		s_vm
 	int					max_checks;
 	t_player			*players;
 	int					players_count;
+	t_buffer            *buffer;
 }						t_vm;
 
 

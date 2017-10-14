@@ -20,13 +20,22 @@ def set_number(data):
 
 
 class Carriage(object):
-    __slots__ = ['_player_number', '_pc', '_is_change', 'addr_of_change']
+    __slots__ = [
+        '_player_number',
+        '_pc',
+        '_is_change',
+        'addr_of_change',
+        'last_live',
+        'lives_in_period'
+    ]
 
     def __init__(self):
         self._player_number = 0
         self._pc = 0
         self._is_change = 0
         self.addr_of_change = 0
+        self.last_live = 0
+        self.lives_in_period = 0
 
     @property
     def player_number(self):
@@ -55,6 +64,12 @@ class Carriage(object):
     def set_change(self, data):
         addr_of_change = bin_to_int(data)
         self.addr_of_change = [addr_of_change + x for x in range(4)]
+
+    def set_last_live(self, data):
+        self.last_live = bin_to_int(data)
+
+    def set_lives(self, data):
+        self.lives_in_period = bin_to_int(data)
 
 
 class Step(object):

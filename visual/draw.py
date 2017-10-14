@@ -2,6 +2,7 @@ import time
 import pygame
 import numpy as np
 import parse
+
 # from os import system
 # from platform import system as platform
 # set up your Tk Frame and whatnot here...
@@ -35,9 +36,10 @@ change_colors = [(153, 72, 0), (11, 195, 96), (195, 0, 156), (0, 179, 195)]
 # sizes
 space = 1
 element_size = 16
-menu_width = element_size * 20
+menu_width = element_size * 27
 height = (element_size + space) * 64
 width = height + menu_width
+left_text_padding = width - menu_width + 10
 
 # font
 font_name = "raleway/Raleway-Thin.ttf"
@@ -87,7 +89,7 @@ def draw_map(file, players, indexes):
     screen = pygame.display.set_mode((
         int(width),
         int(height)),
-        pygame.RESIZABLE
+        pygame.RESIZABLE | pygame.HWSURFACE
     )
 
     font = pygame.font.SysFont(
@@ -138,13 +140,6 @@ def draw_map(file, players, indexes):
             if event.type == pygame.QUIT:
                 loop = False
 
-        # changes with player color
-        for carriage in step.carriages:
-            if carriage.is_change:
-                color = change_colors[-carriage.player_number - 1]
-                for addr in carriage.addr_of_change:
-                    matrix[addr].color = color
-
         # simple squares
         for byte in matrix:
             color = byte.color if byte.color else element_color
@@ -154,14 +149,35 @@ def draw_map(file, players, indexes):
                 [byte.x, byte.y, element_size, element_size]
             )
 
+        # changes with player color
+        # and
         # carriage itself
+        y = 225
         for carriage in step.carriages:
+            if carriage.is_change:
+                color = change_colors[-carriage.player_number - 1]
+                for addr in carriage.addr_of_change:
+                    matrix[addr].color = color
             color = carriage_colors[-carriage.player_number - 1]
             pygame.draw.rect(
                 screen,
                 color,
                 [matrix[carriage.pc].x, matrix[carriage.pc].y, element_size, element_size]
             )
+            last_live = info_font.render(
+                'Last live : {0:>47}'.format(carriage.last_live),
+                True,
+                menu_text_color
+            )
+            screen.blit(last_live, (left_text_padding, y))
+            y += 25
+            lives_in_period = info_font.render(
+                'Lives in current period : {0:>20}'.format(carriage.lives_in_period),
+                True,
+                menu_text_color
+            )
+            screen.blit(lives_in_period, (left_text_padding, y))
+            y += 50
 
         # text on top
         for i, byte in enumerate(matrix):
@@ -173,37 +189,37 @@ def draw_map(file, players, indexes):
             screen.blit(text, (byte.x + 1, byte.y + 2))
 
         # menu items
-        left = width - menu_width + 10
         status = info_font.render(
             'RUNNING' if run < 0 else 'PAUSED',
             True,
             menu_text_color
         )
-        screen.blit(status, (left, 50))
+        screen.blit(status, (left_text_padding, 50))
 
         cycle = info_font.render(
             'Cycle : {}'.format(iteration),
             True,
             menu_text_color
         )
-        screen.blit(cycle, (left, 100))
+        screen.blit(cycle, (left_text_padding, 100))
 
         processes = info_font.render(
             'Processes : {}'.format(len(step.carriages)),
             True,
             menu_text_color
         )
-        screen.blit(processes, (left, 150))
+        screen.blit(processes, (left_text_padding, 150))
 
         y = 200
         for player in players:
+            color = player_colors[player.number - 1]
             name = info_font.render(
                 'Player {} : {}'.format(player.number, player.name),
                 True,
-                menu_text_color
+                color
             )
-            screen.blit(name, (left, y))
-            y += 25
+            screen.blit(name, (left_text_padding, y))
+            y += 75
 
         # button(screen, 'huy', width - menu_width, 20, menu_width, 40)
 

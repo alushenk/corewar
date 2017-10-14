@@ -90,8 +90,9 @@ int main(int argc, char **argv)
 
     if (vm->buffer->size > 0)
     {
-        fwrite(vm->buffer->data, 1, vm->buffer->size, fd);
+        fwrite(vm->buffer->data, 1, vm->buffer->size - 1, fd);
     }
+    // free this shit)
 
     return (0);
 }

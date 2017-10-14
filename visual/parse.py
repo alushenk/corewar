@@ -82,6 +82,9 @@ def parse_step(file, index):
         # carriage.set_change(data[index: index + 4])
         # index += 4
 
+        carriage.set_last_live(file.read(4))
+        carriage.set_lives(file.read(4))
+
         step.carriages.append(carriage)
 
     return step
@@ -96,7 +99,7 @@ def parse_step_size(file, index):
     # file.seek(-4, 1)
     index += 4
 
-    index += (number_of_carriages * 10)
+    index += (number_of_carriages * 18)
 
     return index
 
@@ -107,13 +110,13 @@ def parse(file, file_size):
 
     # steps = deque()
     indexes = list()
-    indexes.append(index)
 
     while index < file_size:
+        indexes.append(index)
         # step, index = parse_step(data, index)
         # steps.append(step)
         index = parse_step_size(file, index)
-        indexes.append(index)
+        # indexes.append(index)
 
     print()
     print(index)

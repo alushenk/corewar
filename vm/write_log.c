@@ -91,6 +91,8 @@ void	write_log(FILE *fd, t_vm *vm)
     unsigned int    pc;
     unsigned int    is_change;
     unsigned int    addr_of_change;
+    unsigned int    last_live;
+    unsigned int    lives_in_period;
     unsigned int i;
 
 //    time_t start_t, end_t;
@@ -130,6 +132,12 @@ void	write_log(FILE *fd, t_vm *vm)
 	    addr_of_change = vm->players[i].addr_of_change;
 	    //write_int_to_file(addr_of_change, fd);
         write_int_to_buf(addr_of_change, fd, vm->buffer);
+
+        last_live = vm->players[i].last_live;
+        write_int_to_buf(last_live, fd, vm->buffer);
+
+        lives_in_period = vm->players[i].lives;
+        write_int_to_buf(lives_in_period, fd, vm->buffer);
 	    i++;
 	}
 

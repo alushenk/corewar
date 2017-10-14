@@ -17,7 +17,7 @@ def main():
             # data = bytearray(data)
             players, indexes = parse(file, file_size)
 
-            draw_map(players, indexes)
+            draw_map(file, players, indexes)
     else:
         print('usage: ./main.py [output]')
         exit()

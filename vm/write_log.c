@@ -131,7 +131,7 @@ FILE		*create_log_file(t_vm *vm, t_players **initial_players)
 	// 	write(2, "Error! can't create output file\n", ft_strlen("Error! can't create output file\n"));
 	// 	exit(0);
 	// }
-	fd_output = fopen("output", "w");
+	fd_output = fopen("/tmp/output", "w");
 
 	// колличество игроков, один раз
 	number_of_players = vm->players_count;

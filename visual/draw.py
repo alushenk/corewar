@@ -25,8 +25,11 @@ element_color = (70, 70, 70)
 text_color = (180, 180, 180)
 highlighted_text_color = (40, 40, 40)
 
-# player colors
 player_colors = [(183, 102, 30), (41, 225, 126), (225, 30, 186), (30, 209, 225)]
+
+carriage_colors = [(213, 132, 60), (71, 255, 156), (255, 60, 216), (60, 239, 255)]
+
+change_colors = [(153, 72, 0), (11, 195, 96), (195, 0, 156), (0, 179, 195)]
 
 # sizes
 space = 1
@@ -79,7 +82,6 @@ def button(screen, msg, x, y, w, h):
 
 
 def draw_map(file, players, indexes):
-    # pygame intitialization
     pygame.init()
 
     screen = pygame.display.set_mode((
@@ -139,10 +141,7 @@ def draw_map(file, players, indexes):
         # changes with player color
         for carriage in step.carriages:
             if carriage.is_change:
-                color = list(player_colors[(-carriage.player_number) - 1])
-                color[0] -= 30
-                color[1] -= 30
-                color[2] -= 30
+                color = change_colors[-carriage.player_number - 1]
                 for addr in carriage.addr_of_change:
                     matrix[addr].color = color
 
@@ -157,10 +156,7 @@ def draw_map(file, players, indexes):
 
         # carriage itself
         for carriage in step.carriages:
-            color = list(player_colors[(-carriage.player_number) - 1])
-            color[0] += 30
-            color[1] += 30
-            color[2] += 30
+            color = carriage_colors[-carriage.player_number - 1]
             pygame.draw.rect(
                 screen,
                 color,
@@ -180,11 +176,11 @@ def draw_map(file, players, indexes):
         iteration_number = info_font.render(str(iteration), True, text_color)
         screen.blit(iteration_number, (width - 180, 100))
 
-        button(screen, 'huy', width - menu_width, 20, menu_width, 40)
+        # button(screen, 'huy', width - menu_width, 20, menu_width, 40)
 
         pygame.display.update()
         screen.fill(background_color)
-        # clock.tick(40)
+        # clock.tick(100)
 
         if run < 0:
             iteration += 1

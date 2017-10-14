@@ -78,18 +78,20 @@ int main(int argc, char **argv)
     arena = fill_arena(arena, player_array, argc);
 
     vm = ft_create_vm(arena, player_array, argc);
+
     // ft_print_map(vm);
     // printf("REG0: %u\n", vm->players[0]->rg);
-    ft_putstr("suka\n");
 
     //ft_putchar((player_array)[1]->name[0]);
+
     FILE *fd = create_log_file(vm, player_array);
-    //int fd = 4;
-	play(vm, fd);//
 
+	play(vm, fd);
 
-    
-
+    if (vm->buffer->size > 0)
+    {
+        fwrite(vm->buffer->data, 1, vm->buffer->size, fd);
+    }
 
     return (0);
 }

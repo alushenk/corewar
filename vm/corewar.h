@@ -28,6 +28,4 @@ FILE		*create_log_file(t_vm *vm, t_players **initial_players);
 // unsigned char *copy
 void	write_log(FILE *fd, t_vm *vm);
 
-
-
 #endif

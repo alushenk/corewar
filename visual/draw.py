@@ -23,6 +23,7 @@ clock = pygame.time.Clock()
 background_color = (39, 40, 34)
 element_color = (70, 70, 70)
 text_color = (180, 180, 180)
+menu_text_color = (255, 255, 255)
 highlighted_text_color = (40, 40, 40)
 
 player_colors = [(183, 102, 30), (41, 225, 126), (225, 30, 186), (30, 209, 225)]
@@ -34,7 +35,7 @@ change_colors = [(153, 72, 0), (11, 195, 96), (195, 0, 156), (0, 179, 195)]
 # sizes
 space = 1
 element_size = 16
-menu_width = 200
+menu_width = element_size * 20
 height = (element_size + space) * 64
 width = height + menu_width
 
@@ -44,7 +45,6 @@ font_name = "raleway/Raleway-Thin.ttf"
 # font_name = "comicsansms"
 font_size = element_size + 2
 
-# shit here
 run = 1
 
 
@@ -173,8 +173,37 @@ def draw_map(file, players, indexes):
             screen.blit(text, (byte.x + 1, byte.y + 2))
 
         # menu items
-        iteration_number = info_font.render(str(iteration), True, text_color)
-        screen.blit(iteration_number, (width - 180, 100))
+        left = width - menu_width + 10
+        status = info_font.render(
+            'RUNNING' if run < 0 else 'PAUSED',
+            True,
+            menu_text_color
+        )
+        screen.blit(status, (left, 50))
+
+        cycle = info_font.render(
+            'Cycle : {}'.format(iteration),
+            True,
+            menu_text_color
+        )
+        screen.blit(cycle, (left, 100))
+
+        processes = info_font.render(
+            'Processes : {}'.format(len(step.carriages)),
+            True,
+            menu_text_color
+        )
+        screen.blit(processes, (left, 150))
+
+        y = 200
+        for player in players:
+            name = info_font.render(
+                'Player {} : {}'.format(player.number, player.name),
+                True,
+                menu_text_color
+            )
+            screen.blit(name, (left, y))
+            y += 25
 
         # button(screen, 'huy', width - menu_width, 20, menu_width, 40)
 

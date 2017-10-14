@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include <time.h>
 
 static int	no_live_payers(t_vm *vm)
 {
@@ -100,6 +101,8 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm, FILE *fd)
 {
 	int		i;
+//    time_t start_t, end_t;
+//	double diff_t;
 	//unsigned char copy[MEM_SIZE + 1];
 //	char	c;
 
@@ -108,6 +111,7 @@ void		play(t_vm *vm, FILE *fd)
     //&& vm->cycle < Z + 1
 	while (!(end(vm)))
 	{
+	    //time(&start_t);
 //		while(1)
 //		{
 //			c = getchar();
@@ -122,7 +126,6 @@ void		play(t_vm *vm, FILE *fd)
 
 
 			//ft_strcpy((char*)copy, (char*)vm->arena);
-			//fd = NULL;
 
 			// if (vm->cycle > Z - 5) //test
 			// ft_print_map(vm);
@@ -155,5 +158,8 @@ void		play(t_vm *vm, FILE *fd)
 				//if (c == 'q')
 				//return ;
 				//}
-			}
+//		time(&end_t);
+//        diff_t = difftime(end_t, start_t);
+//        printf("Execution time = %f\n", diff_t);
+	}
 }

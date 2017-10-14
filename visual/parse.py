@@ -1,6 +1,4 @@
 from __future__ import print_function
-import numpy as np
-from collections import deque
 import struct
 from classes import Player, Step, Carriage, bin_to_int
 

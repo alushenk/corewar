@@ -1,21 +1,7 @@
 import pygame
 import numpy as np
 import parse
-
-# from os import system
-# from platform import system as platform
-# set up your Tk Frame and whatnot here...
-# if platform() == 'Darwin':  # How Mac OS X is identified by Python
-#     system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
-
-# text = font.render(format(step.field[index] & 240, '02x')[0].upper(), True, current_text_color)
-# screen.blit(text, (x + 1, y + 3))
-# text = font.render(format(step.field[index] & 15, '02x')[1].upper(), True, current_text_color)
-# screen.blit(text, (x + 9, y + 3))
-
-# text = font.render(memory[index].encode('hex').upper(), True, current_text_color)
-# screen.blit(text, (x + 1, y  + 3))
-
+from classes import Byte
 
 clock = pygame.time.Clock()
 
@@ -27,9 +13,7 @@ menu_text_color = (255, 255, 255)
 highlighted_text_color = (40, 40, 40)
 
 player_colors = [(183, 102, 30), (41, 225, 126), (255, 5, 213), (76, 202, 211)]
-
 carriage_colors = [(255, 160, 71), (183, 255, 203), (255, 158, 238), (183, 250, 255)]
-
 change_colors = [(99, 50, 7), (35, 119, 51), (195, 0, 156), (12, 103, 109)]
 
 # sizes
@@ -42,19 +26,9 @@ left_text_padding = width - menu_width + 10
 
 # font
 font_name = "raleway/Raleway-Thin.ttf"
-# font_name = "quicksand/Quicksand-Light.ttf"
-# font_name = "comicsansms"
 font_size = element_size + 2
 
 run = 1
-
-
-class Byte(object):
-    __slots__ = ['x', 'y']
-
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
 
 
 def get_color(number):
@@ -119,7 +93,7 @@ def draw_map(file, players, indexes):
         if iteration == iteration_count and run < 0:
             run *= -1
         elif iteration == -1:
-            iteration = iteration_count
+            iteration = 0
         elif iteration == iteration_count + 1:
             iteration = 0
 
@@ -151,10 +125,7 @@ def draw_map(file, players, indexes):
 
         # simple squares
         for i, byte in enumerate(bytes_matrix):
-            color = element_color
-            if step_color[i]:
-                color = get_color(step_color[i])
-            # color = byte.color if byte.color else element_color
+            color = get_color(step_color[i]) if step_color[i] else element_color
             pygame.draw.rect(
                 screen,
                 color,
@@ -168,12 +139,11 @@ def draw_map(file, players, indexes):
         y = 225
         for carriage in step.carriages:
             if carriage.is_change:
-                color = change_colors[-carriage.player_number - 1]
+                color = change_colors[carriage.player_number - 1]
                 color = set_color(color)
                 for addr in carriage.addr_of_change:
                     step_color[addr] = color
-                    # bytes_matrix[addr].color = color
-            color = carriage_colors[-carriage.player_number - 1]
+            color = carriage_colors[carriage.player_number - 1]
             pygame.draw.rect(
                 screen,
                 color,
@@ -198,12 +168,12 @@ def draw_map(file, players, indexes):
 
         # text on top
         for i, byte in enumerate(bytes_matrix):
-            current_text_color = text_color if not step_color[i] else highlighted_text_color
+            current_text_color = highlighted_text_color if step_color[i] else text_color
 
-            value = format(step.field[i], '02x')
-            # value = step.field[i].upper()
-            text = font.render(value, True, current_text_color)
+            text = font.render(format(step.field[i] & 240, '02x')[0], True, current_text_color)
             screen.blit(text, (byte.x + 1, byte.y + 2))
+            text = font.render(format(step.field[i] & 15, '02x')[1], True, current_text_color)
+            screen.blit(text, (byte.x + 7, byte.y + 2))
 
         # menu items
         status = info_font.render(
@@ -238,11 +208,8 @@ def draw_map(file, players, indexes):
             screen.blit(name, (left_text_padding, y))
             y += 75
 
-        # button(screen, 'huy', width - menu_width, 20, menu_width, 40)
-
         pygame.display.update()
         screen.fill(background_color)
-        # clock.tick(100)
 
         if run < 0:
             iteration += 1

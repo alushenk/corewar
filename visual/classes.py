@@ -1,5 +1,4 @@
 import binascii
-import numpy
 
 
 def bin_to_int(data):
@@ -7,16 +6,21 @@ def bin_to_int(data):
 
 
 def bin_to_str(data):
-    # data = bytearray(data)
     return data.decode('utf-8').rstrip('\0')
-    # return data.decode('unicode_escape').encode('utf-8')
-    # return data
 
 
 def set_number(data):
     if data > 127:
         data -= 0x100
     return data
+
+
+class Byte(object):
+    __slots__ = ['x', 'y']
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
 
 
 class Carriage(object):
@@ -77,7 +81,6 @@ class Step(object):
 
     def __init__(self):
         self.carriages = []
-        self.objects = numpy.empty(4096, dtype=object)
 
 
 class Player(object):
@@ -104,33 +107,3 @@ class Player(object):
     @pc.setter
     def pc(self, data):
         self._pc = bin_to_int(data)
-
-
-class Data(object):
-    def __init__(self):
-        self.number_of_players = 0
-        self.players = []
-
-
-def text_objects(text, font):
-    text_surface = font.render(text, True, text_color)
-    return text_surface, text_surface.get_rect()
-
-
-def button(pygame, screen, msg, x, y, w, h):
-    global run
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-    # print(click)
-    if x + w > mouse[0] > x and y + h > mouse[1] > y:
-        pygame.draw.rect(screen, (200, 200, 100), (x, y, w, h))
-
-        if click[0] == 1:
-            run *= -1
-    else:
-        pygame.draw.rect(screen, (100, 200, 100), (x, y, w, h))
-
-    small_text = pygame.font.SysFont("comicsansms", 20)
-    text_surf, text_rect = text_objects(msg, small_text)
-    text_rect.center = ((x + (w / 2)), (y + (h / 2)))
-    screen.blit(text_surf, text_rect)

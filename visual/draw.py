@@ -1,4 +1,3 @@
-import time
 import pygame
 import numpy as np
 import parse
@@ -27,15 +26,15 @@ text_color = (180, 180, 180)
 menu_text_color = (255, 255, 255)
 highlighted_text_color = (40, 40, 40)
 
-player_colors = [(183, 102, 30), (41, 225, 126), (225, 30, 186), (30, 209, 225)]
+player_colors = [(183, 102, 30), (41, 225, 126), (255, 5, 213), (76, 202, 211)]
 
-carriage_colors = [(213, 132, 60), (71, 255, 156), (255, 60, 216), (60, 239, 255)]
+carriage_colors = [(255, 160, 71), (183, 255, 203), (255, 158, 238), (183, 250, 255)]
 
-change_colors = [(153, 72, 0), (11, 195, 96), (195, 0, 156), (0, 179, 195)]
+change_colors = [(99, 50, 7), (35, 119, 51), (195, 0, 156), (12, 103, 109)]
 
 # sizes
 space = 1
-element_size = 16
+element_size = 14
 menu_width = element_size * 27
 height = (element_size + space) * 64
 width = height + menu_width
@@ -51,36 +50,27 @@ run = 1
 
 
 class Byte(object):
+    __slots__ = ['x', 'y']
+
     def __init__(self, x, y):
-        self.color = 0
-        self.data = 0
-        self.rect = 0
         self.x = x
         self.y = y
 
 
-def text_objects(text, font):
-    text_surface = font.render(text, True, text_color)
-    return text_surface, text_surface.get_rect()
+def get_color(number):
+    mask = np.uint64(0xFF)
+    r = np.bitwise_and(np.right_shift(number, np.uint64(16)), mask)
+    g = np.bitwise_and(np.right_shift(number, np.uint64(8)), mask)
+    b = np.bitwise_and(number, mask)
+    return r, g, b
 
 
-def button(screen, msg, x, y, w, h):
-    global run
-    mouse = pygame.mouse.get_pos()
-    click = pygame.mouse.get_pressed()
-    # print(click)
-    if x + w > mouse[0] > x and y + h > mouse[1] > y:
-        pygame.draw.rect(screen, (200, 200, 100), (x, y, w, h))
-
-        if click[0] == 1:
-            run *= -1
-    else:
-        pygame.draw.rect(screen, (100, 200, 100), (x, y, w, h))
-
-    small_text = pygame.font.SysFont("comicsansms", 20)
-    text_surf, text_rect = text_objects(msg, small_text)
-    text_rect.center = ((x + (w / 2)), (y + (h / 2)))
-    screen.blit(text_surf, text_rect)
+def set_color(color):
+    x = 0
+    x |= (color[0] << 16)
+    x |= (color[1] << 8)
+    x |= color[2]
+    return x
 
 
 def draw_map(file, players, indexes):
@@ -89,7 +79,7 @@ def draw_map(file, players, indexes):
     screen = pygame.display.set_mode((
         int(width),
         int(height)),
-        pygame.RESIZABLE | pygame.HWSURFACE
+        pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF
     )
 
     font = pygame.font.SysFont(
@@ -106,10 +96,14 @@ def draw_map(file, players, indexes):
 
     global run
     iteration = 0
+    last_iteration = 0
+    iteration_count = len(indexes) - 1
     loop = True
 
     size = element_size + space
-    matrix = [Byte(i * size, j * size) for j in range(64) for i in range(64)]
+
+    bytes_matrix = [Byte(i * size, j * size) for j in range(64) for i in range(64)]
+    color_matrix = np.zeros((len(indexes), 64 * 64), dtype=np.uint64)
 
     # players with them color
     for player in players:
@@ -117,12 +111,25 @@ def draw_map(file, players, indexes):
         end = i + player.size
         color = player_colors[player.number - 1]
         while i < end:
-            matrix[i].color = color
+            color_matrix[0][i] = set_color(color)
             i += 1
 
     while loop:
 
+        if iteration == iteration_count and run < 0:
+            run *= -1
+        elif iteration == -1:
+            iteration = iteration_count
+        elif iteration == iteration_count + 1:
+            iteration = 0
+
         step = parse.parse_step(file, indexes[iteration])
+        if last_iteration < iteration:
+            color_matrix[iteration] = color_matrix[iteration - 1]
+        step_color = color_matrix[iteration]
+
+        if iteration > last_iteration:
+            last_iteration = iteration
 
         # pygame events
         for event in pygame.event.get():
@@ -130,6 +137,8 @@ def draw_map(file, players, indexes):
                 if event.key == pygame.K_ESCAPE:
                     loop = False
                 elif event.key == pygame.K_RIGHT:
+                    if run < 0 < iteration:
+                        color_matrix[iteration] = color_matrix[iteration - 1]
                     iteration += 1
                 elif event.key == pygame.K_LEFT:
                     iteration -= 1
@@ -141,8 +150,11 @@ def draw_map(file, players, indexes):
                 loop = False
 
         # simple squares
-        for byte in matrix:
-            color = byte.color if byte.color else element_color
+        for i, byte in enumerate(bytes_matrix):
+            color = element_color
+            if step_color[i]:
+                color = get_color(step_color[i])
+            # color = byte.color if byte.color else element_color
             pygame.draw.rect(
                 screen,
                 color,
@@ -152,36 +164,41 @@ def draw_map(file, players, indexes):
         # changes with player color
         # and
         # carriage itself
+        menu_items = set()
         y = 225
         for carriage in step.carriages:
             if carriage.is_change:
                 color = change_colors[-carriage.player_number - 1]
+                color = set_color(color)
                 for addr in carriage.addr_of_change:
-                    matrix[addr].color = color
+                    step_color[addr] = color
+                    # bytes_matrix[addr].color = color
             color = carriage_colors[-carriage.player_number - 1]
             pygame.draw.rect(
                 screen,
                 color,
-                [matrix[carriage.pc].x, matrix[carriage.pc].y, element_size, element_size]
+                [bytes_matrix[carriage.pc].x, bytes_matrix[carriage.pc].y, element_size, element_size]
             )
-            last_live = info_font.render(
-                'Last live : {0:>47}'.format(carriage.last_live),
-                True,
-                menu_text_color
-            )
-            screen.blit(last_live, (left_text_padding, y))
-            y += 25
-            lives_in_period = info_font.render(
-                'Lives in current period : {0:>20}'.format(carriage.lives_in_period),
-                True,
-                menu_text_color
-            )
-            screen.blit(lives_in_period, (left_text_padding, y))
-            y += 50
+            if carriage.player_number not in menu_items:
+                last_live = info_font.render(
+                    'Last live : {0:>43}'.format(carriage.last_live),
+                    True,
+                    menu_text_color
+                )
+                screen.blit(last_live, (left_text_padding, y))
+                y += 25
+                lives_in_period = info_font.render(
+                    'Lives in current period : {0:>20}'.format(carriage.lives_in_period),
+                    True,
+                    menu_text_color
+                )
+                screen.blit(lives_in_period, (left_text_padding, y))
+                menu_items.add(carriage.player_number)
+                y += 50
 
         # text on top
-        for i, byte in enumerate(matrix):
-            current_text_color = text_color if not byte.color else highlighted_text_color
+        for i, byte in enumerate(bytes_matrix):
+            current_text_color = text_color if not step_color[i] else highlighted_text_color
 
             value = format(step.field[i], '02x')
             # value = step.field[i].upper()

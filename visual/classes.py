@@ -110,3 +110,27 @@ class Data(object):
     def __init__(self):
         self.number_of_players = 0
         self.players = []
+
+
+def text_objects(text, font):
+    text_surface = font.render(text, True, text_color)
+    return text_surface, text_surface.get_rect()
+
+
+def button(pygame, screen, msg, x, y, w, h):
+    global run
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    # print(click)
+    if x + w > mouse[0] > x and y + h > mouse[1] > y:
+        pygame.draw.rect(screen, (200, 200, 100), (x, y, w, h))
+
+        if click[0] == 1:
+            run *= -1
+    else:
+        pygame.draw.rect(screen, (100, 200, 100), (x, y, w, h))
+
+    small_text = pygame.font.SysFont("comicsansms", 20)
+    text_surf, text_rect = text_objects(msg, small_text)
+    text_rect.center = ((x + (w / 2)), (y + (h / 2)))
+    screen.blit(text_surf, text_rect)

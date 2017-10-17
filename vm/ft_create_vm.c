@@ -12,73 +12,59 @@
 
 #include "corewar.h"
 
-static t_player    ft_create_vm_player( int i, int num_players)
+static t_player	ft_create_vm_player(int i, int num_players)
 {
-    t_player    vm_player;
-    int         k;
+	t_player	vm_player;
+	int			k;
 
-    k = 1;
-
-//    vm_player = (t_player*)malloc(sizeof(*vm_player));
-
-    vm_player.name =  -1 * i;
-    vm_player.rgstrs[0] = (-1) * i;
-    while (k < REG_NUMBER)
-    {
-        vm_player.rgstrs[i] = 0;
-        k++;
-    }
-//    printf("%d\n", i);
-    vm_player.pc = (MEM_SIZE / num_players) * (i - 1);
-    vm_player.alive = 1;
-    vm_player.carry = 0;
-    vm_player.cycle = 0;
-    vm_player.lives = 0;
-    vm_player.last_live = 0;
+	k = 1;
+	vm_player.name = (-1) * i;
+	vm_player.rgstrs[0] = (-1) * i;
+	while (k < REG_NUMBER)
+	{
+		vm_player.rgstrs[i] = 0;
+		k++;
+	}
+	vm_player.pc = (MEM_SIZE / num_players) * (i - 1);
+	vm_player.alive = 1;
+	vm_player.carry = 0;
+	vm_player.cycle = 0;
+	vm_player.lives = 0;
+	vm_player.last_live = 0;
 	vm_player.is_change = 0;
 	vm_player.addr_of_change = 0;
-
-    // printf("NAME FiRst: %d\n", )
-
-    return (vm_player);
+	return (vm_player);
 }
 
-static t_player    *ft_create_vm_players_array(t_players **players_array, int num_players)
+static t_player	*ft_create_vm_players_array(t_players **players_array,
+				int num_players)
 {
-    t_player    *players_vm_array;
-    int         i;
+	t_player	*players_vm_array;
+	int			i;
 
-    i = 0;
-
-    players_vm_array = (t_player*)malloc(sizeof(t_player) * num_players + 1);
-    players_array[num_players] = 0;
-
-    while (i < num_players)
-    {
-        players_vm_array[i] = ft_create_vm_player(i + 1, num_players);
-        i++;
-    }
-
-    return (players_vm_array);
+	i = 0;
+	players_vm_array = (t_player*)malloc(sizeof(t_player) * num_players + 1);
+	players_array[num_players] = 0;
+	while (i < num_players)
+	{
+		players_vm_array[i] = ft_create_vm_player(i + 1, num_players);
+		i++;
+	}
+	return (players_vm_array);
 }
 
-t_vm    *ft_create_vm(unsigned char *arena, t_players **players_array, int argc)
+t_vm			*ft_create_vm(unsigned char *arena,
+				t_players **players_array, int argc)
 {
-    t_vm    *vm;
+	t_vm	*vm;
 
-    vm = (t_vm*)malloc(sizeof(*vm));
-
-    vm->arena = arena;
-    vm->cycle_to_die = CYCLE_TO_DIE;
-    vm->cycle = 0;
-    vm->current_cycle = 0;
-    vm->max_checks = MAX_CHECKS;
-    vm->players = ft_create_vm_players_array(players_array, argc - 1);
-    vm->players_count = argc - 1;
-
-    printf("Name: %d\n", vm->players[0].name);
-    printf("PAM %u\n", vm->players[0].rgstrs[0]);
-    printf("START PC %u\n", vm->players[0].pc);
-
-    return (vm);
+	vm = (t_vm*)malloc(sizeof(*vm));
+	vm->arena = arena;
+	vm->cycle_to_die = CYCLE_TO_DIE;
+	vm->cycle = 0;
+	vm->current_cycle = 0;
+	vm->max_checks = MAX_CHECKS;
+	vm->players = ft_create_vm_players_array(players_array, argc - 1);
+	vm->players_count = argc - 1;
+	return (vm);
 }

@@ -12,11 +12,11 @@
 
 #include "corewar.h"
 
-void    x_add(t_player *player, unsigned char *arena)
+void	x_add(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
-	unsigned int    arg2;
-	unsigned int    arg3;
+	unsigned int	arg2;
+	unsigned int	arg3;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] != 84)
@@ -30,7 +30,7 @@ void    x_add(t_player *player, unsigned char *arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arg1 < 1 || arg1 > REG_NUMBER || arg2 < 1 || arg2 > REG_NUMBER ||
 		arg3 < 1 || arg3 > REG_NUMBER)
-        return ;
+		return ;
 	player->rgstrs[arg3 - 1] =
 		player->rgstrs[arg1 - 1] + player->rgstrs[arg2 - 1];
 	player->carry = 1;

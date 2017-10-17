@@ -12,7 +12,7 @@
 
 NAME = corewar
 
-SRC = 	DEBUGG.c \
+SRC = 	\
 		enough_cycle.c \
 		ft_addr.c \
 		ft_bytes_to_int.c \
@@ -21,18 +21,22 @@ SRC = 	DEBUGG.c \
 		main.c\
 		move.c \
 		play.c \
+		play_two.c \
 		x_ld.c \
 		x_live.c \
 		x_st.c \
 		x_add.c \
 		x_sub.c \
 		x_and.c \
+		x_and_two.c \
 		x_or.c \
+		x_or_two.c \
 		x_ldi.c \
 		x_sti.c\
 		x_lld.c \
 		x_lldi.c \
 		x_xor.c \
+		x_xor_two.c \
 		x_zjmp.c \
 		x_fork.c \
 		x_lfork.c \

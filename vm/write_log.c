@@ -11,53 +11,24 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include <stdio.h>
-#include <time.h>
 
-//    int len;
-//
-//	len = 0;
-//	i = 0;
-//	while (copy[i])
-//	{
-//	    if (vm->arena[i] != copy[i])
-//	        len++;
-//	    i++;
-//	}
-//	printf("\nlen: %d\n", len);
-//	write_int_to_file(len, fd);
-//	if (len > 0)
-//	{
-//	    i = 0;
-//	    len = 0;
-//	    while (copy[i])
-//	    {
-//	        if (vm->arena[i] != copy[i])
-//	            write_int_to_file(len, fd);
-//	            write(fd, &copy[i], 1);
-//	            len++;
-//	        i++;
-//	    }
-//	}
-
-void    write_buf(unsigned char value, FILE *fd, t_buffer *buffer)
+void				write_buf(unsigned char value, FILE *fd, t_buffer *buffer)
 {
-    if (buffer->size < SIZE)
-    {
-        buffer->data[buffer->size] = value;
-        buffer->size += 1;
-    }
-    else
-    {
-        fwrite(buffer->data, 1, SIZE, fd);
-        buffer->size = 0;
-    }
-
+	if (buffer->size < SIZE)
+	{
+		buffer->data[buffer->size] = value;
+		buffer->size += 1;
+	}
+	else
+	{
+		fwrite(buffer->data, 1, SIZE, fd);
+		buffer->size = 0;
+	}
 }
 
-void	write_int_to_file(unsigned int value, FILE *fd)
+void				write_int_to_file(unsigned int value, FILE *fd)
 {
-	unsigned char temp;
+	unsigned char	temp;
 
 	temp = (value >> (8 * 3)) & 0xFF;
 	fwrite(&temp, 1, 1, fd);
@@ -69,9 +40,10 @@ void	write_int_to_file(unsigned int value, FILE *fd)
 	fwrite(&temp, 1, 1, fd);
 }
 
-void	write_int_to_buf(unsigned int value, FILE *fd, t_buffer *buffer)
+void				write_int_to_buf(unsigned int value,
+					FILE *fd, t_buffer *buffer)
 {
-	unsigned char temp;
+	unsigned char	temp;
 
 	temp = (value >> (8 * 3)) & 0xFF;
 	write_buf(temp, fd, buffer);
@@ -83,102 +55,59 @@ void	write_int_to_buf(unsigned int value, FILE *fd, t_buffer *buffer)
 	write_buf(temp, fd, buffer);
 }
 
-// unsigned char *copy
-void	write_log(FILE *fd, t_vm *vm)
+void				write_log(FILE *fd, t_vm *vm)
 {
-    unsigned int    number_of_carriages;
-    unsigned char   player_number;
-    unsigned int    pc;
-    unsigned int    is_change;
-    unsigned int    addr_of_change;
-    unsigned int    last_live;
-    unsigned int    lives_in_period;
-    unsigned int i;
-
-//    time_t start_t, end_t;
-//    double diff_t;
-//
-//    time(&start_t);
-
-    i = 0;
-    while (i < MEM_SIZE + 1)
-    {
-        write_buf(vm->arena[i], fd, vm->buffer);
-        i++;
-    }
-
-	// колличество кареток, один раз
-	number_of_carriages = vm->players_count;
-	write_int_to_buf(number_of_carriages, fd, vm->buffer);
+	unsigned int	pc;
+	unsigned int	last_live;
+	unsigned int	lives_in_period;
+	int				i;
 
 	i = 0;
-	while (i < number_of_carriages)
+	while (i < MEM_SIZE + 1)
+		write_buf(vm->arena[i++], fd, vm->buffer);
+	write_int_to_buf(vm->players_count, fd, vm->buffer);
+	i = 0;
+	while (i < vm->players_count)
 	{
-	    player_number = vm->players[i].name * -1;
-        write_buf(player_number, fd, vm->buffer);
-
-	    pc = vm->players[i].pc;
-	    write_int_to_buf(pc, fd, vm->buffer);
-
-	    is_change = vm->players[i].is_change;
-	    write_buf(is_change, fd, vm->buffer);
-	    vm->players[i].is_change = 0;
-
-	    addr_of_change = vm->players[i].addr_of_change;
-        write_int_to_buf(addr_of_change, fd, vm->buffer);
-
-        last_live = vm->players[i].last_live;
-        write_int_to_buf(last_live, fd, vm->buffer);
-
-        lives_in_period = vm->players[i].lives;
-        write_int_to_buf(lives_in_period, fd, vm->buffer);
-	    i++;
+		write_buf(vm->players[i].name * -1, fd, vm->buffer);
+		pc = vm->players[i].pc;
+		write_int_to_buf(pc, fd, vm->buffer);
+		write_buf(vm->players[i].is_change, fd, vm->buffer);
+		vm->players[i].is_change = 0;
+		write_int_to_buf(vm->players[i].addr_of_change, fd, vm->buffer);
+		last_live = vm->players[i].last_live;
+		write_int_to_buf(last_live, fd, vm->buffer);
+		lives_in_period = vm->players[i].lives;
+		write_int_to_buf(lives_in_period, fd, vm->buffer);
+		i++;
 	}
-
-//	time(&end_t);
-//    diff_t = difftime(end_t, start_t);
-//
-//    printf("Execution time = %f\n", diff_t);
 }
 
-FILE		*create_log_file(t_vm *vm, t_players **initial_players)
+FILE				*create_log_file(t_vm *vm, t_players **init_players)
 {
-	FILE            *fd_output;
-	unsigned char   number_of_players;
+	FILE			*fd_output;
+	unsigned char	number_of_players;
 	unsigned char	player_number;
-	unsigned int 	player_size;
-	unsigned int    pc;
+	unsigned int	n[3];
 
-
-    vm->buffer = (t_buffer*)malloc(sizeof(t_buffer));
-    vm->buffer->data = (unsigned char*)malloc(SIZE);
-    vm->buffer->size = 0;
-
-	fd_output = fopen("/tmp/output", "w");
-
+	vm->buffer = (t_buffer*)malloc(sizeof(t_buffer));
+	vm->buffer->data = (unsigned char*)malloc(SIZE);
+	vm->buffer->size = 0;
+	fd_output = fopen("output", "w");
 	number_of_players = vm->players_count;
 	fwrite(&number_of_players, 1, 1, fd_output);
-
-    unsigned int i = 0;
-    while (i < number_of_players)
-    {
-	    player_number = vm->players[i].name * -1;
-	    fwrite(&player_number, 1, 1, fd_output);
-
-        pc = vm->players[i].pc;
-        write_int_to_file(pc, fd_output);
-
-	    player_size = initial_players[i]->size;
-	    write_int_to_file(player_size, fd_output);
-
-	    fwrite(initial_players[i]->name, 1, PROG_NAME_LENGTH + 1, fd_output);
-
-	    ft_putnbr(i);
-        ft_putstr("\n");
-
-	    fwrite(initial_players[i]->comment, 1, COMMENT_LENGTH + 1, fd_output);
-
-	    i++;
-    }
+	n[2] = 0;
+	while (n[2] < number_of_players)
+	{
+		player_number = vm->players[n[2]].name * -1;
+		fwrite(&player_number, 1, 1, fd_output);
+		n[1] = vm->players[n[2]].pc;
+		write_int_to_file(n[1], fd_output);
+		n[0] = init_players[n[2]]->size;
+		write_int_to_file(n[0], fd_output);
+		fwrite(init_players[n[2]]->name, 1, PROG_NAME_LENGTH + 1, fd_output);
+		fwrite(init_players[n[2]]->comment, 1, COMMENT_LENGTH + 1, fd_output);
+		n[2]++;
+	}
 	return (fd_output);
 }

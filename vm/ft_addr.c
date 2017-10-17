@@ -20,6 +20,5 @@ unsigned int	ft_addr(int tmp)
 	if (tmp < 0)
 		tmp += MEM_SIZE;
 	addr = (unsigned int)tmp;
-
 	return (addr);
 }

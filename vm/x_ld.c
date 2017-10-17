@@ -9,14 +9,14 @@
 /*   Updated: 2017/09/09 13:07:27 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "corewar.h"
 
+#include "corewar.h"
 
 void		x_ld(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 	unsigned int	arg2;
-    int             tmp;
+	int				tmp;
 
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] == 144)
@@ -35,8 +35,7 @@ void		x_ld(t_player *player, unsigned char *arena)
 	else
 		return ;
 	arg2 = ft_get_n_bytes(arena, player->pc, 1);
-	player->pc = (player->pc + 1) % MEM_SIZE;
-	player->pc = (player->pc + 1) % MEM_SIZE;
+	player->pc = (player->pc + 2) % MEM_SIZE;
 	if (arg2 > 0 && arg2 < REG_NUMBER + 1)
 		player->rgstrs[arg2 - 1] = arg1;
 	player->carry = 1;

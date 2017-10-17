@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-void        x_aff(t_player *player, unsigned char *arena)
+void		x_aff(t_player *player, unsigned char *arena)
 {
 	unsigned int	arg1;
 

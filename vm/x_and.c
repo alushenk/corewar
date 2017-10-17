@@ -12,111 +12,133 @@
 
 #include "corewar.h"
 
-void		x_and(t_player *player, unsigned char *arena)
+int			ft_and_one(unsigned int *as, t_player *player,
+			unsigned char *arena, int *tmp)
 {
-	unsigned int	arg1;
-	unsigned int	arg2;
-	unsigned int	arg3;
-	int				tmp;
-
-	player->pc = (player->pc + 1) % MEM_SIZE;
-    if (arena[player->pc] == 84)
+	if (arena[player->pc] == 84)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 1);
+		as[0] = ft_get_n_bytes(arena, player->pc, 1);
 		player->pc = (player->pc + 1) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 1);
+		as[1] = ft_get_n_bytes(arena, player->pc, 1);
 		player->pc = (player->pc + 1) % MEM_SIZE;
-		if (arg1 < 1 || arg1 > REG_NUMBER || arg2 < 1 || arg2 > REG_NUMBER)
-			return ;
-		arg1 = player->rgstrs[arg1 - 1];
-		arg2 = player->rgstrs[arg2 - 1];
+		if (as[0] < 1 || as[0] > REG_NUMBER || as[1] < 1 || as[1] > REG_NUMBER)
+			return (1);
+		as[0] = player->rgstrs[as[0] - 1];
+		as[1] = player->rgstrs[as[1] - 1];
 	}
 	else if (arena[player->pc] == 116)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 1);
-        player->pc = (player->pc + 1) % MEM_SIZE;
-		if (arg1 < 1 || arg1 > REG_NUMBER)
-            return ;
-		arg1 = player->rgstrs[arg1 - 1];
-		arg2 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 2 + (int)arg2;
-		arg2 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
-        player->pc = (player->pc + 2) % MEM_SIZE;
+		as[0] = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
+		if (as[0] < 1 || as[0] > REG_NUMBER)
+			return (1);
+		as[0] = player->rgstrs[as[0] - 1];
+		as[1] = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		*tmp = player->pc - 2 + (int)as[1];
+		as[1] = ft_get_n_bytes(arena, ft_addr(*tmp), 4);
+		player->pc = (player->pc + 2) % MEM_SIZE;
 	}
-	else if (arena[player->pc] == 100)
+	return (0);
+}
+
+int			ft_and_two(unsigned int *as, t_player *player,
+			unsigned char *arena)
+{
+	if (arena[player->pc] == 100)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 1);
-        player->pc = (player->pc + 1) % MEM_SIZE;
-        if (arg1 < 1 || arg1 > REG_NUMBER)
-            return ;
-        arg1 = player->rgstrs[arg1 - 1];
-        arg2 = ft_get_n_bytes(arena, player->pc, 4);
-        player->pc = (player->pc + 4) % MEM_SIZE;
+		as[0] = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
+		if (as[0] < 1 || as[0] > REG_NUMBER)
+			return (1);
+		as[0] = player->rgstrs[as[0] - 1];
+		as[1] = ft_get_n_bytes(arena, player->pc, 4);
+		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
 	else if (arena[player->pc] == 148)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 4);
+		as[0] = ft_get_n_bytes(arena, player->pc, 4);
 		player->pc = (player->pc + 4) % MEM_SIZE;
-        arg2 = ft_get_n_bytes(arena, player->pc, 1);
+		as[1] = ft_get_n_bytes(arena, player->pc, 1);
 		player->pc = (player->pc + 1) % MEM_SIZE;
-		if (arg2 < 1 || arg2 > REG_NUMBER)
-            return ;
-		arg2 = player->rgstrs[arg2 - 1];
+		if (as[1] < 1 || as[1] > REG_NUMBER)
+			return (1);
+		as[1] = player->rgstrs[as[1] - 1];
 	}
-	else if (arena[player->pc] == 164)
+	return (0);
+}
+
+int			ft_and_three(unsigned int *as, t_player *player,
+			unsigned char *arena, int *tmp)
+{
+	if (arena[player->pc] == 164)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 4);
-        player->pc = (player->pc + 4) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 4);
-        player->pc = (player->pc + 4) % MEM_SIZE;
+		as[0] = ft_get_n_bytes(arena, player->pc, 4);
+		player->pc = (player->pc + 4) % MEM_SIZE;
+		as[1] = ft_get_n_bytes(arena, player->pc, 4);
+		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
 	else if (arena[player->pc] == 180)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 4);
-        player->pc = (player->pc + 4) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 5 + (int)arg2;
-		arg2 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
-        player->pc = (player->pc + 2) % MEM_SIZE;
-	}
-	else if (arena[player->pc] == 212)
-	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 1 + (int)arg1;
-		arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
+		as[0] = ft_get_n_bytes(arena, player->pc, 4);
+		player->pc = (player->pc + 4) % MEM_SIZE;
+		as[1] = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		*tmp = player->pc - 5 + (int)as[1];
+		as[1] = ft_get_n_bytes(arena, ft_addr(*tmp), 4);
 		player->pc = (player->pc + 2) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 1);
-        player->pc = (player->pc + 1) % MEM_SIZE;
-        if (arg2 < 1 || arg2 > REG_NUMBER)
-            return ;
-		arg2 = player->rgstrs[arg2 - 1];
+	}
+	return (0);
+}
+
+int			ft_and_four(unsigned int *as, t_player *player,
+			unsigned char *arena, int *tmp)
+{
+	if (arena[player->pc] == 212)
+	{
+		as[0] = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		*tmp = player->pc - 1 + (int)as[0];
+		as[0] = ft_get_n_bytes(arena, ft_addr(*tmp), 4);
+		player->pc = (player->pc + 2) % MEM_SIZE;
+		as[1] = ft_get_n_bytes(arena, player->pc, 1);
+		player->pc = (player->pc + 1) % MEM_SIZE;
+		if (as[1] < 1 || as[1] > REG_NUMBER)
+			return (1);
+		as[1] = player->rgstrs[as[1] - 1];
 	}
 	else if (arena[player->pc] == 228)
 	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 1 + (int)arg1;
-		arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
-        player->pc = (player->pc + 2) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 4);
-        player->pc = (player->pc + 4) % MEM_SIZE;
-	}
-	else if (arena[player->pc] == 244)
-	{
-		arg1 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 1 + (int)arg1;
-		arg1 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
+		as[0] = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
+		*tmp = player->pc - 1 + (int)as[0];
+		as[0] = ft_get_n_bytes(arena, ft_addr(*tmp), 4);
 		player->pc = (player->pc + 2) % MEM_SIZE;
-		arg2 = ft_get_n_bytes(arena, player->pc, 2) % IDX_MOD;
-		tmp = player->pc - 3 + (int)arg2;
-		arg2 = ft_get_n_bytes(arena, ft_addr(tmp), 4);
-		player->pc = (player->pc + 2) % MEM_SIZE;
+		as[1] = ft_get_n_bytes(arena, player->pc, 4);
+		player->pc = (player->pc + 4) % MEM_SIZE;
 	}
+	return (0);
+}
 
-	arg3 = ft_get_n_bytes(arena, player->pc, 1);
-	if (arg3 < 1 || arg3 > REG_NUMBER)
+void		x_and(t_player *player, unsigned char *arena)
+{
+	unsigned int	*as;
+	int				tmp;
+	int				flag;
+
+	flag = 0;
+	as = (unsigned int*)malloc(sizeof(unsigned int) * 3);
+	player->pc = (player->pc + 1) % MEM_SIZE;
+	if (arena[player->pc] == 84 || arena[player->pc] == 116)
+		flag = ft_and_one(as, player, arena, &tmp);
+	else if (arena[player->pc] == 100 || arena[player->pc] == 148)
+		flag = ft_and_two(as, player, arena);
+	else if (arena[player->pc] == 164 || arena[player->pc] == 180)
+		flag = ft_and_three(as, player, arena, &tmp);
+	else if (arena[player->pc] == 212 || arena[player->pc] == 228)
+		flag = ft_and_four(as, player, arena, &tmp);
+	else if (arena[player->pc] == 244)
+		flag = ft_and_five(as, player, arena, &tmp);
+	if (flag == 1)
 		return ;
-	player->pc = (player->pc + 1) % MEM_SIZE;
-	player->pc = (player->pc + 1) % MEM_SIZE;
-	player->rgstrs[arg3 - 1] = arg1 & arg2;
-	player->carry = 1;
+	as[2] = ft_get_n_bytes(arena, player->pc, 1);
+	if (as[2] < 1 || as[2] > REG_NUMBER)
+		return ;
+	ft_and_six(as, player);
 }

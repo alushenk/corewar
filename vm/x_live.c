@@ -12,8 +12,7 @@
 
 #include "corewar.h"
 
-
-static void	say_live(t_vm *vm, unsigned int name)
+static void		say_live(t_vm *vm, unsigned int name)
 {
 	int				i;
 
@@ -29,10 +28,10 @@ static void	say_live(t_vm *vm, unsigned int name)
 	}
 }
 
-void		x_live(t_player *player, t_vm *vm)
+void			x_live(t_player *player, t_vm *vm)
 {
 	unsigned int	name;
-	
+
 	name = ft_get_n_bytes(vm->arena, player->pc, 4);
 	player->pc = (player->pc + 4) % MEM_SIZE;
 	player->pc = (player->pc + 1) % MEM_SIZE;

@@ -71,8 +71,7 @@ void		play(t_vm *vm, FILE *fd)
 
 	while (!(end(vm)))
 	{
-		if (vm->cycle % 100 == 0)
-			write_log(fd, vm);
+		write_log(fd, vm);
 		i = 0;
 		while (i < vm->players_count)
 		{

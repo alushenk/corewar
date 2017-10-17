@@ -11,37 +11,6 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include <time.h>
-
-static int	no_live_payers(t_vm *vm)
-{
-	int		i;
-
-	i = 0;
-	while(i < vm->players_count)
-	{
-		if (vm->players[i].alive)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-static void	update_alive(t_vm *vm)
-{
-	int		i;
-
-	i = 0;
-	while(i < vm->players_count)
-	{
-		if (vm->players[i].alive)
-		{
-			if (vm->players[i].last_live < (vm->current_cycle - vm->cycle_to_die))
-				vm->players[i].alive = 0;
-		}
-		i++;
-	}
-}
 
 static int	nbr_live(t_vm *vm)
 {
@@ -50,7 +19,7 @@ static int	nbr_live(t_vm *vm)
 
 	i = 0;
 	nbr_live = 0;
-	while(i < vm->players_count)
+	while (i < vm->players_count)
 	{
 		nbr_live += vm->players[i].lives;
 		i++;
@@ -76,10 +45,9 @@ static int	end(t_vm *vm)
 		return (0);
 	update_alive(vm);
 	if (no_live_payers(vm))
-	{//
-		printf("\n\nno live players\n\n");//test
+	{
 		return (1);
-	}//
+	}
 	if (nbr_live(vm) >= NBR_LIVE || !vm->max_checks)
 	{
 		vm->max_checks = MAX_CHECKS;
@@ -89,10 +57,9 @@ static int	end(t_vm *vm)
 		if (vm->cycle_to_die > 0)
 			return (0);
 		else
-		{//
-			printf("\n\nno cycle to die\n\n");//test
+		{
 			return (1);
-		}//
+		}
 	}
 	vm->max_checks--;
 	return (0);
@@ -101,65 +68,24 @@ static int	end(t_vm *vm)
 void		play(t_vm *vm, FILE *fd)
 {
 	int		i;
-//    time_t start_t, end_t;
-//	double diff_t;
-	//unsigned char copy[MEM_SIZE + 1];
-//	char	c;
 
-    //ft_bzero(copy, MEM_SIZE + 1);
-	//int Z = 1270;//test
-    //&& vm->cycle < Z + 1
 	while (!(end(vm)))
 	{
-	    //time(&start_t);
-//		while(1)
-//		{
-//			c = getchar();
-//			if (c == 's' || c == ']')
-//			{
-            if (vm->cycle % 100 == 0)
-			    printf("\nCYCLE: %d\n\n", vm->cycle);//test
-				//	printf("\nCURRENT CYCLE: %d\n\n", vm->current_cycle);//test
-				//printf("\nCYCLE TO DIE: %d\n\n", vm->cycle_to_die);//test
-
+		if (vm->cycle % 100 == 0)
 			write_log(fd, vm);
-
-
-			//ft_strcpy((char*)copy, (char*)vm->arena);
-
-			// if (vm->cycle > Z - 5) //test
-			// ft_print_map(vm);
-				i = 0;
-				while (i < vm->players_count)
-				{
-					vm->players[i].cycle++;
-					if (enough_cycle(vm->players[i].cycle, vm->arena[vm->players[i].pc]))
-					{
-						move(&(vm->players[i]), vm);
-						vm->players[i].cycle = 0;
-					}
-					//testtttttttttttttt
-
-/*
-					int		r = 0;
-					while (r < 16)
-					{
-						printf("ARG%d: %u\n", r + 1, vm->players[i].rgstrs[r]);//TEST
-						r++;
-					}
-
-*/
-					//testttttttttttttttttttt
-					i++;
-				}
-				vm->cycle++;
-				vm->current_cycle++;
-//			}
-				//if (c == 'q')
-				//return ;
-				//}
-//		time(&end_t);
-//        diff_t = difftime(end_t, start_t);
-//        printf("Execution time = %f\n", diff_t);
+		i = 0;
+		while (i < vm->players_count)
+		{
+			vm->players[i].cycle++;
+			if (enough_cycle(vm->players[i].cycle,
+				vm->arena[vm->players[i].pc]))
+			{
+				move(&(vm->players[i]), vm);
+				vm->players[i].cycle = 0;
+			}
+			i++;
+		}
+		vm->cycle++;
+		vm->current_cycle++;
 	}
 }

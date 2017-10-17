@@ -10,22 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINES_H
-# define DEFINES_H
+#ifndef COREWAR_H
+# define COREWAR_H
 
-#include "defines.h"
-#include "vrybchyc.h"
-#include "vrudenko.h"
-
-
-#include <stdio.h> // delete
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-//# include <ncurses.h>
+# include "defines.h"
+# include "vrybchyc.h"
+# include "vrudenko.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <fcntl.h>
 
 FILE		*create_log_file(t_vm *vm, t_players **initial_players);
-// unsigned char *copy
-void	write_log(FILE *fd, t_vm *vm);
+void		write_log(FILE *fd, t_vm *vm);
 
 #endif

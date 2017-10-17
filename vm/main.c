@@ -27,7 +27,6 @@ unsigned char		*fill_arena(unsigned char *arena,
 
 	i = 0;
 	delta = MEM_SIZE / (argc - 1);
-	printf("delta = %d\n", delta);
 	while (i < argc - 1)
 	{
 		k = 0;

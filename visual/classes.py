@@ -67,7 +67,7 @@ class Carriage(object):
 
     def set_change(self, data):
         addr_of_change = bin_to_int(data)
-        self.addr_of_change = [addr_of_change + x for x in range(4)]
+        self.addr_of_change = [(addr_of_change + x) % 4096 for x in range(4)]
 
     def set_last_live(self, data):
         self.last_live = bin_to_int(data)

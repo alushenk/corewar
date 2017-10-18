@@ -18,7 +18,7 @@ void				ft_determ_winner(t_vm *vm, t_players **players,
 	int		winner_number;
 	int		last_life;
 
-	winner_number = 0;
+	winner_number = 1;
 	i = 0;
 	last_life = 0;
 	while (i < vm->players_count)

@@ -43,6 +43,7 @@ SRC = 	\
 		x_aff.c \
 		write_log.c \
 		free_ass.c \
+		print_out.c\
 
 OBJ = $(SRC:.c=.o)
 

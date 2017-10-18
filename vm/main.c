@@ -81,32 +81,6 @@ void				ft_free_memory(unsigned char *arena, t_vm *vm,
 	free(arena);
 }
 
-void		ft_determ_winner(t_vm *vm, t_players **players)
-{
-	int		i;
-	int		winner_number;
-	int		last_life;
-
-	winner_number = 0;
-	i = 0;
-	last_life = 0;
-	while (i < vm->players_count)
-	{
-		if (vm->players[i].last_live > last_life)
-		{
-			last_life = vm->players[i].last_live;
-			winner_number = (vm->players[i].name * (-1));
-		}
-		i++;
-	}
-	ft_putstr("--------------------------------------\n");
-	ft_putstr("\n| The winner is player: ");
-	ft_putstr((const char*)players[winner_number - 1]->name);
-	ft_putstr("!\n| ");
-	ft_putstr((const char*)players[winner_number - 1]->comment);
-	ft_putstr("\n--------------------------------------\n");
-}
-
 int					main(int argc, char **argv)
 {
 	unsigned char		*arena;
@@ -130,7 +104,8 @@ int					main(int argc, char **argv)
 	{
 		fwrite(vm->buffer->data, 1, vm->buffer->size - 1, fd);
 	}
-	ft_determ_winner(vm, player_array);
+	ft_putstr("===============Players=============\n");
+	ft_print_info(vm, player_array, argc);
 	ft_free_memory(arena, vm, player_array, argc);
 	return (0);
 }

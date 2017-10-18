@@ -66,5 +66,6 @@ t_players			**ft_create_players_array(int argc, char **argv);
 int					ft_get_n_bytes(unsigned char *arena, int pc, int bytes_num);
 t_vm				*ft_create_vm(unsigned char *arena,
 					t_players **players_array, int argc);
+void				ft_print_info(t_vm *vm, t_players **players, int argc);
 
 #endif

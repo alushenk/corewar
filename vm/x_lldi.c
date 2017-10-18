@@ -102,9 +102,9 @@ void				x_lldi(t_player *player, unsigned char *arena)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] == 84 || arena[player->pc] == 100)
 		flag = ft_lldi_one(as, player, arena);
-	else if (arena[player->pc - 1] == 148 || arena[player->pc - 1] == 164)
+	else if (arena[player->pc] == 148 || arena[player->pc] == 164)
 		flag = ft_lldi_two(as, player, arena);
-	else if (arena[player->pc - 1] == 212 || arena[player->pc - 1] == 228)
+	else if (arena[player->pc] == 212 || arena[player->pc] == 228)
 		flag = ft_lldi_three(as, player, arena, &tmp);
 	if (flag == 1)
 		return (free_ass(as));

@@ -116,7 +116,7 @@ void				x_sti(t_player *player, unsigned char *arena, int flag)
 		return (free_ass(as));
 	as[0] = player->rgstrs[as[0] - 1];
 	player->pc = (player->pc + 1) % MEM_SIZE;
-	if (arena[player->pc] == 84 || arena[player->pc] == 88)
+	if (arena[player->pc - 1] == 84 || arena[player->pc - 1] == 88)
 		flag = ft_x_sti_one(as, player, arena);
 	else if (arena[player->pc - 1] == 100 || arena[player->pc - 1] == 104)
 		flag = ft_x_sti_two(as, player, arena);

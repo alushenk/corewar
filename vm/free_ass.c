@@ -15,5 +15,4 @@
 void		free_ass(unsigned int *as)
 {
 	free(as);
-	return ;
 }

@@ -63,3 +63,4 @@ int				enough_cycle(int cycle, int command)
 	else
 		return (0);
 }
+

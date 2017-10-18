@@ -136,9 +136,9 @@ void			x_xor(t_player *player, unsigned char *arena)
 	else if (arena[player->pc] == 244)
 		flag = ft_xor_five(as, player, arena, &tmp);
 	if (flag == 1)
-		return ;
+		return (free_ass(as));
 	as[2] = ft_get_n_bytes(arena, player->pc, 1);
 	if (as[2] < 1 || as[2] > REG_NUMBER)
-		return ;
+		return (free_ass(as));
 	ft_xor_six(as, player);
 }

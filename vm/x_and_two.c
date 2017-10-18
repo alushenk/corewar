@@ -35,4 +35,5 @@ void		ft_and_six(unsigned int *as, t_player *player)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	player->rgstrs[as[2] - 1] = as[0] & as[1];
 	player->carry = 1;
+	free(as);
 }

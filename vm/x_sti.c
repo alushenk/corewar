@@ -113,7 +113,7 @@ void				x_sti(t_player *player, unsigned char *arena, int flag)
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	as[0] = ft_get_n_bytes(arena, player->pc, 1);
 	if (as[0] < 1 || as[0] > REG_NUMBER)
-		return ;
+		return (free_ass(as));
 	as[0] = player->rgstrs[as[0] - 1];
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	if (arena[player->pc] == 84 || arena[player->pc] == 88)
@@ -123,7 +123,7 @@ void				x_sti(t_player *player, unsigned char *arena, int flag)
 	else if (arena[player->pc - 1] == 116 || arena[player->pc - 1] == 120)
 		flag = ft_x_sti_three(as, player, arena, &tmp);
 	if (flag == 1)
-		return ;
+		return (free_ass(as));
 	player->pc = (player->pc + 1) % MEM_SIZE;
 	ft_x_sti_four(as, arena, &tmp, &addr);
 	player->is_change = 1;

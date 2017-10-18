@@ -41,11 +41,12 @@ SRC = 	\
 		x_fork.c \
 		x_lfork.c \
 		x_aff.c \
-		write_log.c
+		write_log.c \
+		free_ass.c \
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS =
 
 all: $(NAME)
 

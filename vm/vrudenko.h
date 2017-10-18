@@ -60,6 +60,7 @@ typedef struct		s_vm
 }					t_vm;
 
 char				*ft_copy_str_part(int start, int size, char *str);
+void				free_ass(unsigned int *as);
 void				ft_error(char *error_name);
 t_players			**ft_create_players_array(int argc, char **argv);
 int					ft_get_n_bytes(unsigned char *arena, int pc, int bytes_num);

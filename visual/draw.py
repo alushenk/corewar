@@ -28,7 +28,7 @@ left_text_padding = width - menu_width + 10
 font_name = "raleway/Raleway-Thin.ttf"
 font_size = element_size + 2
 
-run = 1
+run = -1
 
 
 def get_color(number):
@@ -47,13 +47,14 @@ def set_color(color):
     return x
 
 
-def draw_map(file, players, indexes):
+def draw_map(file, players, indexes, steps):
     pygame.init()
 
+    # | pygame.HWSURFACE
     screen = pygame.display.set_mode((
         int(width),
         int(height)),
-        pygame.RESIZABLE | pygame.HWSURFACE | pygame.DOUBLEBUF
+        pygame.RESIZABLE | pygame.DOUBLEBUF
     )
 
     font = pygame.font.SysFont(
@@ -97,13 +98,15 @@ def draw_map(file, players, indexes):
         elif iteration == iteration_count + 1:
             iteration = 0
 
-        step = parse.parse_step(file, indexes[iteration])
-        if last_iteration < iteration:
-            color_matrix[iteration] = color_matrix[iteration - 1]
-        step_color = color_matrix[iteration]
+        if steps[iteration]:
+            step = steps[iteration]
+        else:
+            step, index = parse.parse_step(file, indexes[iteration])
 
         if iteration > last_iteration:
+            color_matrix[iteration] = color_matrix[iteration - 1]
             last_iteration = iteration
+        step_color = color_matrix[iteration]
 
         # pygame events
         for event in pygame.event.get():

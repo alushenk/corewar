@@ -13,8 +13,8 @@ def main():
         file_size = os.path.getsize(file_name)
 
         with open(file_name, 'rb') as file:
-            players, indexes = parse(file, file_size)
-            draw_map(file, players, indexes)
+            players, indexes, steps = parse(file, file_size)
+            draw_map(file, players, indexes, steps)
     else:
         print('usage: ./main.py [output]')
         exit()

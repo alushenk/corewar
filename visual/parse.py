@@ -1,6 +1,7 @@
 from __future__ import print_function
 import struct
 from classes import Player, Step, Carriage, bin_to_int
+import numpy as np
 
 
 def parse_players(file, index):
@@ -40,8 +41,10 @@ def parse_step(file, index):
 
     file.seek(index)
     step.field = bytearray(file.read(4097))
+    index += 4097
 
     number_of_carriages = bin_to_int(file.read(4))
+    index += 4
 
     for i in range(number_of_carriages):
         carriage = Carriage()
@@ -54,8 +57,9 @@ def parse_step(file, index):
         carriage.set_lives(file.read(4))
 
         step.carriages.append(carriage)
+        index += 18
 
-    return step
+    return step, index
 
 
 def parse_step_size(file, index):
@@ -79,6 +83,14 @@ def parse(file, file_size):
         indexes.append(index)
         index = parse_step_size(file, index)
 
+    steps = np.zeros((len(indexes)), dtype=Step)
+    iteration = 0
+    index = indexes[0]
+    while index < file_size:
+        steps[iteration], index = parse_step(file, index)
+        iteration += 1
+
+
     print(index)
     print(file_size)
-    return players, indexes
+    return players, indexes, steps

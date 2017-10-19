@@ -84,11 +84,11 @@ def parse(file, file_size):
         index = parse_step_size(file, index)
 
     steps = np.zeros((len(indexes)), dtype=Step)
-    iteration = 0
-    index = indexes[0]
-    while index < file_size:
-        steps[iteration], index = parse_step(file, index)
-        iteration += 1
+    # iteration = 0
+    # index = indexes[0]
+    # while index < file_size:
+    #     steps[iteration], index = parse_step(file, index)
+    #     iteration += 1
 
 
     print(index)

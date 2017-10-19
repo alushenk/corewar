@@ -101,10 +101,11 @@ int					main(int argc, char **argv)
 	fd = create_log_file(vm, player_array);
 	play(vm, fd);
 	if (vm->buffer->size > 0)
-		fwrite(vm->buffer->data, 1, vm->buffer->size - 1, fd);
+		fwrite(vm->buffer->data, 1, vm->buffer->size, fd);
 	ft_putstr("===============Players============\n");
 	ft_print_info(vm, player_array, argc);
 	ft_free_memory(arena, vm, player_array, argc);
+	fclose(fd);
 	ft_use_graphics();
 	return (0);
 }

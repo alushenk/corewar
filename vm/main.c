@@ -105,6 +105,17 @@ void				ft_validation(int argc, char **argv)
 
 }
 
+void ft_use_graphics(void)
+{
+	char	buffer[2];
+
+	buffer[1] = '\0';
+	ft_putstr("\n\nOpen visualization? [y/n] ");
+	read(0, buffer, 1);
+	if (buffer[0] == 'y')
+		execl( "../visual/main.py", "", "output",0);
+}
+
 int					main(int argc, char **argv)
 {
 	unsigned char		*arena;
@@ -125,5 +136,6 @@ int					main(int argc, char **argv)
 	ft_putstr("===============Players============\n");
 	ft_print_info(vm, player_array, argc);
 	ft_free_memory(arena, vm, player_array, argc);
+	ft_use_graphics();
 	return (0);
 }

@@ -12,7 +12,7 @@
 
 #include "corewar.h"
 
-int ft_math_cycles(int *cycle_count, int *percent_loaded)
+int			ft_math_cycles(int *cycle_count, int *percent_loaded)
 {
 	int				cycle_to_die;
 	int				cycles;
@@ -28,14 +28,15 @@ int ft_math_cycles(int *cycle_count, int *percent_loaded)
 	}
 	ft_putnbr(cycles);
 	ft_putstr("\n");
-	return(cycles / 100);
+	return (cycles / 100);
 }
 
 void		ft_draw_loading(int *cycle_count, int *percent_loaded,
-							char *load_line, int *cycles_load)
+			char *load_line, int *cycles_load)
 {
 	*cycle_count += 1;
-	if (*cycle_count % *cycles_load == 0) {
+	if (*cycle_count % *cycles_load == 0)
+	{
 		ft_putstr("\e[1;1H\e[2J");
 		ft_putstr("\x1b[31m");
 		ft_putstr("Loaded ");
@@ -50,7 +51,7 @@ void		ft_draw_loading(int *cycle_count, int *percent_loaded,
 	}
 }
 
-void		ft_draw_loaded(char	*load_line)
+void		ft_draw_loaded(char *load_line)
 {
 	ft_putstr("\e[1;1H\e[2J");
 	ft_putstr("\x1b[32m");
@@ -59,7 +60,7 @@ void		ft_draw_loaded(char	*load_line)
 	free(load_line);
 }
 
-char 		*ft_create_load_line()
+char		*ft_create_load_line(void)
 {
 	char	*load_line;
 

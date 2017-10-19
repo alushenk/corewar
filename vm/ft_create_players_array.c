@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include <stdio.h>
 
 static char			*ft_strncpy_my(char *dest, const char *src, size_t len)
 {
@@ -30,8 +31,10 @@ static char			*ft_strncpy_my(char *dest, const char *src, size_t len)
 static t_players	*ft_create_player_struct(unsigned char *file_str,
 					int str_len)
 {
-	t_players	*player;
+	t_players		*player;
 
+	if (ft_get_n_bytes(file_str, -1, 4) != COREWAR_EXEC_MAGIC)
+		ft_error("this is not a champion");			
 	player = (t_players*)malloc(sizeof(*player));
 	player->name = (unsigned char*)ft_strnew(PROG_NAME_LENGTH);
 	player->name = (unsigned char*)ft_strncpy_my((char*)player->name,
@@ -42,6 +45,10 @@ static t_players	*ft_create_player_struct(unsigned char *file_str,
 					+ ANOTHER_MAGIC + PROG_NAME_LENGTH), COMMENT_LENGTH);
 	player->size = str_len - PROG_NAME_LENGTH - (COMMENT_LENGTH +
 					MAGIC_NUM_LEN + SIZE_PROGRAM_LEN + ANOTHER_MAGIC * 2);
+	if (player->size >= MEM_SIZE / MAX_PLAYERS) {
+		ft_putstr((char*)player->name);
+		ft_error(" is too big");
+	}
 	player->code = (unsigned char*)ft_strnew(player->size);
 	player->code = (unsigned char*)ft_strncpy_my((char*)player->code,
 					((char*)(file_str

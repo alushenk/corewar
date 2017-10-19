@@ -85,37 +85,6 @@ void				ft_free_memory(unsigned char *arena, t_vm *vm,
 	free(arena);
 }
 
-void				ft_validation(int argc, char **argv)
-{
-	int		i;
-	int		file_name_len;
-
-	i = 1;
-	if (argc < 2)
-		ft_error("no players");
-	else if (argc > MAX_PLAYERS + 1)
-		ft_error("too much players");
-	while (i < argc)
-	{
-		file_name_len = ft_strlen(argv[i]);
-		if (ft_strcmp(argv[i] + file_name_len - 4, ".cor"))
-			ft_error("wrong file format. use <name>.cor ");
-		i++;
-	}
-
-}
-
-void ft_use_graphics(void)
-{
-	char	buffer[2];
-
-	buffer[1] = '\0';
-	ft_putstr("\n\nOpen visualization? [y/n] ");
-	read(0, buffer, 1);
-	if (buffer[0] == 'y')
-		execl( "../visual/main.py", "", "output",0);
-}
-
 int					main(int argc, char **argv)
 {
 	unsigned char		*arena;

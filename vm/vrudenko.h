@@ -72,5 +72,7 @@ void				ft_draw_loaded(char	*load_line);
 void				ft_draw_loading(int *cycle_count, int *percent_loaded,
 					char *load_line, int *cycles_load);
 int					ft_math_cycles(int *cycle_count, int *percent_loaded);
+void				ft_validation(int argc, char **argv);
+void				ft_use_graphics(void);
 
 #endif

@@ -45,6 +45,7 @@ SRC = 	\
 		write_log.c \
 		free_ass.c \
 		print_out.c\
+		validation.c \
 
 OBJ = $(SRC:.c=.o)
 

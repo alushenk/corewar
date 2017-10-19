@@ -68,3 +68,14 @@ char		*ft_create_load_line(void)
 	ft_strcpy(load_line, "[                    ]");
 	return (load_line);
 }
+
+void		ft_use_graphics(void)
+{
+	char	buffer[2];
+
+	buffer[1] = '\0';
+	ft_putstr("\n\nOpen visualization? [y/n] ");
+	read(0, buffer, 1);
+	if (buffer[0] == 'y')
+		execl("../visual/main.py", "", "output", 0);
+}

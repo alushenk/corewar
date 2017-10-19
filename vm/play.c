@@ -67,24 +67,29 @@ static int	end(t_vm *vm)
 
 void		play(t_vm *vm, FILE *fd)
 {
-	int		i;
+	int				norm[4];
+	char			*load_line;
 
+	load_line = ft_create_load_line();
+	norm[1] = ft_math_cycles(&norm[3], &norm[2]);
 	while (!(end(vm)))
 	{
+		ft_draw_loading(&norm[3], &norm[2], load_line, &norm[1]);
 		write_log(fd, vm);
-		i = 0;
-		while (i < vm->players_count)
+		norm[0] = 0;
+		while (norm[0] < vm->players_count)
 		{
-			vm->players[i].cycle++;
-			if (enough_cycle(vm->players[i].cycle,
-				vm->arena[vm->players[i].pc]))
+			vm->players[norm[0]].cycle++;
+			if (enough_cycle(vm->players[norm[0]].cycle,
+				vm->arena[vm->players[norm[0]].pc]))
 			{
-				move(&(vm->players[i]), vm);
-				vm->players[i].cycle = 0;
+				move(&(vm->players[norm[0]]), vm);
+				vm->players[norm[0]].cycle = 0;
 			}
-			i++;
+			norm[0]++;
 		}
 		vm->cycle++;
 		vm->current_cycle++;
 	}
+	ft_draw_loaded(load_line);
 }

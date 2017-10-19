@@ -67,5 +67,10 @@ int					ft_get_n_bytes(unsigned char *arena, int pc, int bytes_num);
 t_vm				*ft_create_vm(unsigned char *arena,
 					t_players **players_array, int argc);
 void				ft_print_info(t_vm *vm, t_players **players, int argc);
+char 				*ft_create_load_line();
+void				ft_draw_loaded(char	*load_line);
+void				ft_draw_loading(int *cycle_count, int *percent_loaded,
+					char *load_line, int *cycles_load);
+int					ft_math_cycles(int *cycle_count, int *percent_loaded);
 
 #endif

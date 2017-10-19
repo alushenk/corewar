@@ -30,7 +30,7 @@ void				ft_determ_winner(t_vm *vm, t_players **players,
 		}
 		i++;
 	}
-	ft_putstr("-----------------------------------\n\n");
+	ft_putstr("----------------------------------\n\n");
 	ft_putstr("==================================\n");
 	ft_putstr("🌟 🌟 🌟 🌟 🌟 🌟   WINNER  🌟 🌟 🌟 🌟 🌟 🌟\nThe winner is player: ");
 	ft_putstr(c[winner_number - 1]);

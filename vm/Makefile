@@ -16,6 +16,7 @@ SRC = 	\
 		enough_cycle.c \
 		ft_addr.c \
 		ft_bytes_to_int.c \
+		draw_load.c \
 		ft_create_players_array.c \
 		ft_create_vm.c \
 		main.c\
@@ -47,7 +48,7 @@ SRC = 	\
 
 OBJ = $(SRC:.c=.o)
 
-FLAGS =
+FLAGS = -Wall -Werror -Wextra
 
 all: $(NAME)
 

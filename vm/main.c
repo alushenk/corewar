@@ -104,7 +104,7 @@ int					main(int argc, char **argv)
 	{
 		fwrite(vm->buffer->data, 1, vm->buffer->size - 1, fd);
 	}
-	ft_putstr("===============Players=============\n");
+	ft_putstr("===============Players============\n");
 	ft_print_info(vm, player_array, argc);
 	ft_free_memory(arena, vm, player_array, argc);
 	return (0);

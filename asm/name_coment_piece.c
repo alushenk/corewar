@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:53:36 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/10 03:44:07 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/19 14:45:18 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*name_trans(int *i, char *s)
 	name[PROG_NAME_LENGTH + 1] = '\0';
 	while (s[++(*i)] != '"')
 	{
-		if (k > PROG_NAME_LENGTH)
+		if (k > PROG_NAME_LENGTH - 1)
 			return (NULL);
 		name[k] = s[*i];
 		k++;

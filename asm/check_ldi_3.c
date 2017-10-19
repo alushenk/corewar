@@ -6,13 +6,13 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 13:50:02 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 14:45:05 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:27:10 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-int		skip(struct ldi *l)
+int		skip(struct s_ldi *l)
 {
 	if ((*l).t[(*l).i][(*l).k] == '\0')
 	{
@@ -32,7 +32,7 @@ int		skip(struct ldi *l)
 	return (0);
 }
 
-int		short_ldi(struct ldi *l, struct lol *st, char **v, char **data)
+int		short_ldi(struct s_ldi *l, struct s_lol *st, char **v, char **data)
 {
 	if ((*l).t[(*l).i][(*l).k] == '%')
 	{
@@ -59,7 +59,7 @@ int		short_ldi(struct ldi *l, struct lol *st, char **v, char **data)
 	return (skip(l));
 }
 
-int		short_ldi_2(struct ldi *l, struct lol *st, char **v, char **data)
+int		short_ldi_2(struct s_ldi *l, struct s_lol *st, char **v, char **data)
 {
 	if ((*l).t[(*l).i][(*l).k] == '%')
 	{

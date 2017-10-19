@@ -6,18 +6,18 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 03:33:05 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 13:05:32 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:19:05 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_live(char *s, char **data, struct lol *st)
+char	*check_arguments_live(char *s, char **data, struct s_lol *st)
 {
-	struct pop	p;
-	char		**t;
-	int			i;
-	char		*v;
+	struct s_pop	p;
+	char			**t;
+	int				i;
+	char			*v;
 
 	v = "01";
 	i = 1;
@@ -57,7 +57,7 @@ char	**live_1(char *s)
 	return (t);
 }
 
-void	live_3(char **t, int *i, struct pop *p, char **v)
+void	live_3(char **t, int *i, struct s_pop *p, char **v)
 {
 	char	*dig;
 	int		o;
@@ -84,7 +84,7 @@ void	live_3(char **t, int *i, struct pop *p, char **v)
 	}
 }
 
-int		live_2(struct pop *p, char **data, struct lol *st, char **v)
+int		live_2(struct s_pop *p, char **data, struct s_lol *st, char **v)
 {
 	int		o;
 	char	**r;

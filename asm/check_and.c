@@ -6,16 +6,16 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 21:55:36 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 20:01:49 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:16:27 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_and(char *s, char **data, struct lol *st)
+char	*check_arguments_and(char *s, char **data, struct s_lol *st)
 {
-	struct ldi	l;
-	char		*v;
+	struct s_ldi	l;
+	char			*v;
 
 	l.stars = "";
 	if ((l.t = and_1(s, &v)) == NULL)

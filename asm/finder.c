@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   del_all_coment.c                                   :+:      :+:    :+:   */
+/*   finder.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/25 22:02:19 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 17:34:01 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/19 15:01:02 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/19 17:33:06 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-int		del_all_coment(char **s)
+int		find_i(char **s)
 {
 	int i;
+	int j;
 
-	i = -1;
-	while ((*s)[++i] != '\0')
+	i = 0;
+	j = 0;
+	if (ft_strstr(s[i], ".name ") != NULL)
 	{
-		if ((*s)[i] == '"')
-		{
+		while (ft_strstr(s[i], ".comment") == NULL)
 			i++;
-			while ((*s)[i] != '"')
-			{
-				i++;
-			}
-		}
-		if ((*s)[i] == '#' || (*s)[i] == ';')
-		{
-			while ((*s)[i] != '\n' && (*s)[i] != '\0')
-			{
-				(*s)[i] = ' ';
-				i++;
-			}
-		}
+		while (s[i][ft_strlen(s[i]) - 1] != '"')
+			i++;
+		return (++i);
 	}
-	return (0);
+	else
+	{
+		while (ft_strstr(s[i], ".name ") == NULL)
+			i++;
+		while (s[i][ft_strlen(s[i]) - 1] != '"')
+			i++;
+		return (++i);
+	}
 }

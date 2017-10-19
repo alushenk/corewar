@@ -6,13 +6,13 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/21 04:07:00 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/15 23:54:31 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:19:39 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-void	silka(char **v, char **data, struct lol *st, int i)
+void	silka(char **v, char **data, struct s_lol *st, int i)
 {
 	int		c;
 	char	*f;
@@ -38,7 +38,7 @@ void	silka(char **v, char **data, struct lol *st, int i)
 	}
 }
 
-char	*silka_4(char **v, char **data, struct lol *st, int i)
+char	*silka_4(char **v, char **data, struct s_lol *st, int i)
 {
 	int		c;
 	char	*f;

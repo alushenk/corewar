@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 15:38:45 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 14:52:15 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:25:26 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	**ldi_1(char *s, char **v)
 	return (t);
 }
 
-char	*ldi_dir(struct ldi *l, char **v, char **data, struct lol *st)
+char	*ldi_dir(struct s_ldi *l, char **v, char **data, struct s_lol *st)
 {
 	char	*y;
 	char	**r;
@@ -52,7 +52,7 @@ char	*ldi_dir(struct ldi *l, char **v, char **data, struct lol *st)
 	return ((*l).stars);
 }
 
-int		ildi_2(struct ldi *l, struct lol *st, char **y)
+int		ildi_2(struct s_ldi *l, struct s_lol *st, char **y)
 {
 	int		o;
 	char	**r;
@@ -70,7 +70,7 @@ int		ildi_2(struct ldi *l, struct lol *st, char **y)
 	return (ldi_4(r, y));
 }
 
-void	ldi_3(struct ldi *l, char **y)
+void	ldi_3(struct s_ldi *l, char **y)
 {
 	int o;
 

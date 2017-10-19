@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 15:04:30 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 19:35:17 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:21:29 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*check_arguments_add(char *s)
 {
-	char		*v;
-	struct ldi	l;
+	char			*v;
+	struct s_ldi	l;
 
 	l.stars = "";
 	if ((l.t = add_1(s, &v)) == NULL)
@@ -45,7 +45,7 @@ char	**add_1(char *s, char **v)
 	return (t);
 }
 
-int		add_2(struct ldi *l, char **v)
+int		add_2(struct s_ldi *l, char **v)
 {
 	if ((*l).t[(*l).i][(*l).k] == 'r')
 	{
@@ -69,7 +69,7 @@ int		add_2(struct ldi *l, char **v)
 		return (0);
 }
 
-int		down(struct ldi *l, char **v)
+int		down(struct s_ldi *l, char **v)
 {
 	if (skip(l) == -1)
 		return (-1);

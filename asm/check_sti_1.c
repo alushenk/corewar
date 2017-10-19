@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 16:42:29 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 20:43:13 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:28:32 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**sti_1(char *s, char **v)
 	return (t);
 }
 
-int		short_sti(struct ldi *l, struct lol *st, char **v, char **data)
+int		short_sti(struct s_ldi *l, struct s_lol *st, char **v, char **data)
 {
 	if ((*l).t[(*l).i][(*l).k] == 'r')
 	{

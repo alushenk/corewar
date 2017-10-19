@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 13:00:12 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/12 17:17:06 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/19 12:16:33 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 
 int		main(int ar, char **ac)
 {
+	int u;
+
 	if (ar == 2)
 	{
-		if (bet_main(ac[1]) == -1)
+		if ((u = bet_main(ac[1])) < 0)
 		{
-			ft_putstr("Error\n");
+			errors(u);
 			return (-1);
 		}
 	}
 	else
-		ft_putstr("Error\n");
+		ft_putstr("Error in arguments\n");
 	return (0);
 }
 

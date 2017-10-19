@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/07 16:34:44 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/15 23:50:51 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 16:46:31 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,16 @@ int		write_file(char *data, char *s)
 	s[o - 1] = '\0';
 	s[o - 2] = '\0';
 	s = ft_strjoin(s, "1.cor");
-	fd = open(s, O_RDWR | O_CREAT, 777);
+	fd = open(s, O_CREAT | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (fd == -1)
 		return (-1);
 	o = 0;
 	k = 0;
 	write_data_to_file(data, fd);
-	ft_putstr("\nWriting output program to ");
+	ft_putstr("Writing output program to ");
 	ft_putstr(s);
 	ft_putchar('\n');
+	close(fd);
 	return (0);
 }
 

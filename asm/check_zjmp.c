@@ -6,16 +6,16 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/08 23:48:56 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/16 03:05:14 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:16:59 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_zjmp(char *s, char **data, struct lol *st)
+char	*check_arguments_zjmp(char *s, char **data, struct s_lol *st)
 {
-	char		*v;
-	struct ldi	l;
+	char			*v;
+	struct s_ldi	l;
 
 	l.stars = "";
 	if ((l.t = zm(s, &v)) == NULL)

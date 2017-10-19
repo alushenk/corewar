@@ -6,13 +6,13 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/29 01:30:23 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/16 04:04:43 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:23:32 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-void	kripo(char *lable, char **data, struct lol *st)
+void	kripo(char *lable, char **data, struct s_lol *st)
 {
 	char	**t;
 	char	*f;
@@ -40,7 +40,7 @@ void	kripo(char *lable, char **data, struct lol *st)
 	}
 }
 
-void	gogo(char **f, struct lol *st, int *h, int y)
+void	gogo(char **f, struct s_lol *st, int *h, int y)
 {
 	char **r;
 

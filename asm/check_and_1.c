@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 19:37:47 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/14 20:04:00 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:29:02 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**and_1(char *s, char **v)
 	return (t);
 }
 
-int		and_2(struct ldi *l, char **v, char **data, struct lol *st)
+int		and_2(struct s_ldi *l, char **v, char **data, struct s_lol *st)
 {
 	if ((*l).t[(*l).i][(*l).k] == '%')
 	{

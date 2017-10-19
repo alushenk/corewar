@@ -6,16 +6,16 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/24 14:47:26 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/16 03:06:57 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:20:31 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lkorvar.h"
 
-char	*check_arguments_st(char *s, char **data, struct lol *st)
+char	*check_arguments_st(char *s, char **data, struct s_lol *st)
 {
-	struct ldi	l;
-	char		*v;
+	struct s_ldi	l;
+	char			*v;
 
 	l.stars = "";
 	if ((l.t = glgl(s, &v)) == NULL)
@@ -43,7 +43,7 @@ char	**glgl(char *s, char **v)
 	return (t);
 }
 
-int		st_1(struct ldi *l, struct lol *st, char **v, char **data)
+int		st_1(struct s_ldi *l, struct s_lol *st, char **v, char **data)
 {
 	if ((*l).t[(*l).i][(*l).k] == 'r')
 	{

@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 04:28:05 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/10 04:08:29 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/19 13:04:40 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 int		chenos(char *s, int *i, int *k)
 {
-	while (s[*i] == ' ')
-	{
-		while (s[*i] != '\n')
-			(*i)++;
+	while (s[*i] == ' ' || s[*i] == '\n')
 		(*i)++;
-	}
 	if (s[*i] != '.' || s[*i + 1] != 'c' || s[*i + 2] != 'o' || s[*i + 3] != 'm'
 			|| s[*i + 4] != 'm' || s[*i + 5] != 'e'
 			|| s[*i + 6] != 'n' || s[*i + 7] != 't')
@@ -39,7 +35,7 @@ int		cle_1(char *s, int *i, int *k, char *coment)
 {
 	while (s[++(*i)] != '"')
 	{
-		if (*k > COMMENT_LENGTH)
+		if (*k > COMMENT_LENGTH - 1)
 			return (-1);
 		coment[*k] = s[*i];
 		(*k)++;
@@ -55,10 +51,8 @@ int		cle_1(char *s, int *i, int *k, char *coment)
 		if (!(s[*i] == ' '))
 			return (-1);
 	}
-	while (s[++(*i)] == ' ')
+	while (s[++(*i)] == ' ' || s[*i] == '\n')
 	{
-		while (s[*i] != '\n')
-			(*i)++;
 	}
 	return (0);
 }

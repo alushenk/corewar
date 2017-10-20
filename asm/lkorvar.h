@@ -6,15 +6,16 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 14:48:30 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 17:56:07 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/20 12:50:09 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LKORVAR_H
 # define LKORVAR_H
 
+# include <unistd.h>
+# include <sys/types.h>
 # include "libft/libft.h"
-# include <stdio.h>
 # include <fcntl.h>
 # include <sys/stat.h>
 # include "get_next_line.h"
@@ -152,4 +153,6 @@ void			doroy(int i);
 int				empty(char *data);
 int				find_i(char **s);
 char			*ft_itoa_base2(long long int value, int base);
+int				find_endl(int fd);
+int				doubles(char *s);
 #endif

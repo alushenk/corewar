@@ -6,7 +6,7 @@
 #    By: opanchen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/06 12:39:22 by opanchen          #+#    #+#              #
-#    Updated: 2017/10/19 15:03:27 by opanchen         ###   ########.fr        #
+#    Updated: 2017/10/20 12:50:39 by opanchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,6 @@ SRC = main.c \
 	  lable.c \
 	  name_coment_piece.c \
 	  check_operations.c \
-	  del_all_tabs.c \
 	  corect_operation.c \
 	  check_sti.c \
 	  check_and.c \
@@ -61,7 +60,9 @@ SRC = main.c \
 	  errors.c \
 	  corect_operation_1.c \
 	  empty.c \
-	  finder.c
+	  finder.c \
+	  lsecos.c \
+	  double_n_c.c
 
 SRO = $(SRC:.c=.o)
 

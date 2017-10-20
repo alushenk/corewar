@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/26 04:28:05 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 13:04:40 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/20 13:55:07 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		chenos(char *s, int *i, int *k)
 			return (-1);
 		(*i)++;
 	}
+	if (doubles(s) == -1)
+		return (-1);
 	*k = 0;
 	return (0);
 }

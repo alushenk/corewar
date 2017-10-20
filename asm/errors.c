@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 15:18:19 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 14:22:56 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/20 11:14:09 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	errors(int i)
 	if (i == -21)
 		ft_putstr("Error in live\n");
 	if (i == -20)
-		ft_putstr("Can't open file\n");
+		ft_putstr("Not a valid file\n");
 	if (i == -2)
 		ft_putstr("Error in .name or .coment\n");
 	if (i == -3)

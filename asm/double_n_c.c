@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strncat.c                                          :+:      :+:    :+:   */
+/*   double_n_c.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 16:31:17 by opanchen          #+#    #+#             */
-/*   Updated: 2016/11/25 16:48:02 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/20 12:41:07 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/20 13:55:03 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lkorvar.h"
 
-char	*ft_strncat(char *s1, const char *s2, size_t n)
+int		doubles(char *s)
 {
-	char *ptr;
+	char *t;
+	char *y;
 
-	ptr = s1;
-	while (*ptr != '\0')
-	{
-		ptr++;
-	}
-	while (*s2 != '\0' && n > 0)
-	{
-		*ptr = *s2;
-		ptr++;
-		s2++;
-		n--;
-	}
-	*ptr = '\0';
-	return (s1);
+	if ((t = ft_strstr(s, ".name")) == NULL)
+		return (-1);
+	t = t + 5;
+	if (ft_strstr(t, ".name") != NULL)
+		return (-1);
+	if ((y = ft_strstr(s, ".comment")) == NULL)
+		return (-1);
+	y = y + 8;
+	if (ft_strstr(y, ".comment") != NULL)
+		return (-1);
+	return (1);
 }

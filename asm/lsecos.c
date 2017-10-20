@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strdup.c                                           :+:      :+:    :+:   */
+/*   lsecos.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/02 16:42:47 by opanchen          #+#    #+#             */
-/*   Updated: 2016/12/04 18:29:50 by opanchen         ###   ########.fr       */
+/*   Created: 2017/10/20 10:45:35 by opanchen          #+#    #+#             */
+/*   Updated: 2017/10/20 11:27:27 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lkorvar.h"
 
-char	*ft_strdup(const char *s)
+int		find_endl(int fd)
 {
-	int		len;
 	int		i;
-	char	*str;
+	char	*line;
 
-	len = ft_strlen(s);
-	str = (char *)malloc((int)len + 1);
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s[i] != '\0')
+	line = ft_strnew(10);
+	i = -1;
+	line[0] = ' ';
+	while (line[0] == ' ' || line[0] == '\t')
 	{
-		str[i] = s[i];
-		i++;
+		if (lseek(fd, i, SEEK_END) > 0)
+		{
+			read(fd, line, 1);
+		}
+		else
+			return (-1);
+		i--;
 	}
-	str[i] = '\0';
-	return (str);
+	if (line[0] == '\n')
+		return (1);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/01 11:53:36 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 14:45:18 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/20 13:04:32 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int		name_coment(char *s, char **data)
 		if (!(s[i] == ' ' || s[i] == '\t'))
 			return (-1);
 	}
+	if (doubles(s) == -1)
+		return (-1);
 	return (i);
 }
 

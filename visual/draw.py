@@ -62,13 +62,15 @@ def set_color(color):
 
 def draw_map(file, players, indexes, steps):
     pygame.init()
-
-    # | pygame.HWSURFACE
+    # | pygame.HWACCEL | pygame.HWSURFACE
     screen = pygame.display.set_mode((
         int(width),
         int(height)),
         pygame.RESIZABLE | pygame.DOUBLEBUF
     )
+
+    pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
+    screen.set_alpha(None)
 
     font = pygame.font.SysFont(
         font_name,
@@ -116,6 +118,7 @@ def draw_map(file, players, indexes, steps):
             step = steps[iteration]
         else:
             step, index = parse.parse_step(file, indexes[iteration])
+            steps[iteration] = step
 
         if iteration > last_iteration:
             color_matrix[iteration] = color_matrix[iteration - 1]

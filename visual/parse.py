@@ -89,8 +89,6 @@ def parse(file, file_size):
     # while index < file_size:
     #     steps[iteration], index = parse_step(file, index)
     #     iteration += 1
-
-
-    print(index)
-    print(file_size)
+    # print(index)
+    # print(file_size)
     return players, indexes, steps

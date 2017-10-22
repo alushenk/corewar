@@ -84,6 +84,8 @@ class Step(object):
 
 
 class Player(object):
+    __slots__ = ['number', 'size', '_pc', 'name', 'comment']
+
     def __init__(self, player_number):
         self.number = set_number(player_number)
         self.size = 0

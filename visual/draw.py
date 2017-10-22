@@ -12,9 +12,24 @@ text_color = (180, 180, 180)
 menu_text_color = (255, 255, 255)
 highlighted_text_color = (40, 40, 40)
 
-player_colors = [(183, 102, 30), (41, 225, 126), (255, 5, 213), (76, 202, 211)]
-carriage_colors = [(255, 160, 71), (183, 255, 203), (255, 158, 238), (183, 250, 255)]
-change_colors = [(99, 50, 7), (35, 119, 51), (195, 0, 156), (12, 103, 109)]
+player_colors = [
+    (183, 102, 30),
+    (41, 225, 126),
+    (255, 5, 213),
+    (76, 202, 211)
+]
+carriage_colors = [
+    (255, 160, 71),
+    (183, 255, 203),
+    (255, 158, 238),
+    (183, 250, 255)
+]
+change_colors = [
+    (99, 50, 7),
+    (35, 119, 51),
+    (195, 0, 156),
+    (12, 103, 109)
+]
 
 # sizes
 space = 1
@@ -27,8 +42,6 @@ left_text_padding = width - menu_width + 10
 # font
 font_name = "raleway/Raleway-Thin.ttf"
 font_size = element_size + 2
-
-run = -1
 
 
 def get_color(number):
@@ -69,7 +82,8 @@ def draw_map(file, players, indexes, steps):
         bold=False,
         italic=False)
 
-    global run
+    run = -1
+    direction = 1
     iteration = 0
     last_iteration = 0
     iteration_count = len(indexes) - 1
@@ -116,13 +130,18 @@ def draw_map(file, players, indexes, steps):
                 elif event.key == pygame.K_RIGHT:
                     if run < 0 < iteration:
                         color_matrix[iteration] = color_matrix[iteration - 1]
+                        run *= -1
                     iteration += 1
                 elif event.key == pygame.K_LEFT:
+                    if run < 0:
+                        run *= -1
                     iteration -= 1
                 elif event.key == pygame.K_SPACE:
                     run *= -1
                 elif event.key == pygame.K_r:
                     iteration = 0
+                elif event.key == pygame.K_t:
+                    direction *= -1
             if event.type == pygame.QUIT:
                 loop = False
 
@@ -215,7 +234,7 @@ def draw_map(file, players, indexes, steps):
         screen.fill(background_color)
 
         if run < 0:
-            iteration += 1
+            iteration += direction
 
     pygame.quit()
     quit()

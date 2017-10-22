@@ -85,6 +85,7 @@ def draw_map(file, players, indexes, steps):
         italic=False)
 
     run = -1
+    circle = 0
     direction = 1
     iteration = 0
     last_iteration = 0
@@ -109,8 +110,11 @@ def draw_map(file, players, indexes, steps):
 
         if iteration == iteration_count and run < 0:
             run *= -1
-        elif iteration == -1:
+            circle = 1
+        elif iteration == -1 and not circle:
             iteration = 0
+        elif iteration == -1 and circle:
+            iteration = iteration_count
         elif iteration == iteration_count + 1:
             iteration = 0
 

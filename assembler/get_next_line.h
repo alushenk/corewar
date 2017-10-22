@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str_is_alpha.c                                  :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vrudenko <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/01 10:36:39 by vrudenko          #+#    #+#             */
-/*   Updated: 2016/12/05 15:27:49 by vrudenko         ###   ########.fr       */
+/*   Created: 2017/01/27 12:14:32 by opanchen          #+#    #+#             */
+/*   Updated: 2017/02/11 11:15:43 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# define BUFF_SIZE 1
+# include "../libft/libft.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
 
-int		ft_isalpha(int c)
-{
-	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (1);
-	else
-		return (0);
-}
+int		get_next_line(const int fd, char **line);
+#endif

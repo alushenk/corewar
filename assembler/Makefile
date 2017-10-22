@@ -69,17 +69,14 @@ SRO = $(SRC:.c=.o)
 all: $(NAME)
 
 $(NAME): $(SRO)
-			make -C libft
 			$(CC) $(FLAGS) -c $(SRC) $(HEAD)
-			$(CC) $(FLAGS) -o $(NAME) $(SRO) libft/libft.a
+			$(CC) $(FLAGS) -o $(NAME) $(SRO) ../libft/libft.a
 
 
 clean:
-			make clean -C ./libft
 			@rm -f $(SRO) $(HEAD_GCH)
 
 fclean:
-			make fclean -C ./libft
 			@make clean
 			@rm -f $(NAME)
 

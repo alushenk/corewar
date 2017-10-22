@@ -54,10 +54,8 @@ FLAGS = -Wall -Werror -Wextra
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[32;1mmake libft...\033[0m"
-	@make -C libft/
 	@echo "\033[32;1mmake vm\033[0m"
-	@gcc $(FLAGS) -o $(NAME) $(OBJ) libft/libft.a
+	@gcc $(FLAGS) -o $(NAME) $(OBJ) ../libft/libft.a
 
 .c.o:
 	@gcc $(FLAGS) -c $< -o $@
@@ -65,12 +63,10 @@ $(NAME): $(OBJ)
 clean:
 	@echo "\033[31mRemoving objects...\033[0m"
 	@rm -f $(OBJ)
-	@make -C libft/ clean
 
 fclean: clean
 	@echo "\033[31mRemoving vm...\033[0m"
 	@rm -f $(NAME)
-	@make -C libft/ fclean
 
 re: fclean all
 

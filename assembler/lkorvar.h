@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <sys/types.h>
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <fcntl.h>
 # include <sys/stat.h>
 # include "get_next_line.h"

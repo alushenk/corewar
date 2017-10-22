@@ -77,5 +77,5 @@ void		ft_use_graphics(void)
 	ft_putstr("\n\nOpen visualization? [y/n] ");
 	read(0, buffer, 1);
 	if (buffer[0] == 'y')
-		system("../visual/main.py output");
+		system("visual/main.py output");
 }

@@ -12,7 +12,7 @@
 
 #ifndef COREWAR_VRUDENKO_H
 # define COREWAR_VRUDENKO_H
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include "corewar.h"
 # define MAGIC_NUM_LEN 4
 # define SIZE_PROGRAM_LEN 4

@@ -40,7 +40,7 @@ width = height + menu_width
 left_text_padding = width - menu_width + 10
 
 # font
-font_name = "raleway/Raleway-Thin.ttf"
+font_name = "Raleway-Thin.ttf"
 font_size = element_size + 2
 
 

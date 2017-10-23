@@ -26,6 +26,7 @@ int		main(int ar, char **ac)
 	}
 	else
 		ft_putstr("Error in arguments\n");
+	while(1);
 	return (0);
 }
 

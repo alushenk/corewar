@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "lkorvar.h"
+#include <stdio.h>
 
 int		na_co_la(char **s, char *ac, char **data, struct s_lol *st)
 {
@@ -35,6 +36,7 @@ int		bet_main(char *ac)
 	char			*data;
 	int				g;
 
+
 	s = "";
 	data = "";
 	if (check_file(ac) == 1)
@@ -45,9 +47,11 @@ int		bet_main(char *ac)
 			return (g);
 		calc(&data);
 		kripo(st.lable, &data, &st);
+		free(st.a);
 		if (empty(data) == -1)
 			return (-50);
 		write_file(data, ac);
+		free(data);
 	}
 	else
 		return (-1);

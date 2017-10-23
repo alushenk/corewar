@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 15:11:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 13:07:27 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 11:36:50 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ void		x_ld(t_player *player, unsigned char *arena)
 	player->pc = (player->pc + 2) % MEM_SIZE;
 	if (arg2 > 0 && arg2 < REG_NUMBER + 1)
 		player->rgstrs[arg2 - 1] = arg1;
-	player->carry = 1;
+	modify_carry(player, arg1);
 }

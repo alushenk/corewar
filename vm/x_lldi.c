@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/09 11:43:00 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 11:43:17 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 11:46:10 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,12 @@ static int			ft_lldi_three(unsigned int *as, t_player *player,
 	return (0);
 }
 
-void				x_lldi(t_player *player, unsigned char *arena)
+void				x_lldi(t_player *player, unsigned char *arena, int flag)
 {
 	unsigned int	*as;
 	unsigned int	addr;
 	int				tmp;
-	int				flag;
 
-	flag = 0;
 	as = (unsigned int*)malloc(sizeof(unsigned int) * 3);
 	addr = player->pc;
 	player->pc = (player->pc + 1) % MEM_SIZE;
@@ -115,5 +113,6 @@ void				x_lldi(t_player *player, unsigned char *arena)
 	addr = addr + (int)as[0] + (int)as[1] - 1;
 	as[0] = ft_addr(addr);
 	player->rgstrs[as[2] - 1] = ft_get_n_bytes(arena, as[0], 4);
+	modify_carry(player, player->rgstrs[as[2] - 1]);
 	free(as);
 }

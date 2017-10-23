@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/05 15:09:41 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 13:58:33 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 11:37:44 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	x_add(t_player *player, unsigned char *arena)
 		return ;
 	player->rgstrs[arg3 - 1] =
 		player->rgstrs[arg1 - 1] + player->rgstrs[arg2 - 1];
-	player->carry = 1;
+	modify_carry(player, player->rgstrs[arg3 - 1]);
 }

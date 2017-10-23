@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 13:00:21 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/09 11:43:34 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 11:44:56 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	move_two(t_player *player, t_vm *vm)
 	else if (vm->arena[player->pc] == 13)
 		x_lld(player, vm->arena);
 	else if (vm->arena[player->pc] == 14)
-		x_lldi(player, vm->arena);
+		x_lldi(player, vm->arena, 0);
 	else if (vm->arena[player->pc] == 15)
 		x_lfork(player, vm);
 	else if (vm->arena[player->pc] == 16)

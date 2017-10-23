@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:21:25 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/07 15:47:43 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 11:40:27 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void		ft_or_six(unsigned int *as, t_player *player)
 {
 	player->pc = (player->pc + 2) % MEM_SIZE;
 	player->rgstrs[as[2] - 1] = as[0] | as[1];
-	player->carry = 1;
+	modify_carry(player, player->rgstrs[as[2] - 1]);
 	free(as);
 }

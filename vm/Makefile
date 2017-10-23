@@ -6,7 +6,7 @@
 #    By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/08/15 11:17:22 by vrybchyc          #+#    #+#              #
-#    Updated: 2017/09/09 11:51:03 by vrybchyc         ###   ########.fr        #
+#    Updated: 2017/10/23 11:48:18 by vrybchyc         ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -20,6 +20,7 @@ SRC = 	\
 		ft_create_players_array.c \
 		ft_create_vm.c \
 		main.c\
+		modify_carry.c\
 		move.c \
 		play.c \
 		play_two.c \

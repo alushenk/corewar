@@ -6,7 +6,7 @@
 /*   By: vrybchyc <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/07 13:44:12 by vrybchyc          #+#    #+#             */
-/*   Updated: 2017/09/08 18:53:43 by vrybchyc         ###   ########.fr       */
+/*   Updated: 2017/10/23 12:24:12 by vrybchyc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_player		ft_create_new_player(t_player *player, unsigned int new_pc)
 	}
 	new_player.pc = new_pc;
 	new_player.alive = player->alive;
-	new_player.carry = player->carry;
+	new_player.carry = 0;
 	new_player.cycle = -1;
 	new_player.lives = player->lives;
 	new_player.last_live = player->last_live;

@@ -15,7 +15,6 @@
 void				ft_error(char *error_name)
 {
 	ft_putstr("\x1b[31m");
-	ft_putstr("ERROR: ");
 	ft_putstr(error_name);
 	ft_putstr("\n");
 	ft_putstr("\x1b[0m");

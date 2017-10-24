@@ -28,6 +28,13 @@ static char			*ft_strncpy_my(char *dest, const char *src, size_t len)
 	return (dest);
 }
 
+static void			ft_norm_one(char *name)
+{
+	ft_putstr("\x1b[31m");
+	ft_putstr(name);
+	ft_error(" is too big");
+}
+
 static t_players	*ft_create_player_struct(unsigned char *file_str,
 					int str_len)
 {
@@ -45,11 +52,8 @@ static t_players	*ft_create_player_struct(unsigned char *file_str,
 				+ ANOTHER_MAGIC + PROG_NAME_LENGTH), COMMENT_LENGTH);
 	p->size = str_len - PROG_NAME_LENGTH - (COMMENT_LENGTH +
 					MAGIC_NUM_LEN + SIZE_PROGRAM_LEN + ANOTHER_MAGIC * 2);
-	if (p->size >= MEM_SIZE / MAX_PLAYERS)
-	{
-		ft_putstr((char*)p->name);
-		ft_error(" is too big");
-	}
+	if (p->size >= MEM_SIZE / MAX_PLAYERS || p->size > CHAMP_MAX_SIZE)
+		ft_norm_one((char*)p->name);
 	p->code = (unsigned char*)ft_strnew(p->size);
 	p->code = (unsigned char*)ft_strncpy_my((char*)p->code,
 	((char*)(file_str + MAGIC_NUM_LEN + SIZE_PROGRAM_LEN + (ANOTHER_MAGIC * 2)

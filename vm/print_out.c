@@ -56,7 +56,7 @@ void				ft_print_info(t_vm *vm, t_players **players, int argc)
 	while (i < argc - 1)
 	{
 		ft_putstr("-----------------------------------\n");
-		ft_putstr(colors[i]);
+		ft_putstr(colors[i % 4]);
 		ft_putstr("             Player ");
 		ft_putnbr(i + 1);
 		ft_putstr("\nName: ");

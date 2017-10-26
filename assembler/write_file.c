@@ -23,7 +23,7 @@ int		write_file(char *data, char *s)
 	o = ft_strlen(s);
 	s[o - 1] = '\0';
 	s[o - 2] = '\0';
-	s = ft_strjoin(s, "1.cor");
+	s = ft_strjoin(s, ".cor");
 	fd = open(s, O_CREAT | O_TRUNC | O_RDWR, S_IRWXU | S_IRWXG | S_IRWXO);
 	if (fd == -1)
 		return (-1);

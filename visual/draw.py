@@ -16,19 +16,31 @@ player_colors = [
     (183, 102, 30),
     (41, 225, 126),
     (255, 5, 213),
-    (76, 202, 211)
+    (76, 202, 211),
+    (66, 244, 92),
+    (201, 24, 71),
+    (255, 255, 0),
+    (180, 47, 234)
 ]
 carriage_colors = [
     (255, 160, 71),
     (183, 255, 203),
     (255, 158, 238),
-    (183, 250, 255)
+    (183, 250, 255),
+    (132, 255, 150),
+    (255, 35, 94),
+    (255, 253, 158),
+    (214, 94, 255)
 ]
 change_colors = [
     (99, 50, 7),
     (35, 119, 51),
     (195, 0, 156),
-    (12, 103, 109)
+    (12, 103, 109),
+    (26, 96, 36),
+    (127, 5, 37),
+    (209, 205, 12),
+    (116, 0, 155)
 ]
 
 # sizes
@@ -101,7 +113,7 @@ def draw_map(file, players, indexes, steps):
     for player in players:
         i = player.pc
         end = i + player.size
-        color = player_colors[player.number - 1]
+        color = player_colors[(player.number - 1) % 8]
         while i < end:
             color_matrix[0][i] = set_color(color)
             i += 1
@@ -168,11 +180,11 @@ def draw_map(file, players, indexes, steps):
         y = 225
         for carriage in step.carriages:
             if carriage.is_change:
-                color = change_colors[carriage.player_number - 1]
+                color = change_colors[(carriage.player_number - 1) % 8]
                 color = set_color(color)
                 for addr in carriage.addr_of_change:
                     step_color[addr] = color
-            color = carriage_colors[carriage.player_number - 1]
+            color = carriage_colors[(carriage.player_number - 1) % 8]
             pygame.draw.rect(
                 screen,
                 color,
@@ -228,7 +240,7 @@ def draw_map(file, players, indexes, steps):
 
         y = 200
         for player in players:
-            color = player_colors[player.number - 1]
+            color = player_colors[(player.number - 1) % 8]
             name = info_font.render(
                 'Player {} : {}'.format(player.number, player.name),
                 True,

@@ -30,7 +30,10 @@ def main():
         with open(file_name, 'rb') as file:
             players, indexes, steps = parse(file, file_size)
             with ignore_stderr():
-                draw_map(file, players, indexes, steps)
+                try:
+                    draw_map(file, players, indexes, steps)
+                except BaseException:
+                    print('error in output file')
     else:
         print('usage: ./main.py [output]')
         exit()

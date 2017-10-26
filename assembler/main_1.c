@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/12 16:07:27 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 14:47:04 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/25 19:58:06 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int		bet_main(char *ac)
 	char			*data;
 	int				g;
 
-
 	s = "";
 	data = "";
 	if (check_file(ac) == 1)
@@ -51,7 +50,6 @@ int		bet_main(char *ac)
 		if (empty(data) == -1)
 			return (-50);
 		write_file(data, ac);
-		free(data);
 	}
 	else
 		return (-1);

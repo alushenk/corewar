@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 13:00:12 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/19 12:16:33 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/25 19:57:14 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int		main(int ar, char **ac)
 	}
 	else
 		ft_putstr("Error in arguments\n");
-	while(1);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/14 15:41:52 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/26 17:02:03 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:28:00 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,9 @@ int		dir_4(struct s_ldi *l, char **v, char **data, struct s_lol *st)
 	int		t;
 
 	((*l).k)++;
-	if ((*l).t[(*l).i][(*l).k] == '\0')
-		return (-1);
 	if ((*l).t[(*l).i][(*l).k] == ':')
 	{
 		((*l).k)++;
-		if ((*l).t[(*l).i][(*l).k] == '\0')
-			return (-1);
 		if ((t = ildi_2(l, st, &y)) == -1)
 			return (-1);
 		r = ft_strsplit((*st).lable, ' ');

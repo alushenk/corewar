@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 14:48:30 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/26 18:04:53 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/20 12:50:09 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int				ldi_4(char **r, char **y);
 char			**lld_1(char *s, char **v);
 int				dir_4(struct s_ldi *l, char **v, char **data, struct s_lol *st);
 int				lldos(struct s_ldi *l, struct s_lol *st, char **v, char **data);
-char			**sti_1(char *s, char **vt);
+char			**sti_1(char *s, char **v);
 int				short_sti(struct s_ldi *l, struct s_lol *st,
 				char **v, char **data);
 char			**glgl(char *s, char **v);

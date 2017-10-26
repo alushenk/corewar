@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/13 19:26:12 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/26 17:07:55 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/18 14:26:19 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ char	*ldi_reg(struct s_ldi *l, char **v)
 	int		o;
 
 	((*l).k)++;
-	if ((*l).t[(*l).i][(*l).k] == '\0' || (*l).t[(*l).i][(*l).k] == ',')
-		return (NULL);
 	y = (char *)malloc(sizeof(char) * 100);
 	o = 0;
 	while (ft_isdigit((*l).t[(*l).i][(*l).k]) == 1)

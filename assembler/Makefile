@@ -6,7 +6,7 @@
 #    By: opanchen <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/05/06 12:39:22 by opanchen          #+#    #+#              #
-#    Updated: 2017/10/26 17:59:13 by opanchen         ###   ########.fr        #
+#    Updated: 2017/10/20 12:50:39 by opanchen         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ HEAD = op.h get_next_line.h lkorvar.h
 
 HEAD_GCH = $(HEAD:.h=.h.gch)
 
-//FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 SRC = main.c \
 	  get_next_line.c \
@@ -71,7 +71,6 @@ all: $(NAME)
 $(NAME): $(SRO)
 			$(CC) $(FLAGS) -c $(SRC) $(HEAD)
 			$(CC) $(FLAGS) -o $(NAME) $(SRO) ../libft/libft.a
-
 
 clean:
 			@rm -f $(SRO) $(HEAD_GCH)

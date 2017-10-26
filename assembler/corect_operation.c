@@ -6,7 +6,7 @@
 /*   By: opanchen <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/02 11:41:04 by opanchen          #+#    #+#             */
-/*   Updated: 2017/10/25 20:02:16 by opanchen         ###   ########.fr       */
+/*   Updated: 2017/10/19 17:16:27 by opanchen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		find_operation_1(char *s, char **data, struct s_lol *st, int *a)
 			*a = -21;
 			return (-1);
 		}
+		*data = ft_strjoin(*data, r);
 	}
 	else if (ft_strstr(s, "ldi ") != NULL || ft_strstr(s, "lldi ") != NULL)
 	{
@@ -60,6 +61,7 @@ int		find_operation_1(char *s, char **data, struct s_lol *st, int *a)
 				*a = -23;
 			return (-1);
 		}
+		*data = ft_strjoin(*data, r);
 	}
 	return (0);
 }
@@ -76,6 +78,7 @@ int		find_operation_2(char *s, char **data, struct s_lol *st, int *a)
 			*a = -26;
 			return (-1);
 		}
+		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	if (ft_strstr(s, "st ") != NULL)
@@ -86,6 +89,7 @@ int		find_operation_2(char *s, char **data, struct s_lol *st, int *a)
 			*a = -27;
 			return (-1);
 		}
+		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	return (0);
@@ -109,6 +113,7 @@ int		find_operation_3(char *s, char **data, struct s_lol *st, int *a)
 				*a = -32;
 			return (-1);
 		}
+		*data = ft_strjoin(*data, r);
 		return (1);
 	}
 	return (0);
